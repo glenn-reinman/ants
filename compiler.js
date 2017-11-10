@@ -38,12 +38,10 @@ var condition = {
 }
 
 function compile(source){
-    console.log(source);
     var lines = source.split('\n');
     if(lines.length < 0){
         return [false, 0, "File is Empty"];
     }
-    console.log(lines);
     var colonyName = parseColonyName(lines[0]);
     if(colonyName.length < 1){
         return [false, 1, "Invalid colony specification at top of bug program"]
@@ -66,13 +64,11 @@ function compile(source){
                 program.push(command);
         }
     }
-    console.log(labels["start"]);
     for(var i = 0; i < program.length; i++){
         if(program[i].opcode == opcode.goto){
             if(labels.hasOwnProperty(program[i].operand1))
                 program[i].operand1 = labels[program[i].operand1]
             else {
-                console.log(program[i].operand1);
                 return [false, program[i].lineNum, "Unknown label '" + program[i].operand1+"'"];
             }
         }else if(program[i].opcode == opcode.if){
