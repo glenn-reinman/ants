@@ -1,0 +1,15 @@
+#text {
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+
+#sim {
+	float: right;
+	width: 50%;
+	height: 100%;
+}
+
+#graphics {
+	border:1px dotted;
+}
