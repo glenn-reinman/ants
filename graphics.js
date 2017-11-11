@@ -6,51 +6,38 @@ var w = window.getComputedStyle(sim).width
 canvas.width = parseInt(w.substring(0, w.length - 2));
 canvas.height = canvas.width;
 
-var grid = [];
-for(var i = 0; i < 64; i++){
-	grid.push([]);
-	for(var j = 0; j < 64; j++){
-		grid[i].push([]);
-	}
-}
 
 var offset = canvas.width/64;
-for(var i = 0; i < 64; i++){
-	for(var j = 0; j < 64; j++){
-		ctx.fillStyle = ((i+j)%2 == 0)? "#ffffff": "#dddddd";
-		ctx.fillRect(i*offset, j*offset, offset, offset);
-	}
-}
 
-function populateGrid(){
+function populateArray(){
+	var ans = [];
 	for(var i = 0; i < 64; i++){
 		for(var j = 0; j < 64; j++){
-			if(i == 0 || j == 0 || i == 63 || j == 63)
-				grid[i][j].push(rest.rock1);
-		}
-	}
-	grid[3][2].push(rest.rock1);
-}
-
-function start(){
-	populateGrid();
-	drawGrid();
-}
-
-function drawGrid() {
-	for(var i = 0; i < 64; i++){
-		for(var j = 0; j < 64; j++){
-			if(grid[i][j] != null){
-				for(var k = 0; k < grid[i][j].length; k++){
-					ctx.drawImage(grid[i][j][k], j*offset, i*offset, offset, offset);
-				}
+			if(i == 0 || j == 0 || i == 63 || j == 63){
+				ans.push({});
+				ans[ans.length-1].x = i;
+				ans[ans.length-1].y = j;
+				ans[ans.length-1].img = rest.rock1;
 			}
 		}
 	}
+	ans.push({x: 2, y: 3, img: rest.rock1});
+	return ans;
 }
 
+function start(){
+	draw(populateArray());
+}
 
-// red.style.width = ''+offset + 'px';
-// red.style.height = "auto";
-// document.body.append(red);
-
+function draw(arr) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	for(var i = 0; i < 64; i++){
+		for(var j = 0; j < 64; j++){
+			ctx.fillStyle = ((i+j)%2 == 0)? "#ffffff": "#dddddd";
+			ctx.fillRect(i*offset, j*offset, offset, offset);
+		}
+	}
+	for(var i = 0; i < arr.length; i++){
+		ctx.drawImage(arr[i].img, arr[i].x*offset, arr[i].y*offset, offset, offset);
+	}
+}
