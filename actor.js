@@ -1,87 +1,87 @@
 // actor.js
 
 class Actor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Pebble extends Actor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class EnergyHolder extends Actor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Food extends EnergyHolder {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class AntHill extends EnergyHolder {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Pheromone extends EnergyHolder {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class TriggerableActor extends Actor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class WaterPool extends TriggerableActor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Poison extends TriggerableActor {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Insect extends EnergyHolder {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Ant extends Insect {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class Grasshopper extends Insect {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class BabyGrasshopper extends Grasshopper {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 class AdultGrasshopper extends Grasshopper {
-  constructor() {
+	constructor() {
 
-  }
+	}
 }
 
 
