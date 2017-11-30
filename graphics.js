@@ -9,20 +9,20 @@ canvas.height = canvas.width;
 
 var offset = canvas.width/64;
 
+
 function populateArray(){
-	var ans = [];
+
+	var map = [];
 	for(var i = 0; i < 64; i++){
 		for(var j = 0; j < 64; j++){
 			if(i == 0 || j == 0 || i == 63 || j == 63){
-				ans.push({});
-				ans[ans.length-1].x = i;
-				ans[ans.length-1].y = j;
-				ans[ans.length-1].img = rest.rock1;
+				let tmp = new Pebble(i,j);
+				map.push(tmp);
 			}
 		}
 	}
-	ans.push({x: 2, y: 3, img: rest.rock1});
-	return ans;
+
+	return map;
 }
 
 function start(){

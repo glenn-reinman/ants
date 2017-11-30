@@ -1,14 +1,14 @@
 // actor.js
 
-class Actor {
-	constructor() {
-
+class Actor extends GraphObject{
+	constructor(startX, startY, startDir, img, depth) {
+		super(startX, startY, startDir, img, depth);
 	}
 }
 
 class Pebble extends Actor {
-	constructor() {
-
+	constructor(startX, startY) {
+		super(startX, startY, 1, rest.rock1, 2);
 	}
 }
 
