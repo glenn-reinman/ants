@@ -1,14 +1,52 @@
 // actor.js
 
 class Actor extends GraphObject{
-	constructor(startX, startY, startDir, img, depth) {
+	constructor(world, startX, startY, startDir, img, depth) {
 		super(startX, startY, startDir, img, depth);
+		this.world = world;
 	}
+
+	doSomething() {
+	}
+
+	isDead() {
+	}
+
+	blocksMovement() {
+	}
+
+	getBitten() {
+	}
+
+	getPoisoned() {
+	}
+
+	getStunned() {
+	}
+
+	isEdible() {
+	}
+
+	isPheromone() {
+	}
+
+	isPheromoneType() {
+	}
+
+	isEnemy() {
+	}
+
+	isDangerous() {
+	}
+
+	isAntHill() {
+	}
+
 }
 
 class Pebble extends Actor {
-	constructor(startX, startY) {
-		super(startX, startY, 1, rest.rock1, 2);
+	constructor(world, startX, startY) {
+		super(world, startX, startY, Direction.none, rest.rock1, 2);
 	}
 }
 
