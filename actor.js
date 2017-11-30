@@ -51,8 +51,31 @@ class Pebble extends Actor {
 }
 
 class EnergyHolder extends Actor {
-	constructor() {
+	constructor(world, startX, startY, startDir, img, depth, energy) {
+		super(world, startX, startY, startDir, img, depth);
+		this.energy = energy;
+		this.death_food = 100;
+	}
 
+	isDead(){
+	}
+
+	getEnergy(){
+	}
+
+	updateEnergy(){
+	}
+
+	addFood(){
+	}
+
+	pickupFood(){
+	}
+
+	pickupAndEatFood(){
+	}
+
+	becomesFoodUponDeath(){
 	}
 }
 
@@ -75,8 +98,11 @@ class Pheromone extends EnergyHolder {
 }
 
 class TriggerableActor extends Actor {
-	constructor() {
+	constructor(world, startX, startY, img) {
+		super(world, startX, startY, Direction.none, img, 2);
+	}
 
+	isDangerous(){
 	}
 }
 
@@ -93,8 +119,38 @@ class Poison extends TriggerableActor {
 }
 
 class Insect extends EnergyHolder {
-	constructor() {
+	constructor(world, startX, startY, img, energy) {
+		super(world, startX, startY, Direction.right, img, 1, energy); //change Direction.right to some getRandomDirection() later
+	}
 
+	doSomething() {
+	}
+
+	getBitten() {
+	}
+
+	getPoisoned() {
+	}
+
+	getStunned() {
+	}
+
+	isEnemy() {
+	}
+
+	becomesFoodUponDeath() {
+	}
+
+	getXYInFrontOfMe() {
+	}
+
+	moveForwardIfPossible() {
+	}
+
+	increaseSleepTicks() {
+	}
+
+	getRandomDirection() {
 	}
 }
 

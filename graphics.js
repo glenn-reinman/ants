@@ -12,17 +12,17 @@ var offset = canvas.width/64;
 
 function populateArray(){
 
-	var map = [];
+	var allActors = [];
 	for(var i = 0; i < 64; i++){
 		for(var j = 0; j < 64; j++){
 			if(i == 0 || j == 0 || i == 63 || j == 63){
-				let tmp = new Pebble(map, i,j);
-				map.push(tmp);
+				let tmp = new Pebble(allActors, i,j);
+				allActors.push(tmp);
 			}
 		}
 	}
 
-	return map;
+	return allActors;
 }
 
 function start(){
