@@ -1,13 +1,15 @@
-#text {
-	float: left;
-	width: 50%;
-	height: 100%;
+#editor {
+    display: none;
+    margin: auto;
+	width: 99.5vh;
+	height: 99.5vh;
 }
 
 #sim {
-	float: right;
-	width: 50%;
-	height: 100%;
+    display: block;
+    margin: auto;
+    width: 99.5vh;
+    height: 99.5vh;
 }
 
 #graphics {

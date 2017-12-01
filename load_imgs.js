@@ -7,9 +7,9 @@ var loaded_imgs = 0;
 var temp = Object.keys(ants);
 for (var i = 0; i < temp.length; i++){
 	for(var j = 0; j < 4; j++){
-		ants[temp[i]][j] = new Image();
-		ants[temp[i]][j].src = "assets/" + temp[i] + "ant" + j + ".png";
-		ants[temp[i]][j].onload = function(){loaded_imgs++; if(loaded_imgs == 33) {start();}};
+		ants[temp[i]]["x"+j] = new Image();
+		ants[temp[i]]["x"+j].src = "assets/" + temp[i] + "ant" + j + ".png";
+		ants[temp[i]]["x"+j].onload = function(){loaded_imgs++; if(loaded_imgs == 33) {start();}};
 	}
 	ants[temp[i]].pher = new Image();
 	ants[temp[i]].pher.src = "assets/" + temp[i] + "pher" + ".png";
@@ -19,9 +19,10 @@ for (var i = 0; i < temp.length; i++){
 temp = Object.keys(grass);
 for (var i = 0; i < temp.length; i++){
 	for(var j = 0; j < 4; j++){
-		grass[temp[i]][j] = new Image();
-		grass[temp[i]][j].src = "assets/" + temp[i] + "grass" + j + ".png";
-		grass[temp[i]][j].onload = function(){loaded_imgs++; if(loaded_imgs == 33) {start();}};
+		grass[temp[i]]["x"+j] = new Image(); //"x"+j is temp fix
+		grass[temp[i]]["x"+j].src = "assets/" + temp[i] + "grass" + j + ".png";
+		console.log(grass[temp[i]]["x"+j].src)
+		grass[temp[i]]["x"+j].onload = function(){loaded_imgs++; if(loaded_imgs == 33) {start();}};
 	}
 }
 
