@@ -1,17 +1,27 @@
+#sidepanel {
+
+}
+
 #editor {
     display: none;
+
     margin: auto;
 	width: 99.5vh;
 	height: 99.5vh;
+    
+    border: 1px dotted;
 }
 
 #sim {
     display: block;
+
     margin: auto;
     width: 99.5vh;
     height: 99.5vh;
+
+    border: 1px dotted;
 }
 
 #graphics {
-	border:1px dotted;
+	
 }

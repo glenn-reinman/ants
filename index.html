@@ -1,25 +1,78 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="normalize.css">
 
-	<script src="graphObject.js" type="text/javascript"></script>
-	<script src="actor.js" type="text/javascript"></script>
-	<script src="load_imgs.js" type="text/javascript"></script>
-
+	<!-- Basic Page Needs
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta charset="utf-8">
 	<title>ANTS!</title>
-	<link rel="favicon" href="./assets/anthill.png">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- FONT
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+	<!-- CSS
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="stylesheet" href="./css/normalize.css">
+	<link rel="stylesheet" href="./css/skeleton.css">
+	<link rel="stylesheet" href="./css/styles.css">
+
+
+
+	<!-- Favicon
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="./assets/anthill.png">
+
 </head>
 <body>
-	<div id="editor">
-		editor
-	</div>
-	<div id="sim">
-		<canvas id="graphics"></canvas>
-	</div>
-	<script src="graphics.js" type="text/javascript"></script>
-</body>
 
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="container" style="height: 100vh">
+	<div class="row" style="height: 100vh">
+		<div class="two columns" style="height: 100vh">
+			<div id="sidepanel">
+				sidepanel
+				<div onclick="swapPanel()">
+					click_to_switch
+				</div>
+			</div>
+		</div>
+
+		<div class="seven columns offset-by-one" style="height: 100vh">
+			<div id="editor">
+				editor
+			</div>
+
+			<div id="sim">
+				<canvas id="graphics"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<!--<div id="sidepanel">
+	</div>-->
+
+	
+
+
+</div>
+
+<!-- End Document
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- JS
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<script src="./js/graphObject.js" type="text/javascript"></script>
+	<script src="./js/actor.js" type="text/javascript"></script>
+	<script src="./js/load_imgs.js" type="text/javascript"></script>
+	<script src="./js/graphics.js" type="text/javascript"></script>
+	<script src="./js/styles.js" type="text/javascript"></script>
+</body>
 </html>
