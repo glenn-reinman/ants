@@ -10,9 +10,11 @@ class Actor extends GraphObject{
 	}
 
 	isDead(){
+		return false;
 	}
 
 	blocksMovement(){
+		return false;
 	}
 
 	getBitten(amt){
@@ -25,27 +27,32 @@ class Actor extends GraphObject{
 	}
 
 	isEdible(){
+		return false;
 	}
 
 	isPheromone(colony){
+		return false;
 	}
 
 	isPheromoneType(pheromoneType){
+		return false;
 	}
 
 	isEnemy(colony){
+		return false;
 	}
 
 	isDangerous(colony){
+		return isEnemy(colony);
 	}
 
 	isAntHill(colony){
+		return false;
 	}
 
 	getWorld(){
 		return this.world;
 	}
-
 }
 
 class Pebble extends Actor {

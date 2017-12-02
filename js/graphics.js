@@ -14,50 +14,50 @@ var offset = canvas.width/64;
 
 function populateArray(){
 
-	var allActors = [];
+	var actors = [];
 	for(var i = 0; i < 64; i++){
 		for(var j = 0; j < 64; j++){
 			if(i == 0 || j == 0 || i == 63 || j == 63){
-				let tmp = new Pebble(allActors, i, j);
-				allActors.push(tmp);
+				let tmp = new Pebble(actors, i, j);
+				actors.push(tmp);
 			}
 		}
 	}
 
-	let f = new Food(allActors, 1, 1, 100);
-	allActors.push(f);
-	let ah = new AntHill(allActors, 1, 2, Colony.green, 'p1');
-	allActors.push(ah);
+	let f = new Food(actors, 1, 1, 100);
+	actors.push(f);
+	let ah = new AntHill(actors, 1, 2, Colony.green, 'p1');
+	actors.push(ah);
 
-	let pb = new Pheromone(allActors, 1, 3, Colony.blue, Pheromone.pnone);
-	allActors.push(pb);
-	let pg = new Pheromone(allActors, 2, 3, Colony.green, Pheromone.pnone);
-	allActors.push(pg);
-	let pr = new Pheromone(allActors, 3, 3, Colony.red, Pheromone.pnone);
-	allActors.push(pr);
-	let py = new Pheromone(allActors, 4, 3, Colony.yellow, Pheromone.pnone);
-	allActors.push(py);
+	let pb = new Pheromone(actors, 1, 3, Colony.blue, Pheromone.pnone);
+	actors.push(pb);
+	let pg = new Pheromone(actors, 2, 3, Colony.green, Pheromone.pnone);
+	actors.push(pg);
+	let pr = new Pheromone(actors, 3, 3, Colony.red, Pheromone.pnone);
+	actors.push(pr);
+	let py = new Pheromone(actors, 4, 3, Colony.yellow, Pheromone.pnone);
+	actors.push(py);
 
-	let wp = new WaterPool(allActors, 1, 4);
-	allActors.push(wp);
-	let po = new Poison(allActors, 1, 5);
-	allActors.push(po);
+	let wp = new WaterPool(actors, 1, 4);
+	actors.push(wp);
+	let po = new Poison(actors, 1, 5);
+	actors.push(po);
 
-	let anb = new Ant(allActors, 1, 6, Colony.blue, 'p2', 'ant');
-	allActors.push(anb);
-	let ang = new Ant(allActors, 2, 6, Colony.green, 'p2', 'ant');
-	allActors.push(ang);
-	let anr = new Ant(allActors, 3, 6, Colony.red, 'p2', 'ant');
-	allActors.push(anr);
-	let any = new Ant(allActors, 4, 6, Colony.yellow, 'p2', 'ant');
-	allActors.push(any);
+	let anb = new Ant(actors, 1, 6, Colony.blue, 'p2', 'ant');
+	actors.push(anb);
+	let ang = new Ant(actors, 2, 6, Colony.green, 'p2', 'ant');
+	actors.push(ang);
+	let anr = new Ant(actors, 3, 6, Colony.red, 'p2', 'ant');
+	actors.push(anr);
+	let any = new Ant(actors, 4, 6, Colony.yellow, 'p2', 'ant');
+	actors.push(any);
 
-	let bg = new BabyGrasshopper(allActors, 1, 7);
-	allActors.push(bg);
-	let ag = new AdultGrasshopper(allActors, 1, 8);
-	allActors.push(ag);
+	let bg = new BabyGrasshopper(actors, 1, 7);
+	actors.push(bg);
+	let ag = new AdultGrasshopper(actors, 1, 8);
+	actors.push(ag);
 
-	return allActors;
+	return actors;
 }
 
 function start(){
