@@ -1,5 +1,26 @@
 // actor.js
 
+Direction = {
+    up: 0,
+    right: 1,
+    down: 2,
+    left: 3
+}
+
+PheromoneType = {
+  pnone: 0,
+  ptype1: 1,
+  ptype2: 2,
+  ptype3: 3
+}
+
+Colony = {
+	green: 0,
+	red: 1,
+	white: 2,
+	yellow: 3
+}
+
 const PEBBLE_DEPTH = 1;
 const FOOD_DEPTH = 2;
 const ANTHILL_DEPTH = 2;
@@ -15,12 +36,6 @@ const ANT_START_ENERGY = 1500;
 const BABY_GRASSHOPPER_START_ENERGY = 500;
 const ADULT_GRASSHOPPER_START_ENERGY = 1600;
 
-PheromoneType = {
-  pnone: 0,
-  ptype1: 1,
-  ptype2: 2,
-  ptype3: 3
-}
 
 class Actor extends GraphObject{
 	constructor(world, startX, startY, startDir, img, depth){
@@ -68,7 +83,7 @@ class Actor extends GraphObject{
 
 class Pebble extends Actor {
 	constructor(world, startX, startY){
-		super(world, startX, startY, Direction.right, rest.rock1, PEBBLE_DEPTH);
+		super(world, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
 	}
 
 	doSomething(){
@@ -110,7 +125,7 @@ class EnergyHolder extends Actor {
 
 class Food extends EnergyHolder {
 	constructor(world, startX, startY, energy){
-		super(world, startX, startY, Direction.right, energy, rest.food, FOOD_DEPTH)
+		super(world, startX, startY, Direction.right, energy, 'food', FOOD_DEPTH)
 	}
 
 	doSomething(){
@@ -122,7 +137,7 @@ class Food extends EnergyHolder {
 
 class AntHill extends EnergyHolder {
 	constructor(world, startX, startY, colony, program){
-		super(world, startX, startY, Direction.right, ANTHILL_START_FOOD, rest.anthill, ANTHILL_DEPTH)
+		super(world, startX, startY, Direction.right, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
 		this.colony = colony;
 		this.program = program;
 	}
@@ -136,7 +151,7 @@ class AntHill extends EnergyHolder {
 
 class Pheromone extends EnergyHolder {
 	constructor(world, startX, startY, colony, pheromoneType){
-		super(world, startX, startY, Direction.right, PHEROMONE_START_STRENGTH, ants.pher, depth) //need to change this ants.pher thing
+		super(world, startX, startY, Direction.right, PHEROMONE_START_STRENGTH, imgs.colony.pher, PHEROMONE_DEPTH) //need to change this ants.pher thing
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
 	}
@@ -173,7 +188,7 @@ class TriggerableActor extends Actor {
 
 class WaterPool extends TriggerableActor {
 	constructor(world, startX, startY){
-		super(world, startX, startY, rest.waterpool)
+		super(world, startX, startY, 'waterpool')
 	}
 
 	doSomething(){
@@ -182,7 +197,7 @@ class WaterPool extends TriggerableActor {
 
 class Poison extends TriggerableActor {
 	constructor(world, startX, startY){
-		super(world, startX, startY, rest.poison)
+		super(world, startX, startY, 'poison')
 	}
 
 	doSomething(){
@@ -281,7 +296,7 @@ class Grasshopper extends Insect {
 
 class BabyGrasshopper extends Grasshopper {
 	constructor(world, startX, startY){
-		super(world, startX, startY, BABY_GRASSHOPPER_START_ENERGY, grass.baby)
+		super(world, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass')
 	}
 
 	isEnemy(colony){
@@ -292,8 +307,8 @@ class BabyGrasshopper extends Grasshopper {
 }
 
 class AdultGrasshopper extends Grasshopper {
-	constructor(world, startX, startY, ){
-		super(world, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, grass.adult)
+	constructor(world, startX, startY){
+		super(world, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass')
 
 	}
 

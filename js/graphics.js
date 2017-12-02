@@ -16,7 +16,7 @@ function populateArray(){
 	for(var i = 0; i < 64; i++){
 		for(var j = 0; j < 64; j++){
 			if(i == 0 || j == 0 || i == 63 || j == 63){
-				let tmp = new Pebble(allActors, i,j);
+				let tmp = new Pebble(allActors, i, j);
 				allActors.push(tmp);
 			}
 		}
