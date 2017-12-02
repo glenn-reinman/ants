@@ -1,9 +1,9 @@
 // actor.js
 
 class Actor extends GraphObject{
-	constructor(world, startX, startY, startDir, img, depth){
+	constructor(studentWorld, startX, startY, startDir, img, depth){
 		super(img, startX, startY, startDir, depth);
-		this.world = world;
+		this.studentWorld = studentWorld;
 	}
 
 	doSomething(){
@@ -50,41 +50,58 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	getWorld(){
-		return this.world;
+	getstudentWorld(){
+		return this.studentWorld;
 	}
 }
 
 class Pebble extends Actor {
-	constructor(world, startX, startY){
-		super(world, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
+	constructor(studentWorld, startX, startY){
+		super(studentWorld, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
 	}
 
 	doSomething(){
 	}
 
 	blocksMovement(){
+		return true;
 	}
 }
 
 class EnergyHolder extends Actor {
-	constructor(world, startX, startY, startDir, energy, img, depth){
-		super(world, startX, startY, startDir, img, depth);
+	constructor(studentWorld, startX, startY, startDir, energy, img, depth){
+		super(studentWorld, startX, startY, startDir, img, depth);
 		this.energy = energy;
 
 		this.death_food = DEATH_FOOD_AMOUNT;
 	}
 
 	isDead(){
+		return this.energy <= 0;
 	}
 
 	getEnergy(){
+		return this.energy;
 	}
 
 	updateEnergy(amt){
+		this.energy += amt;
+		if (this.energy <= 0)
+	    {
+	        this.energy = 0;
+	        if (this.becomesFoodUponDeath())
+	            this.addFood(DEATH_FOOD_AMOUNT);
+	    }
 	}
 
 	addFood(amt){
+		/*var w = getstudentWorld();
+
+	    EnergyHolder* f = static_cast<EnergyHolder*>(sw->getEdibleAt(getX(), getY()));
+	    if (f != nullptr)
+	        f->updateEnergy(amt);
+	    else
+	        sw->addActor(new Food(sw, getX(), getY(), amt));*/
 	}
 
 	pickupFood(amt){
@@ -94,12 +111,13 @@ class EnergyHolder extends Actor {
 	}
 
 	becomesFoodUponDeath(){
+		return false;
 	}
 }
 
 class Food extends EnergyHolder {
-	constructor(world, startX, startY, energy){
-		super(world, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH)
+	constructor(studentWorld, startX, startY, energy){
+		super(studentWorld, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH)
 	}
 
 	doSomething(){
@@ -110,8 +128,8 @@ class Food extends EnergyHolder {
 }
 
 class AntHill extends EnergyHolder {
-	constructor(world, startX, startY, colony, program){
-		super(world, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
+	constructor(studentWorld, startX, startY, colony, program){
+		super(studentWorld, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
 		this.colony = colony;
 		this.program = program;
 	}
@@ -124,8 +142,8 @@ class AntHill extends EnergyHolder {
 }
 
 class Pheromone extends EnergyHolder {
-	constructor(world, startX, startY, colony, pheromoneType){
-		super(world, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH)
+	constructor(studentWorld, startX, startY, colony, pheromoneType){
+		super(studentWorld, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH)
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
 	}
@@ -152,8 +170,8 @@ class Pheromone extends EnergyHolder {
 }
 
 class TriggerableActor extends Actor {
-	constructor(world, startX, startY, img){
-		super(world, startX, startY, Direction.none, img, ACTIVATING_OBJECT_DEPTH);
+	constructor(studentWorld, startX, startY, img){
+		super(studentWorld, startX, startY, Direction.none, img, ACTIVATING_OBJECT_DEPTH);
 	}
 
 	isDangerous(colony){
@@ -161,8 +179,8 @@ class TriggerableActor extends Actor {
 }
 
 class WaterPool extends TriggerableActor {
-	constructor(world, startX, startY){
-		super(world, startX, startY, 'waterpool')
+	constructor(studentWorld, startX, startY){
+		super(studentWorld, startX, startY, 'waterpool')
 	}
 
 	doSomething(){
@@ -170,8 +188,8 @@ class WaterPool extends TriggerableActor {
 }
 
 class Poison extends TriggerableActor {
-	constructor(world, startX, startY){
-		super(world, startX, startY, 'poison')
+	constructor(studentWorld, startX, startY){
+		super(studentWorld, startX, startY, 'poison')
 	}
 
 	doSomething(){
@@ -179,8 +197,8 @@ class Poison extends TriggerableActor {
 }
 
 class Insect extends EnergyHolder {
-	constructor(world, startX, startY, energy, img){
-		super(world, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
+	constructor(studentWorld, startX, startY, energy, img){
+		super(studentWorld, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
 		this.sleepTicks = 0;
 		this.stunned = false;
 	}
@@ -220,8 +238,8 @@ class Insect extends EnergyHolder {
 }
 
 class Ant extends Insect {
-	constructor(world, startX, startY, colony, program){// remove 'img' from header, this is diff from sol
-		super(world, startX, startY, ANT_START_ENERGY, colony + 'ant')
+	constructor(studentWorld, startX, startY, colony, program){// remove 'img' from header, this is diff from sol
+		super(studentWorld, startX, startY, ANT_START_ENERGY, colony + 'ant')
 		this.colony = colony;
 		this.program = program;
 
@@ -254,8 +272,8 @@ class Ant extends Insect {
 }
 
 class Grasshopper extends Insect {
-	constructor(world, startX, startY, energy, img){
-		super(world, startX, startY, energy, img)
+	constructor(studentWorld, startX, startY, energy, img){
+		super(studentWorld, startX, startY, energy, img)
 	}
 
 	doSomethingAux(){
@@ -269,8 +287,8 @@ class Grasshopper extends Insect {
 }
 
 class BabyGrasshopper extends Grasshopper {
-	constructor(world, startX, startY){
-		super(world, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass')
+	constructor(studentWorld, startX, startY){
+		super(studentWorld, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass')
 	}
 
 	isEnemy(colony){
@@ -281,8 +299,8 @@ class BabyGrasshopper extends Grasshopper {
 }
 
 class AdultGrasshopper extends Grasshopper {
-	constructor(world, startX, startY){
-		super(world, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass')
+	constructor(studentWorld, startX, startY){
+		super(studentWorld, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass')
 
 	}
 
