@@ -1,6 +1,7 @@
 // actor.js
 
 Direction = {
+	none: -1,
     up: 0,
     right: 1,
     down: 2,
@@ -83,7 +84,7 @@ class Actor extends GraphObject{
 
 class Pebble extends Actor {
 	constructor(world, startX, startY){
-		super(world, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
+		super(world, startX, startY, Direction.right, 'whiteant_down', PEBBLE_DEPTH);
 	}
 
 	doSomething(){
@@ -125,7 +126,7 @@ class EnergyHolder extends Actor {
 
 class Food extends EnergyHolder {
 	constructor(world, startX, startY, energy){
-		super(world, startX, startY, Direction.right, energy, 'food', FOOD_DEPTH)
+		super(world, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH)
 	}
 
 	doSomething(){
@@ -137,7 +138,7 @@ class Food extends EnergyHolder {
 
 class AntHill extends EnergyHolder {
 	constructor(world, startX, startY, colony, program){
-		super(world, startX, startY, Direction.right, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
+		super(world, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
 		this.colony = colony;
 		this.program = program;
 	}
@@ -151,7 +152,7 @@ class AntHill extends EnergyHolder {
 
 class Pheromone extends EnergyHolder {
 	constructor(world, startX, startY, colony, pheromoneType){
-		super(world, startX, startY, Direction.right, PHEROMONE_START_STRENGTH, imgs.colony.pher, PHEROMONE_DEPTH) //need to change this ants.pher thing
+		super(world, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, imgs.colony.pher, PHEROMONE_DEPTH) //need to change this ants.pher thing
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
 	}
@@ -179,7 +180,7 @@ class Pheromone extends EnergyHolder {
 
 class TriggerableActor extends Actor {
 	constructor(world, startX, startY, img){
-		super(world, startX, startY, Direction.right, img, ACTIVATING_OBJECT_DEPTH);
+		super(world, startX, startY, Direction.none, img, ACTIVATING_OBJECT_DEPTH);
 	}
 
 	isDangerous(colony){
