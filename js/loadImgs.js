@@ -1,3 +1,4 @@
+// loadImgs.js
 
 var imgs = { "adultgrass_down": null,
              "adultgrass_left": null,
@@ -32,6 +33,7 @@ var imgs = { "adultgrass_down": null,
              "yellowant_right": null,
              "yellowant_up": null,
              "yellowpher": null};
+
 var loaded_imgs = 0;
 
 var img_names = Object.keys(imgs);

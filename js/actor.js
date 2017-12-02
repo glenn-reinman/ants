@@ -1,43 +1,5 @@
 // actor.js
 
-Direction = {
-	none: -1,
-    up: 0,
-    right: 1,
-    down: 2,
-    left: 3
-}
-
-PheromoneType = {
-  pnone: 0,
-  ptype1: 1,
-  ptype2: 2,
-  ptype3: 3
-}
-
-Colony = {
-	green: 0,
-	red: 1,
-	white: 2,
-	yellow: 3
-}
-
-const PEBBLE_DEPTH = 1;
-const FOOD_DEPTH = 2;
-const ANTHILL_DEPTH = 2;
-const PHEROMONE_DEPTH = 2;
-const ACTIVATING_OBJECT_DEPTH = 2
-const INSECT_DEPTH = 1;
-
-const DEATH_FOOD_AMOUNT = 100;
-const START_FOOD_ENERGY = 6000;
-const ANTHILL_START_FOOD = 8999;
-const PHEROMONE_START_STRENGTH = 256;
-const ANT_START_ENERGY = 1500;
-const BABY_GRASSHOPPER_START_ENERGY = 500;
-const ADULT_GRASSHOPPER_START_ENERGY = 1600;
-
-
 class Actor extends GraphObject{
 	constructor(world, startX, startY, startDir, img, depth){
 		super(img, startX, startY, startDir, depth);
@@ -84,7 +46,7 @@ class Actor extends GraphObject{
 
 class Pebble extends Actor {
 	constructor(world, startX, startY){
-		super(world, startX, startY, Direction.right, 'whiteant_down', PEBBLE_DEPTH);
+		super(world, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
 	}
 
 	doSomething(){
@@ -152,7 +114,7 @@ class AntHill extends EnergyHolder {
 
 class Pheromone extends EnergyHolder {
 	constructor(world, startX, startY, colony, pheromoneType){
-		super(world, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, imgs.colony.pher, PHEROMONE_DEPTH) //need to change this ants.pher thing
+		super(world, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH)
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
 	}
@@ -207,7 +169,7 @@ class Poison extends TriggerableActor {
 
 class Insect extends EnergyHolder {
 	constructor(world, startX, startY, energy, img){
-		super(world, startX, startY, Direction.right, energy, img, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
+		super(world, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
 		this.sleepTicks = 0;
 		this.stunned = false;
 	}
@@ -247,14 +209,14 @@ class Insect extends EnergyHolder {
 }
 
 class Ant extends Insect {
-	constructor(world, startX, startY, colony, program, img){
-		super(world, startX, startY, ANT_START_ENERGY, img)
+	constructor(world, startX, startY, colony, program){// remove 'img' from header, this is diff from sol
+		super(world, startX, startY, ANT_START_ENERGY, colony + 'ant')
 		this.colony = colony;
 		this.program = program;
 
 		this.ip = 0;
 		this.lastRandomNumber = 0;
-		this.lastPheromoneType = pnone;
+		this.lastPheromoneType = Pheromone.pnone;
 		this.lastPheromoneStrength = 0;
 		this.foodHeld = 0;
 		this.iWasBit = false;
