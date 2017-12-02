@@ -2,7 +2,6 @@
 
 // Direction enum
 Direction = {
-    none: -1,
     up: 0,
     right: 1,
     down: 2,
@@ -10,11 +9,11 @@ Direction = {
 }
 
 class GraphObject {
-    constructor(startX, startY, startDir, img, depth) {
+    constructor(img, startX, startY, startDir, depth) {
+        this.img = img;
         this.x = startX;
         this.y = startY;
         this.dir = startDir;
-        this.img = img;
         this.depth = depth;
     }
 }
