@@ -9,7 +9,7 @@ canvas.width = parseInt(w.substring(0, w.length - 2));
 canvas.height = canvas.width;
 
 
-var offset = canvas.width/32;
+var offset = canvas.width/64;
 
 
 function populateArray(){
@@ -56,9 +56,6 @@ function populateArray(){
 	allActors.push(bg);
 	let ag = new AdultGrasshopper(allActors, 1, 8);
 	allActors.push(ag);
-
-	
-
 
 	return allActors;
 }

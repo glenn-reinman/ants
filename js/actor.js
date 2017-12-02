@@ -42,6 +42,10 @@ class Actor extends GraphObject{
 	isAntHill(colony){
 	}
 
+	getWorld(){
+		return this.world;
+	}
+
 }
 
 class Pebble extends Actor {
@@ -284,43 +288,3 @@ class AdultGrasshopper extends Grasshopper {
 	jump(){
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
