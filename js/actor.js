@@ -1,7 +1,7 @@
 // actor.js
 
 class Actor extends GraphObject{
-	constructor(studentWorld, startX, startY, startDir, img, depth){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), startDir = throwIfMissing(), img = throwIfMissing(), depth = throwIfMissing()){
 		super(img, startX, startY, startDir, depth);
 		this.studentWorld = studentWorld;
 	}
@@ -17,7 +17,7 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	getBitten(amt){
+	getBitten(amt = throwIfMissing()){
 	}
 
 	getPoisoned(){
@@ -30,23 +30,23 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	isPheromone(colony){
+	isPheromone(colony = throwIfMissing()){
 		return false;
 	}
 
-	isPheromoneType(pheromoneType){
+	isPheromoneType(pheromoneType = throwIfMissing()){
 		return false;
 	}
 
-	isEnemy(colony){
+	isEnemy(colony = throwIfMissing()){
 		return false;
 	}
 
-	isDangerous(colony){
+	isDangerous(colony = throwIfMissing()){
 		return this.isEnemy(colony);
 	}
 
-	isAntHill(colony){
+	isAntHill(colony = throwIfMissing()){
 		return false;
 	}
 
@@ -56,7 +56,7 @@ class Actor extends GraphObject{
 }
 
 class Pebble extends Actor {
-	constructor(studentWorld, startX, startY){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
 	}
 
@@ -69,7 +69,7 @@ class Pebble extends Actor {
 }
 
 class EnergyHolder extends Actor {
-	constructor(studentWorld, startX, startY, startDir, energy, img, depth){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), startDir = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing(), depth = throwIfMissing()){
 		super(studentWorld, startX, startY, startDir, img, depth);
 		this.energy = energy;
 	}
@@ -82,7 +82,7 @@ class EnergyHolder extends Actor {
 		return this.energy;
 	}
 
-	updateEnergy(amt){
+	updateEnergy(amt = throwIfMissing()){
 		this.energy += amt;
 		if (this.energy <= 0)
 	    {
@@ -93,7 +93,7 @@ class EnergyHolder extends Actor {
 	    }
 	}
 
-	addFood(amt){
+	addFood(amt = throwIfMissing()){
 		let energyHolder = this.studentWorld.getEdibleAt(this.getX(), this.getY());
 		if (energyHolder != null)
 			energyHolder.updateEnergy(amt);
@@ -101,13 +101,22 @@ class EnergyHolder extends Actor {
 			let f = new Food(this.studentWorld, this.getX(), this.getY(), amt);
 			this.studentWorld.addActor(f);
 		}
-
 	}
 
-	pickupFood(amt){
+	pickupFood(amt = throwIfMissing()){
+		let energyHolder = this.studentWorld.getEdibleAt(this.getX(), this.getY());
+		if (energyHolder == null)
+			return 0;
+		if (amt > energyHolder.getEnergy())
+			amt = energyHolder.getEnergy();
+		energyHolder.updateEnergy(-amt);
+		return amt;
 	}
 
-	pickupAndEatFood(amt){
+	pickupAndEatFood(amt = throwIfMissing()){
+		amt = this.pickupFood(amt);
+		this.updateEnergy(amt);
+		return amt;
 	}
 
 	becomesFoodUponDeath(){
@@ -116,7 +125,7 @@ class EnergyHolder extends Actor {
 }
 
 class Food extends EnergyHolder {
-	constructor(studentWorld, startX, startY, energy){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH)
 	}
 
@@ -129,7 +138,7 @@ class Food extends EnergyHolder {
 }
 
 class AntHill extends EnergyHolder {
-	constructor(studentWorld, startX, startY, colony, program){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), program = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
 		this.colony = colony;
 		this.program = program;
@@ -138,13 +147,13 @@ class AntHill extends EnergyHolder {
 	doSomething(){
 	}
 
-	isAntHill(colony){
+	isAntHill(colony = throwIfMissing()){
 		return this.colony == colony;
 	}
 }
 
 class Pheromone extends EnergyHolder {
-	constructor(studentWorld, startX, startY, colony, pheromoneType){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), pheromoneType = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH)
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
@@ -154,11 +163,11 @@ class Pheromone extends EnergyHolder {
 		super.updateEnergy(-1);
 	}
 
-	isPheromone(colony){
+	isPheromone(colony = throwIfMissing()){
 		return this.colony == colony;
 	}
 
-	setPheromoneType(pheromoneType){
+	setPheromoneType(pheromoneType = throwIfMissing()){
 		this.pheromoneType = pheromoneType;
 	}
 
@@ -166,7 +175,7 @@ class Pheromone extends EnergyHolder {
 		return this.pheromoneType;
 	}
 
-	isPheromoneType(pheromoneType){
+	isPheromoneType(pheromoneType = throwIfMissing()){
 		return this.pheromoneType == pheromoneType;
 	}
 
@@ -178,17 +187,17 @@ class Pheromone extends EnergyHolder {
 }
 
 class TriggerableActor extends Actor {
-	constructor(studentWorld, startX, startY, img){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), img = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.none, img, ACTIVATING_OBJECT_DEPTH);
 	}
 
-	isDangerous(colony){
+	isDangerous(colony = throwIfMissing()){
 		return true;
 	}
 }
 
 class WaterPool extends TriggerableActor {
-	constructor(studentWorld, startX, startY){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
 		super(studentWorld, startX, startY, 'waterpool')
 	}
 
@@ -197,7 +206,7 @@ class WaterPool extends TriggerableActor {
 }
 
 class Poison extends TriggerableActor {
-	constructor(studentWorld, startX, startY){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
 		super(studentWorld, startX, startY, 'poison')
 	}
 
@@ -206,7 +215,7 @@ class Poison extends TriggerableActor {
 }
 
 class Insect extends EnergyHolder {
-	constructor(studentWorld, startX, startY, energy, img){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing()){
 		super(studentWorld, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
 		this.sleepTicks = 0;
 		this.stunned = false;
@@ -223,7 +232,7 @@ class Insect extends EnergyHolder {
 		doSomethingAux();
 	}
 
-	getBitten(amt){
+	getBitten(amt = throwIfMissing()){
 		super.updateEnergy(-amt);
 	}
 
@@ -238,7 +247,7 @@ class Insect extends EnergyHolder {
 		}
 	}
 
-	isEnemy(colony){
+	isEnemy(colony = throwIfMissing()){
 		return true;
 	}
 
@@ -246,13 +255,13 @@ class Insect extends EnergyHolder {
 		return true;
 	}
 
-	getXYInFrontOfMe(x, y){
+	getXYInFrontOfMe(x = throwIfMissing(), y = throwIfMissing()){
 	}
 
 	moveForwardIfPossible(){
 	}
 
-	increaseSleepTicks(amt){
+	increaseSleepTicks(amt = throwIfMissing()){
 		this.sleepTicks += amt;
 	}
 
@@ -281,7 +290,7 @@ class Insect extends EnergyHolder {
 }
 
 class Ant extends Insect {
-	constructor(studentWorld, startX, startY, colony, program){// remove 'img' from header, this is diff from sol
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), program = throwIfMissing()){// remove 'img' from header, this is diff from sol
 		super(studentWorld, startX, startY, ANT_START_ENERGY, colony + 'ant')
 		this.colony = colony;
 		this.program = program;
@@ -295,12 +304,12 @@ class Ant extends Insect {
 		this.blockedFromMoving = false;
 	}
 
-	getBitten(amt){
+	getBitten(amt = throwIfMissing()){
 		super.getBitten(amt);
 		this.iWasBit = true;
 	}
 
-	isEnemy(colony){
+	isEnemy(colony = throwIfMissing()){
 		return this.colony != colony;
 	}
 
@@ -315,15 +324,15 @@ class Ant extends Insect {
 	doSomethingAux(){
 	}
 
-	conditionTrue(c){
+	conditionTrue(c = throwIfMissing()){
 	}
 
-	emitPheromone(pheromoneType){
+	emitPheromone(pheromoneType = throwIfMissing()){
 	}
 }
 
 class Grasshopper extends Insect {
-	constructor(studentWorld, startX, startY, energy, img){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing()){
 		super(studentWorld, startX, startY, energy, img)
 		this.chooseDirectionAndDistance();
 		this.walkDist;
@@ -342,11 +351,11 @@ class Grasshopper extends Insect {
 }
 
 class BabyGrasshopper extends Grasshopper {
-	constructor(studentWorld, startX, startY){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
 		super(studentWorld, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass')
 	}
 
-	isEnemy(colony){
+	isEnemy(colony = throwIfMissing()){
 		return false;
 	}
 
@@ -355,12 +364,12 @@ class BabyGrasshopper extends Grasshopper {
 }
 
 class AdultGrasshopper extends Grasshopper {
-	constructor(studentWorld, startX, startY){
+	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
 		super(studentWorld, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass')
 
 	}
 
-	getBitten(amt){
+	getBitten(amt = throwIfMissing()){
 	}
 
 	doPreActionThenProceed(){

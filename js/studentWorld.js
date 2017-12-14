@@ -37,7 +37,7 @@ class StudentWorld extends GameWorld{
 		console.log("---Pebble---");
 		console.log(p.blocksMovement());
 
-		let f = new Food(this, 1, 2, 100);
+		let f = new Food(this, 4, 7, START_FOOD_ENERGY);
 		this.addActor(f);
 		console.log("---Food---");
 		console.log(f.isEdible());
@@ -86,10 +86,15 @@ class StudentWorld extends GameWorld{
 		console.log("---Ant---");
 		console.log(any.getEnergy());
 		console.log(any.iWasBit);
-		any.getBitten(1500);
+		any.getBitten(150);
 		console.log(any.getEnergy());
 		console.log(any.iWasBit);
 		console.log(any.isEnemy(Colony.yellow));
+		console.log(f.getEnergy());
+		console.log(any.getEnergy());
+		any.pickupAndEatFood(50);
+		console.log(f.getEnergy());
+		console.log(any.getEnergy());
 
 		let bg = new BabyGrasshopper(this, 1, 8);
 		this.addActor(bg);
