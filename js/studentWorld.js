@@ -18,43 +18,43 @@ class StudentWorld extends GameWorld{
 
 		this.ticks = 0;
 
-		this.world = new Array(); for (var x = 0; x < 64; x++){ this.world[x] = new Array(); for (var y = 0; y < 64; y++){this.world[x][y] = new Array();}} // Makes 3D array
+		this.map = new Array(); for (var x = 0; x < 64; x++){ this.map[x] = new Array(); for (var y = 0; y < 64; y++){this.map[x][y] = new Array();}} // Makes 3D array
 	}
 
 	init(){
 		for(var x = 0; x < 64; x++){
 			for(var y = 0; y < 64; y++){
 				if(x == 0 || y == 0 || x == 63 || y == 63){
-					let tmp = new Pebble(this.world, x, y);
-					this.world[x][y].push(tmp);
+					let tmp = new Pebble(this, x, y);
+					this.addActor(tmp);
 				}
 			}
 		}
 
 		//temporary display all
-		let p = new Pebble(this.world, 1, 1);
-		this.world[1][9].push(p);
+		let p = new Pebble(this, 1, 1);
+		this.addActor(p);
 		console.log("---Pebble---");
 		console.log(p.blocksMovement());
 
-		let f = new Food(this.world, 1, 2, 100);
-		this.world[1][1].push(f);
+		let f = new Food(this, 1, 2, 100);
+		this.addActor(f);
 		console.log("---Food---");
 		console.log(f.isEdible());
 
-		let ah = new AntHill(this.world, 1, 3, Colony.green, 'p1');
-		this.world[1][2].push(ah);
+		let ah = new AntHill(this, 1, 3, Colony.green, 'p1');
+		this.addActor(ah);
 		console.log("---Anthill---");
 		console.log(ah.isAntHill(Colony.green));
 
-		let pb = new Pheromone(this.world, 1, 4, Colony.blue, PheromoneType.ptype1);
-		this.world[1][3].push(pb);
-		let pg = new Pheromone(this.world, 2, 4, Colony.green, PheromoneType.ptype2);
-		this.world[2][3].push(pg);
-		let pr = new Pheromone(this.world, 3, 4, Colony.red, PheromoneType.ptype3);
-		this.world[3][3].push(pr);
-		let py = new Pheromone(this.world, 4, 4, Colony.yellow, PheromoneType.ptype3);
-		this.world[4][3].push(py);
+		let pb = new Pheromone(this, 1, 4, Colony.blue, PheromoneType.ptype1);
+		this.addActor(pb);
+		let pg = new Pheromone(this, 2, 4, Colony.green, PheromoneType.ptype2);
+		this.addActor(pg);
+		let pr = new Pheromone(this, 3, 4, Colony.red, PheromoneType.ptype3);
+		this.addActor(pr);
+		let py = new Pheromone(this, 4, 4, Colony.yellow, PheromoneType.ptype3);
+		this.addActor(py);
 		console.log("---Pheromone---");
 		console.log(py.getEnergy());
 		py.doSomething();
@@ -67,41 +67,46 @@ class StudentWorld extends GameWorld{
 		py.increaseStrength();
 		console.log(py.getEnergy());
 
-		let wp = new WaterPool(this.world, 1, 5);
-		this.world[1][4].push(wp);
+		let wp = new WaterPool(this, 1, 5);
+		this.addActor(wp);
 		console.log("---WaterPool---");
 
-		let po = new Poison(this.world, 1, 6);
-		this.world[1][5].push(po);
+		let po = new Poison(this, 1, 6);
+		this.addActor(po);
 		console.log("---Poison---");
 
-		let anb = new Ant(this.world, 1, 7, Colony.blue, 'p2', 'ant');
-		this.world[1][6].push(anb);
-		let ang = new Ant(this.world, 2, 7, Colony.green, 'p2', 'ant');
-		this.world[2][6].push(ang);
-		let anr = new Ant(this.world, 3, 7, Colony.red, 'p2', 'ant');
-		this.world[3][6].push(anr);
-		let any = new Ant(this.world, 4, 7, Colony.yellow, 'p2', 'ant');
-		this.world[4][6].push(any);
+		let anb = new Ant(this, 1, 7, Colony.blue, 'p2', 'ant');
+		this.addActor(anb);
+		let ang = new Ant(this, 2, 7, Colony.green, 'p2', 'ant');
+		this.addActor(ang);
+		let anr = new Ant(this, 3, 7, Colony.red, 'p2', 'ant');
+		this.addActor(anr);
+		let any = new Ant(this, 4, 7, Colony.yellow, 'p2', 'ant');
+		this.addActor(any);
 		console.log("---Ant---");
 		console.log(any.getEnergy());
 		console.log(any.iWasBit);
-		any.getBitten(1);
+		any.getBitten(1500);
 		console.log(any.getEnergy());
 		console.log(any.iWasBit);
 		console.log(any.isEnemy(Colony.yellow));
 
-		let bg = new BabyGrasshopper(this.world, 1, 8);
-		this.world[1][7].push(bg);
+		let bg = new BabyGrasshopper(this, 1, 8);
+		this.addActor(bg);
 		console.log("---BabyGrasshopper---");
 		console.log(bg.walkDist);
 		console.log(bg.getDirection());
 		console.log(bg.isEnemy(Colony.yellow));
 
-		let ag = new AdultGrasshopper(this.world, 1, 9);
-		this.world[1][8].push(ag);
+		let ag = new AdultGrasshopper(this, 1, 9);
+		this.addActor(ag);
 		console.log("---AdultGrashopper---")
 		//end temporary display all 
+
+		console.log("---studentWorld---")
+
+		console.log(this.getActorsAt(1, 1));
+		console.log(this.getEdibleAt(4, 7));
 
 	}
 
@@ -116,8 +121,8 @@ class StudentWorld extends GameWorld{
 
 		for(var x = 0; x < 64; x++){
 			for(var y = 0; y < 64; y++){
-				if (this.world[x][y].length != 0){// probably will eventually have to make this display a specific image, rather than just the first
-					ctx.drawImage(this.world[x][y][0].img, this.world[x][y][0].x*offset, this.world[x][y][0].y*offset, offset, offset);
+				if (this.map[x][y].length != 0){// probably will eventually have to make this display a specific image, rather than just the first
+					ctx.drawImage(this.map[x][y][0].img, this.map[x][y][0].x*offset, this.map[x][y][0].y*offset, offset, offset);
 				}
 			}
 		}
@@ -134,12 +139,23 @@ class StudentWorld extends GameWorld{
 	}
 
 	addActor(actor){
+		this.map[actor.getX()][actor.getY()].push(actor);
 	}
 
-	getEdible(x, y){
+	getEdibleAt(x, y){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length != 0){
+			for (let i = 0; i < actors.length; i++){
+				if (actors[i].isEdible() && !actors[i].isDead()){
+					return actors[i];
+				}
+			}
+		}
+
+		return null;
 	}
 
-	getPheromoneAt(x, y, colony, ptype){
+	getPheromoneAt(x, y, colony, pheromoneType){
 	}
 
 	getPheromoneAt(x, y, colony){
@@ -167,6 +183,7 @@ class StudentWorld extends GameWorld{
 	}
 
 	getActorsAt(x, y){
+		return this.map[x][y];
 	}
 
 	removeDeadActors(){

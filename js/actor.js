@@ -50,7 +50,7 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	getWorld(){
+	getWorld(){//probably not necessary, remove later probably
 		return this.studentWorld;
 	}
 }
@@ -87,12 +87,21 @@ class EnergyHolder extends Actor {
 		if (this.energy <= 0)
 	    {
 	        this.energy = 0;
-	        if (this.becomesFoodUponDeath())
+	        if (this.becomesFoodUponDeath()){
 	            this.addFood(DEATH_FOOD_AMOUNT);
+	        }
 	    }
 	}
 
 	addFood(amt){
+		let energyHolder = this.studentWorld.getEdibleAt(this.getX(), this.getY());
+		if (energyHolder != null)
+			energyHolder.updateEnergy(amt);
+		else{
+			let f = new Food(this.studentWorld, this.getX(), this.getY(), amt);
+			this.studentWorld.addActor(f);
+		}
+
 	}
 
 	pickupFood(amt){
@@ -204,17 +213,6 @@ class Insect extends EnergyHolder {
 	}
 
 	doSomething(){
-		/*
-		updateEnergy(-1);
-        if (getEnergy() <= 0)
-            return;
-		if (m_sleepTicks > 0)
-		{
-			--m_sleepTicks;
-			return;
-		}
-		doSomethingAux();
-		*/
 		this.updateEnergy(-1);
 		if (this.getEnergy() <= 0)
 			return;

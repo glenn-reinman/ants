@@ -11,11 +11,11 @@ class GraphObject {
 		this.depth = depth;
 	}
 
-	getX(){
+	getX(){//likely to be unnecessary
 		return this.x;
 	}
 
-	getY(){
+	getY(){//likely to be unnecessary
 		return this.y;
 	}
 
@@ -24,7 +24,7 @@ class GraphObject {
 		this.destY = y;
 	}
 
-	getDirection(){
+	getDirection(){//likely to be unnecessary
 		return this.dir;
 	}
 
