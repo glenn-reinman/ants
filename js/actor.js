@@ -145,6 +145,19 @@ class AntHill extends EnergyHolder {
 	}
 
 	doSomething(){
+		this.updateEnergy(-1);
+		if (this.getEnergy() == 0)
+			return;
+
+		if (this.pickupAndEatFood(QUEEN_EAT_PER_TICK) > 0)
+			return;
+
+		if (this.getEnergy() >= MIN_FOOD_TO_PRODUCE_NEW_ANT){
+			let tmp = new Ant(this.studentWorld, this.getX(), this.getY(), this.colony, this.program, 'ant');
+			this.studentWorld.addActor(tmp);
+			this.updateEnergy(-tmp.getEnergy());
+			this.studentWorld.increaseScore(this.colony);
+		}
 	}
 
 	isAntHill(colony = throwIfMissing()){
@@ -216,9 +229,10 @@ class Poison extends TriggerableActor {
 
 class Insect extends EnergyHolder {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH); //change Direction.right to some getRandomDirection() later
+		super(studentWorld, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH);
 		this.sleepTicks = 0;
 		this.stunned = false;
+		this.setDirection(this.getRandomDirection());
 	}
 
 	doSomething(){

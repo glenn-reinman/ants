@@ -9,21 +9,21 @@ class StudentWorld extends GameWorld{
 		this.numAnts2 = 0;
 		this.numAnts3 = 0;
 
-		this.compiler0 = null;
-		this.compiler1 = null;
-		this.compiler2 = null;
-		this.compiler3 = null;
-
 		this.numColonies = 0;
 
 		this.ticks = 0;
 
-		this.map = new Array(); for (var x = 0; x < 64; x++){ this.map[x] = new Array(); for (var y = 0; y < 64; y++){this.map[x][y] = new Array();}} // Makes 3D array
+		this.map = new Array(); for (let x = 0; x < 64; x++){ this.map[x] = new Array(); for (let y = 0; y < 64; y++){this.map[x][y] = new Array();}} // Makes 3D array
+
+		this.scores = {'green': 0, 'red': 0, 'blue': 0, 'yellow': 0};
+		this.winningScore = MIN_ANTS_TO_QUALIFY;
+
+		this.antProgram = {'green': null, 'red': null, 'blue': null, 'yellow': null};
 	}
 
 	init(){
-		for(var x = 0; x < 64; x++){
-			for(var y = 0; y < 64; y++){
+		for(let x = 0; x < 64; x++){
+			for(let y = 0; y < 64; y++){
 				if(x == 0 || y == 0 || x == 63 || y == 63){
 					let tmp = new Pebble(this, x, y);
 					this.addActor(tmp);
@@ -37,7 +37,7 @@ class StudentWorld extends GameWorld{
 		console.log("---Pebble---");
 		console.log(p.blocksMovement());
 
-		let f = new Food(this, 4, 7, START_FOOD_ENERGY);
+		let f = new Food(this, 1, 2, START_FOOD_ENERGY);
 		this.addActor(f);
 		console.log("---Food---");
 		console.log(f.isEdible());
@@ -46,6 +46,20 @@ class StudentWorld extends GameWorld{
 		this.addActor(ah);
 		console.log("---Anthill---");
 		console.log(ah.isAntHill(Colony.green));
+		console.log(ah.getEnergy());
+		console.log(ah.studentWorld.getActorsAt(1,3));
+		console.log(this.scores[Colony.green]);
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		ah.doSomething()
+		console.log(ah.getEnergy());
+		console.log(ah.studentWorld.getActorsAt(1,3));
+		console.log(this.scores[Colony.green]);
 
 		let pb = new Pheromone(this, 1, 4, Colony.blue, PheromoneType.ptype1);
 		this.addActor(pb);
@@ -111,7 +125,7 @@ class StudentWorld extends GameWorld{
 		console.log("---studentWorld---")
 
 		console.log(this.getActorsAt(1, 1));
-		console.log(this.getEdibleAt(4, 7));
+		console.log(this.getEdibleAt(1, 2));
 
 	}
 
@@ -185,6 +199,9 @@ class StudentWorld extends GameWorld{
 	}
 
 	increaseScore(colonyNum){
+		this.scores[colonyNum]++;
+		if (this.scores[colonyNum] > this.winningScore)
+			this.winningScore = this.scores[colonyNum];
 	}
 
 	getActorsAt(x, y){

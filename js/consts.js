@@ -6,6 +6,9 @@ PheromoneType = {pnone: 0, ptype1: 1, ptype2: 2, ptype3: 3}
 
 Colony = {green: 'green', red: 'red', blue: 'blue', yellow: 'yellow'}
 
+// GameConstants
+const MIN_ANTS_TO_QUALIFY = 6;
+
 // Pebble
 const PEBBLE_DEPTH = 1;
 
@@ -67,5 +70,5 @@ function randInt(min, max) {
 
 // Temp dev. method
 function throwIfMissing() {
-        throw new Error('Missing parameter');
-    }
+    throw new Error('Missing parameter');
+}
