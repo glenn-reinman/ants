@@ -8,6 +8,8 @@ Colony = {green: 'green', red: 'red', blue: 'blue', yellow: 'yellow'}
 
 // GameConstants
 const MIN_ANTS_TO_QUALIFY = 6;
+const VIEW_WIDTH = 64;
+const VIEW_HEIGHT = 64;
 
 // Pebble
 const PEBBLE_DEPTH = 1;

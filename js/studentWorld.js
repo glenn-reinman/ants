@@ -32,6 +32,25 @@ class StudentWorld extends GameWorld{
 		}
 
 		//temporary display all
+        this.addActor(new Pebble(this, 21, 1));
+        this.addActor(new Food(this, 21, 2, START_FOOD_ENERGY));
+        this.addActor(new AntHill(this, 21, 3, Colony.green, 'p1'));
+        this.addActor(new Pheromone(this, 21, 4, Colony.blue, PheromoneType.ptype1));
+        this.addActor(new Pheromone(this, 22, 4, Colony.green, PheromoneType.ptype2));
+        this.addActor(new Pheromone(this, 23, 4, Colony.red, PheromoneType.ptype3));
+        this.addActor(new Pheromone(this, 24, 4, Colony.yellow, PheromoneType.ptype3));
+        this.addActor(new WaterPool(this, 21, 5));
+        this.addActor(new Poison(this, 21, 6));
+        this.addActor(new Ant(this, 21, 7, Colony.blue, 'p2', 'ant'));
+        this.addActor(new Ant(this, 22, 7, Colony.green, 'p2', 'ant'));
+        this.addActor(new Ant(this, 23, 7, Colony.red, 'p2', 'ant'));
+        this.addActor(new Ant(this, 24, 7, Colony.yellow, 'p2', 'ant'));
+        this.addActor(new BabyGrasshopper(this, 21, 8));
+        this.addActor(new AdultGrasshopper(this, 21, 9));
+
+
+
+		//temporary test all
 		let p = new Pebble(this, 1, 1);
 		this.addActor(p);
 		console.log("---Pebble---");
@@ -84,10 +103,21 @@ class StudentWorld extends GameWorld{
 		let wp = new WaterPool(this, 1, 5);
 		this.addActor(wp);
 		console.log("---WaterPool---");
+		let anwp = new Ant(this, 1, 5, Colony.blue, 'p2', 'ant');
+		this.addActor(anwp);
+		console.log(anwp.stunned + " " + anwp.sleepTicks);
+		wp.doSomething();
+		console.log(anwp.stunned + " " + anwp.sleepTicks);
+
 
 		let po = new Poison(this, 1, 6);
 		this.addActor(po);
 		console.log("---Poison---");
+		let anpo = new Ant(this, 1, 6, Colony.blue, 'p2', 'ant');
+		this.addActor(anpo);
+		console.log(anpo.getEnergy());
+		po.doSomething();
+		console.log(anpo.getEnergy());
 
 		let anb = new Ant(this, 1, 7, Colony.blue, 'p2', 'ant');
 		this.addActor(anb);
@@ -106,9 +136,18 @@ class StudentWorld extends GameWorld{
 		console.log(any.isEnemy(Colony.yellow));
 		console.log(f.getEnergy());
 		console.log(any.getEnergy());
+		let ff = new Food(this, 4, 7, START_FOOD_ENERGY);
+		this.addActor(ff);
 		any.pickupAndEatFood(50);
-		console.log(f.getEnergy());
+		console.log(ff.getEnergy());
 		console.log(any.getEnergy());
+		console.log(anb.getX() + " " + anb.getY() + " " + anb.getXYInFrontOfMe());
+		console.log(anb.destX + " " + anb.destY);
+		console.log(anb.moveForwardIfPossible());
+		console.log(anb.destX + " " + anb.destY);
+		console.log(this.canMoveTo(1,1));
+		console.log(this.canMoveTo(1,2));
+		console.log(this.canMoveTo(2,1));
 
 		let bg = new BabyGrasshopper(this, 1, 8);
 		this.addActor(bg);
@@ -120,12 +159,14 @@ class StudentWorld extends GameWorld{
 		let ag = new AdultGrasshopper(this, 1, 9);
 		this.addActor(ag);
 		console.log("---AdultGrashopper---")
-		//end temporary display all 
-
+		
 		console.log("---studentWorld---")
-
 		console.log(this.getActorsAt(1, 1));
 		console.log(this.getEdibleAt(1, 2));
+		console.log(this.getEdibleAt(1, 9));
+		//end temporary test all 
+
+
 
 	}
 
@@ -155,6 +196,20 @@ class StudentWorld extends GameWorld{
 	}
 	
 	canMoveTo(toX, toY){
+		if (toX < 0 || toX >= VIEW_WIDTH || toY < 0 || toY >= VIEW_HEIGHT)
+        	return false;
+
+        let actors = this.getActorsAt(toX, toY);
+		if (actors.length == 0)
+			return true;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].blocksMovement()){
+				return false
+			}
+		}
+
+		return true;
 	}
 
 	addActor(actor){
@@ -163,11 +218,12 @@ class StudentWorld extends GameWorld{
 
 	getEdibleAt(x, y){
 		let actors = this.getActorsAt(x, y);
-		if (actors.length != 0){
-			for (let i = 0; i < actors.length; i++){
-				if (actors[i].isEdible() && !actors[i].isDead()){
-					return actors[i];
-				}
+		if (actors.length == 0)
+			return;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isEdible() && !actors[i].isDead()){
+				return actors[i];
 			}
 		}
 
@@ -193,9 +249,27 @@ class StudentWorld extends GameWorld{
 	}
 
 	poisonAllPoisonableAt(x, y){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length == 0)
+			return;
+
+		for (let i = 0; i < actors.length; i++){
+			if (!actors[i].isDead()){
+				actors[i].getPoisoned();
+			}
+		}
 	}
 
 	stunAllStunnableAt(x, y){
+	    let actors = this.getActorsAt(x, y);
+		if (actors.length == 0)
+			return;
+
+		for (let i = 0; i < actors.length; i++){
+			if (!actors[i].isDead()){
+				actors[i].getStunned();
+			}
+		}
 	}
 
 	increaseScore(colonyNum){

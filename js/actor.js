@@ -215,6 +215,7 @@ class WaterPool extends TriggerableActor {
 	}
 
 	doSomething(){
+		this.studentWorld.stunAllStunnableAt(this.getX(), this.getY());
 	}
 }
 
@@ -224,6 +225,7 @@ class Poison extends TriggerableActor {
 	}
 
 	doSomething(){
+		this.studentWorld.poisonAllPoisonableAt(this.getX(), this.getY());
 	}
 }
 
@@ -269,10 +271,32 @@ class Insect extends EnergyHolder {
 		return true;
 	}
 
-	getXYInFrontOfMe(x = throwIfMissing(), y = throwIfMissing()){
+	getXYInFrontOfMe(){//diff from sol; not x y in header, bc not pass by ref in js
+		let x = this.getX();
+		let y = this.getY();
+		switch (this.getDirection())
+		{
+			case Direction.none:   break;  // should never happen
+			case Direction.up:     y++; break;
+			case Direction.right:  x++; break;
+			case Direction.down:   y--; break;
+			case Direction.left:   x--; break;
+			default: break;
+		}
+		return [x, y];
 	}
 
 	moveForwardIfPossible(){
+		let xy = this.getXYInFrontOfMe();
+		let x = xy[0];
+		let y = xy[1];
+		if (this.studentWorld.canMoveTo(x, y)){
+			this.stunned = false;
+			this.moveTo(x, y);
+			return true;
+		}
+
+		return false;
 	}
 
 	increaseSleepTicks(amt = throwIfMissing()){
