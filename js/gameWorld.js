@@ -5,9 +5,9 @@ class GameWorld{
 		this.winnerColony;
 	}
 
-    setWinner(winner){
-    }
+	setWinner(winner){
+	}
 
-    getWinnerName(){
-    }
+	getWinnerName(){
+	}
 }

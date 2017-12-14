@@ -34,20 +34,39 @@ class StudentWorld extends GameWorld{
 		//temporary display all
 		let f = new Food(this.world, 1, 1, 100);
 		this.world[1][1].push(f);
+		console.log("---Food---");
+		console.log(f.isEdible());
+
 		let ah = new AntHill(this.world, 1, 2, Colony.green, 'p1');
 		this.world[1][2].push(ah);
+		console.log("---Anthill---");
+		console.log(ah.isAntHill(Colony.green));
 
-		let pb = new Pheromone(this.world, 1, 3, Colony.blue, Pheromone.pnone);
+
+		let pb = new Pheromone(this.world, 1, 3, Colony.blue, PheromoneType.ptype1);
 		this.world[1][3].push(pb);
-		let pg = new Pheromone(this.world, 2, 3, Colony.green, Pheromone.pnone);
+		let pg = new Pheromone(this.world, 2, 3, Colony.green, PheromoneType.ptype2);
 		this.world[2][3].push(pg);
-		let pr = new Pheromone(this.world, 3, 3, Colony.red, Pheromone.pnone);
+		let pr = new Pheromone(this.world, 3, 3, Colony.red, PheromoneType.ptype3);
 		this.world[3][3].push(pr);
-		let py = new Pheromone(this.world, 4, 3, Colony.yellow, Pheromone.pnone);
+		let py = new Pheromone(this.world, 4, 3, Colony.yellow, PheromoneType.ptype3);
 		this.world[4][3].push(py);
+		console.log("---Pheromone---");
+		console.log(PheromoneType.ptype1);
+		console.log(py.getEnergy());
+		py.doSomething();
+		console.log(py.getEnergy());
+		console.log(py.isPheromone(Colony.yellow));
+		console.log(py.getPheromoneType());
+		py.setPheromoneType(PheromoneType.ptype1);
+		console.log(py.getPheromoneType());
+		console.log(py.isPheromoneType(PheromoneType.ptype3));
+		py.increaseStrength();
+		console.log(py.getEnergy());
 
 		let wp = new WaterPool(this.world, 1, 4);
 		this.world[1][4].push(wp);
+
 		let po = new Poison(this.world, 1, 5);
 		this.world[1][5].push(po);
 
@@ -59,11 +78,30 @@ class StudentWorld extends GameWorld{
 		this.world[3][6].push(anr);
 		let any = new Ant(this.world, 4, 6, Colony.yellow, 'p2', 'ant');
 		this.world[4][6].push(any);
+		console.log("---Ant---");
+		console.log(any.getEnergy());
+		console.log(any.iWasBit);
+		any.getBitten(1);
+		console.log(any.getEnergy());
+		console.log(any.iWasBit);
+		console.log(any.isEnemy(Colony.yellow));
 
 		let bg = new BabyGrasshopper(this.world, 1, 7);
 		this.world[1][7].push(bg);
+		console.log("---BabyGrasshopper---");
+		console.log(bg.walkDist);
+		console.log(bg.getDirection());
+		console.log(bg.isEnemy(Colony.yellow));
+
 		let ag = new AdultGrasshopper(this.world, 1, 8);
 		this.world[1][8].push(ag);
+
+		let p = new Pebble(this.world, 1, 8);
+		this.world[1][9].push(p);
+		console.log("---PEBBLE---");
+		console.log(p.blocksMovement());
+
+
 		//end temporary display all 
 
 	}

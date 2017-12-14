@@ -34,7 +34,7 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	isPheromoneType(pType){
+	isPheromoneType(pheromoneType){
 		return false;
 	}
 
@@ -43,14 +43,14 @@ class Actor extends GraphObject{
 	}
 
 	isDangerous(colony){
-		return isEnemy(colony);
+		return this.isEnemy(colony);
 	}
 
 	isAntHill(colony){
 		return false;
 	}
 
-	getstudentWorld(){
+	getWorld(){
 		return this.studentWorld;
 	}
 }
@@ -72,8 +72,6 @@ class EnergyHolder extends Actor {
 	constructor(studentWorld, startX, startY, startDir, energy, img, depth){
 		super(studentWorld, startX, startY, startDir, img, depth);
 		this.energy = energy;
-
-		this.death_food = DEATH_FOOD_AMOUNT;
 	}
 
 	isDead(){
@@ -95,13 +93,6 @@ class EnergyHolder extends Actor {
 	}
 
 	addFood(amt){
-		/*var w = getstudentWorld();
-
-	    EnergyHolder* f = static_cast<EnergyHolder*>(sw->getEdibleAt(getX(), getY()));
-	    if (f != nullptr)
-	        f->updateEnergy(amt);
-	    else
-	        sw->addActor(new Food(sw, getX(), getY(), amt));*/
 	}
 
 	pickupFood(amt){
@@ -124,6 +115,7 @@ class Food extends EnergyHolder {
 	}
 
 	isEdible(){
+		return true;
 	}
 }
 
@@ -138,6 +130,7 @@ class AntHill extends EnergyHolder {
 	}
 
 	isAntHill(colony){
+		return this.colony == colony;
 	}
 }
 
@@ -149,24 +142,30 @@ class Pheromone extends EnergyHolder {
 	}
 
 	doSomething(){
+		super.updateEnergy(-1);
 	}
 
 	isPheromone(colony){
+		return this.colony == colony;
 	}
 
-	setPheromoneType(pType){
+	setPheromoneType(pheromoneType){
+		this.pheromoneType = pheromoneType;
 	}
 
 	getPheromoneType(){
+		return this.pheromoneType;
 	}
 
-	isPheromoneType(pType){
+	isPheromoneType(pheromoneType){
+		return this.pheromoneType == pheromoneType;
 	}
 
 	increaseStrength(){
-	}
-
-	
+		let amountToIncrease = Math.min(MAX_PHEROMONE_STRENGTH - super.getEnergy(), INCREMENTAL_PHEROMONE_STRENGTH);
+		if (amountToIncrease > 0)
+			super.updateEnergy(amountToIncrease);
+	}	
 }
 
 class TriggerableActor extends Actor {
@@ -175,6 +174,7 @@ class TriggerableActor extends Actor {
 	}
 
 	isDangerous(colony){
+		return true;
 	}
 }
 
@@ -204,21 +204,48 @@ class Insect extends EnergyHolder {
 	}
 
 	doSomething(){
+		/*
+		updateEnergy(-1);
+        if (getEnergy() <= 0)
+            return;
+		if (m_sleepTicks > 0)
+		{
+			--m_sleepTicks;
+			return;
+		}
+		doSomethingAux();
+		*/
+		this.updateEnergy(-1);
+		if (this.getEnergy() <= 0)
+			return;
+		if (this.sleepTicks > 0){
+			this.sleepTicks--;
+			return;
+		}
+		doSomethingAux();
 	}
 
 	getBitten(amt){
+		super.updateEnergy(-amt);
 	}
 
 	getPoisoned(){
+		super.updateEnergy(-POISON_DAMAGE);
 	}
 
 	getStunned(){
+		if (!this.stunned){
+			this.increaseSleepTicks(STUN_TICKS);
+			this.stunned = true;
+		}
 	}
 
 	isEnemy(colony){
+		return true;
 	}
 
 	becomesFoodUponDeath(){
+		return true;
 	}
 
 	getXYInFrontOfMe(x, y){
@@ -228,9 +255,27 @@ class Insect extends EnergyHolder {
 	}
 
 	increaseSleepTicks(amt){
+		this.sleepTicks += amt;
 	}
 
 	getRandomDirection(){
+		switch(randInt(1, 4)) {
+			case 1:
+				return Direction.up;
+				break;
+			case 2:
+				return Direction.right;
+				break;
+			case 3:
+				return Direction.down;
+				break;
+			case 4:
+				return Direction.left;
+				break;
+			default:
+				return Direction.none;
+		}
+		return Direction.none;
 	}
 
 	doSomethingAux(){
@@ -253,27 +298,37 @@ class Ant extends Insect {
 	}
 
 	getBitten(amt){
+		super.getBitten(amt);
+		this.iWasBit = true;
 	}
 
 	isEnemy(colony){
+		return this.colony != colony;
 	}
 
-	moveForwardIfPossible(){
+	moveForwardIfPossible(){//not tested yet b/c super.mfip not implem
+		let moved = super.moveForwardIfPossible();
+		if (moved)
+			this.iWasBit = false;
+		this.blockedFromMoving = !moved;
+		return moved;
 	}
 
 	doSomethingAux(){
 	}
 
-	conditionTrue(){
+	conditionTrue(c){
 	}
 
-	emitPheromone(pType){
+	emitPheromone(pheromoneType){
 	}
 }
 
 class Grasshopper extends Insect {
 	constructor(studentWorld, startX, startY, energy, img){
 		super(studentWorld, startX, startY, energy, img)
+		this.chooseDirectionAndDistance();
+		this.walkDist;
 	}
 
 	doSomethingAux(){
@@ -283,6 +338,8 @@ class Grasshopper extends Insect {
 	}
 
 	chooseDirectionAndDistance(){
+		this.walkDist = randInt(MIN_WALK_DIST, MAX_WALK_DIST);
+		super.setDirection(super.getRandomDirection());
 	}
 }
 
@@ -292,6 +349,7 @@ class BabyGrasshopper extends Grasshopper {
 	}
 
 	isEnemy(colony){
+		return false;
 	}
 
 	doPreActionThenProceed(){

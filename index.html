@@ -22,35 +22,6 @@
 	<link rel="stylesheet" href="./css/normalize.css">
 	<link rel="stylesheet" href="./css/skeleton.css">
 	<link rel="stylesheet" href="./css/styles.css">
-	<style type="text/css" media="screen">
-		#ide {
-			width: 50%;
-			height: 80%;
-			position: fixed;
-			top: 5%;
-			right: 25%;
-			bottom: 0;
-			left: 25%;
-		}
-		#options {
-			width: 50%;
-			height: 5%;
-			position: fixed;
-			top: 0;
-			right: 25%;
-			bottom: 0;
-			left: 25%;
-		}
-		#terminal {
-			width: 50%;
-			height: 20%;
-			position: fixed;
-			top: 85%;
-			right: 25%;
-			bottom: 0;
-			left: 25%;
-		}
-	</style>
 
 	<!-- Favicon
 	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -75,7 +46,8 @@
 
 		<div class="seven columns offset-by-one" style="height: 100vh">
 			<div id="editor">
-				<div id="ide">colony: DumbAnt
+				<div id="ide">
+colony: DumbAnt
 // this program controls a single ant and causes it to move
 // around the field and do things.
 // this ant moves around randomly, picks up food if it
@@ -86,22 +58,23 @@
 // in our "Bugs!" language
 
 start:
-    faceRandomDirection // face some random direction
-    moveForward // move forward
-    if i_am_standing_on_food then goto on_food
-    if i_am_hungry then goto eat_food
-    if i_am_standing_on_my_anthill then goto on_hill
-    goto start // jump back to the "start:" line
+	faceRandomDirection // face some random direction
+	moveForward // move forward
+	if i_am_standing_on_food then goto on_food
+	if i_am_hungry then goto eat_food
+	if i_am_standing_on_my_anthill then goto on_hill
+	goto start // jump back to the "start:" line
 on_food:
-    pickUpFood
-    goto start // jump back to the "start:" line
+	pickUpFood
+	goto start // jump back to the "start:" line
 eat_food:
-    eatFood // assumes we have food – I hope we do!
-    goto start // jump back to the "start:" line
+	eatFood // assumes we have food – I hope we do!
+	goto start // jump back to the "start:" line
 on_hill:
-    dropFood // feed the anthill’s queen ant so she
-     // can produce more ants for the colony
-    goto start // jump back to the "start:" line</div>
+	dropFood // feed the anthill’s queen ant so she
+	 // can produce more ants for the colony
+	goto start // jump back to the "start:" line
+					</div>
 				<div id="options"><button type="button" onclick="compileCode()">Compile</button></div>
 				<div id="terminal">Press Compile to Load Your Program</div>
 			</div>

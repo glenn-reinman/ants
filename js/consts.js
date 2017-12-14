@@ -57,3 +57,10 @@ const BABY_GRASSHOPPER_GROW_UP_ENERGY = 1600;
 // AdultGrasshopper
 const ADULT_GRASSHOPPER_START_ENERGY = 1600;
 const ADULT_GRASSHOPPER_BITE_DAMAGE = 50;
+
+// Return a uniformly distributed random int from min to max, inclusive
+function randInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}

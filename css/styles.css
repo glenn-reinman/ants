@@ -3,25 +3,53 @@
 }
 
 #editor {
-    display: none;
+	display: none;
 
-    margin: auto;
+	margin: auto;
 	width: 99.5vh;
 	height: 99.5vh;
-    
-    border: 1px dotted;
+	
+	border: 1px dotted;
 }
 
 #sim {
-    display: block;
+	display: block;
 
-    margin: auto;
-    width: 99.5vh;
-    height: 99.5vh;
+	margin: auto;
+	width: 99.5vh;
+	height: 99.5vh;
 
-    border: 1px dotted;
+	border: 1px dotted;
 }
 
 #graphics {
 	
+}
+
+#ide {
+	width: 50%;
+	height: 80%;
+	position: fixed;
+	top: 5%;
+	right: 25%;
+	bottom: 0;
+	left: 25%;
+}
+#options {
+	width: 50%;
+	height: 5%;
+	position: fixed;
+	top: 0;
+	right: 25%;
+	bottom: 0;
+	left: 25%;
+}
+#terminal {
+	width: 50%;
+	height: 20%;
+	position: fixed;
+	top: 85%;
+	right: 25%;
+	bottom: 0;
+	left: 25%;
 }
