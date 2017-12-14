@@ -34,7 +34,7 @@ class Actor extends GraphObject{
 		return false;
 	}
 
-	isPheromoneType(pheromoneType){
+	isPheromoneType(pType){
 		return false;
 	}
 
@@ -154,13 +154,13 @@ class Pheromone extends EnergyHolder {
 	isPheromone(colony){
 	}
 
-	setPheromoneType(pheromoneType){
+	setPheromoneType(pType){
 	}
 
 	getPheromoneType(){
 	}
 
-	isPheromoneType(pheromoneType){
+	isPheromoneType(pType){
 	}
 
 	increaseStrength(){
@@ -267,7 +267,7 @@ class Ant extends Insect {
 	conditionTrue(){
 	}
 
-	emitPheromone(pheromoneType){
+	emitPheromone(pType){
 	}
 }
 

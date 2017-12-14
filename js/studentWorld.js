@@ -23,10 +23,10 @@ class StudentWorld extends GameWorld{
 
 	init(){
 		for(var x = 0; x < 64; x++){
-            for(var y = 0; y < 64; y++){
-                if(x == 0 || y == 0 || x == 63 || y == 63){
-                    let tmp = new Pebble(this.world, x, y);
-                    this.world[x][y].push(tmp);
+			for(var y = 0; y < 64; y++){
+				if(x == 0 || y == 0 || x == 63 || y == 63){
+					let tmp = new Pebble(this.world, x, y);
+					this.world[x][y].push(tmp);
 				}
 			}
 		}
@@ -78,10 +78,10 @@ class StudentWorld extends GameWorld{
 		}
 
 		for(var x = 0; x < 64; x++){
-            for(var y = 0; y < 64; y++){
-                if (this.world[x][y].length != 0){// probably will eventually have to make this display a specific image, rather than just the first
-                	ctx.drawImage(this.world[x][y][0].img, this.world[x][y][0].x*offset, this.world[x][y][0].y*offset, offset, offset);
-                }
+			for(var y = 0; y < 64; y++){
+				if (this.world[x][y].length != 0){// probably will eventually have to make this display a specific image, rather than just the first
+					ctx.drawImage(this.world[x][y][0].img, this.world[x][y][0].x*offset, this.world[x][y][0].y*offset, offset, offset);
+				}
 			}
 		}
 
@@ -92,65 +92,51 @@ class StudentWorld extends GameWorld{
 
 	cleanUp(){
 	}
-		
-	eatFood(x, y, energy){
+	
+	canMoveTo(toX, toY){
 	}
 
-	poisonAll(x, y){
+	addActor(actor){
 	}
 
-	stunAll(x, y){
+	getEdible(x, y){
 	}
 
-	biteOne(x, y, actor, damage){
+	getPheromoneAt(x, y, colony, ptype){
 	}
 
-	biteEnemy(x, y, colony){
-	}
-		
-	addFood(x, y, energy){
+	getPheromoneAt(x, y, colony){
 	}
 
-	addPheromone(x, y, colony){
+	isEnemyAt(x, y, colony){
 	}
 
-	addAnt(x, y, colony, compiler, comp){
+	isDangerAt(x, y, colony){
 	}
 
-	addAdult(x, y){
-	}
-		
-	hasObstacle(x, y){
+	isAntHillAt(x, y, colony){
 	}
 
-	hasFood(x, y){
+	biteEnemyAt(me, colony, biteDamage){
 	}
 
-	hasPheromone(x, y, colony){
+	poisonAllPoisonableAt(x, y){
 	}
 
-	hasEnemy(x, y, colony){
+	stunAllStunnableAt(x, y){
 	}
 
-	hasHill(x, y, colony){
+	increaseScore(colonyNum){
 	}
 
-	hasDanger(x, y, colony){
+	getActorsAt(x, y){
 	}
 
-	getCompiler(colony){
+	removeDeadActors(){
 	}
 
-	eraseActor(x, y, actor, currActor){
+	updateStats(){
 	}
 
-	getNumberOfAntsFor(colony){
-	}
-
-	getWinningAntColony(){
-	}
-
-	weHaveAWinningAnt(){
-	}
 }
 	
