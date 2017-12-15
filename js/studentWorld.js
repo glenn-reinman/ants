@@ -164,11 +164,30 @@ class StudentWorld extends GameWorld{
 		console.log(bg.getDirection());
 		console.log(bg.isEnemy(Colony.yellow));
 		bg.doSomething();
+		console.log(bg.getEnergy());
+		console.log(this.getActorsAt(1,8));
+		console.log(bg.walkDist + " " + bg.dir);
+		console.log(bg.getX() + " " + bg.getY());
+		console.log(bg.sleepTicks);
 
-		let ag = new AdultGrasshopper(this, 1, 9);
-		this.addActor(ag);
+
+		let ag1 = new AdultGrasshopper(this, 1, 9);
+		let ag2 = new AdultGrasshopper(this, 1, 9);
+		this.addActor(ag1);
+		this.addActor(ag2);
 		console.log("---AdultGrashopper---")
 		
+		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
+		ag1.getBitten(ADULT_GRASSHOPPER_BITE_DAMAGE);
+		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
+
+		ag2.doSomething();
+		console.log(ag2.getX() + " " + ag2.getY());
+		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
+
+		ag1.jump();
+		console.log(ag1.getX() + " " + ag1.getY());
+
 		console.log("---studentWorld---")
 		console.log(this.getActorsAt(1, 1));
 		console.log(this.getEdibleAt(1, 2));
@@ -295,6 +314,20 @@ class StudentWorld extends GameWorld{
 	}
 
 	biteEnemyAt(me, colony, biteDamage){
+		let actors = this.getActorsAt(me.getX(), me.getY());
+		if (actors.length == 0)
+			return false;
+
+		let enemies = new Array();
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isEnemy(colony) && !actors[i].isDead() && actors[i] != me){
+				enemies.push(actors[i]);
+			}
+		}
+		if (enemies.length == 0)
+			return false;
+		enemies[randInt(0, enemies.length - 1)].getBitten(biteDamage);
+		return true;
 	}
 
 	poisonAllPoisonableAt(x, y){

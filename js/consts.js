@@ -62,6 +62,10 @@ const BABY_GRASSHOPPER_GROW_UP_ENERGY = 1600;
 // AdultGrasshopper
 const ADULT_GRASSHOPPER_START_ENERGY = 1600;
 const ADULT_GRASSHOPPER_BITE_DAMAGE = 50;
+const INVALID_COLONY_NUMBER = -1;
+const MAX_JUMP_TRIES = 10;
+const MAX_JUMP_RADIUS = 10;
+const MIN_JUMP_RADIUS = 3;
 
 // Return a uniformly distributed random int from min to max, inclusive
 function randInt(min, max) {

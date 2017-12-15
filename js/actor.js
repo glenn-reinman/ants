@@ -136,7 +136,7 @@ class EnergyHolder extends Actor {
 
 class Food extends EnergyHolder {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH)
+		super(studentWorld, startX, startY, Direction.none, energy, 'food', FOOD_DEPTH);
 	}
 
 	doSomething(){
@@ -149,7 +149,7 @@ class Food extends EnergyHolder {
 
 class AntHill extends EnergyHolder {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), program = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH)
+		super(studentWorld, startX, startY, Direction.none, ANTHILL_START_FOOD, 'anthill', ANTHILL_DEPTH);
 		this.colony = colony;
 		this.program = program;
 	}
@@ -177,7 +177,7 @@ class AntHill extends EnergyHolder {
 
 class Pheromone extends EnergyHolder {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), pheromoneType = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH)
+		super(studentWorld, startX, startY, Direction.none, PHEROMONE_START_STRENGTH, colony + 'pher', PHEROMONE_DEPTH);
 		this.colony = colony;
 		this.pheromoneType = pheromoneType;
 	}
@@ -221,7 +221,7 @@ class TriggerableActor extends Actor {
 
 class WaterPool extends TriggerableActor {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
-		super(studentWorld, startX, startY, 'waterpool')
+		super(studentWorld, startX, startY, 'waterpool');
 	}
 
 	doSomething(){
@@ -231,7 +231,7 @@ class WaterPool extends TriggerableActor {
 
 class Poison extends TriggerableActor {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
-		super(studentWorld, startX, startY, 'poison')
+		super(studentWorld, startX, startY, 'poison');
 	}
 
 	doSomething(){
@@ -287,7 +287,7 @@ class Insect extends EnergyHolder {
 		let y = this.getY();
 		switch (this.getDirection())
 		{
-			case Direction.none:   break;  // should never happen
+			case Direction.none:   break;
 			case Direction.up:     y--; break;
 			case Direction.right:  x++; break;
 			case Direction.down:   y++; break;
@@ -340,7 +340,7 @@ class Insect extends EnergyHolder {
 
 class Ant extends Insect {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), colony = throwIfMissing(), program = throwIfMissing()){// remove 'img' from header, this is diff from sol
-		super(studentWorld, startX, startY, ANT_START_ENERGY, colony + 'ant')
+		super(studentWorld, startX, startY, ANT_START_ENERGY, colony + 'ant');
 		this.colony = colony;
 		this.program = program;
 
@@ -388,31 +388,26 @@ class Ant extends Insect {
 
 class Grasshopper extends Insect {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing()){
-		super(studentWorld, startX, startY, energy, img)
+		super(studentWorld, startX, startY, energy, img);
+		this.walkDist = 0;
 		this.chooseDirectionAndDistance();
-		this.walkDist;
 	}
 
 	doSomethingAux(){
-		/*
-		if (doPreActionThenProceed())
-		{
-			if (pickupAndEatFood(GRASSHOPPER_EAT_AMOUNT) == 0  ||  randInt(1, 2) == 1)
-			{
-				if (m_walkDist == 0)  // time to change direction?
+		if (this.doPreActionThenProceed()){
+			if (this.pickupAndEatFood(GRASSHOPPER_EAT_AMOUNT) == 0 || randInt(1, 2) == 1){
+				if (this.walkDist == 0)
 					chooseDirectionAndDistance();
-				if (moveForwardIfPossible())
-					m_walkDist--;
+				if (this.moveForwardIfPossible())
+					this.walkDist--;
 				else
-					m_walkDist = 0;
+					this.walkDist = 0;
 			}
 		}
-		increaseSleepTicks(TICKS_TO_SLEEP_BETWEEN_MOVES);
-		*/
-
+		this.increaseSleepTicks(TICKS_TO_SLEEP_BETWEEN_MOVES);
 	}
 
-	doPreActionThenProceed(){
+	doPreActionThenProceed(){//likely to be unnecessary
 	}
 
 	chooseDirectionAndDistance(){
@@ -423,7 +418,7 @@ class Grasshopper extends Insect {
 
 class BabyGrasshopper extends Grasshopper {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
-		super(studentWorld, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass')
+		super(studentWorld, startX, startY, BABY_GRASSHOPPER_START_ENERGY, 'babygrass');
 	}
 
 	isEnemy(colony = throwIfMissing()){
@@ -431,31 +426,55 @@ class BabyGrasshopper extends Grasshopper {
 	}
 
 	doPreActionThenProceed(){
-		/*
 		// see if we want to grow up
-		if (getEnergy() >= BABY_GRASSHOPPER_GROW_UP_ENERGY)
-		{
-			updateEnergy(-getEnergy());
-			getWorld()->addActor(new AdultGrasshopper(getWorld(), getX(), getY()));
+		if (this.getEnergy() >= BABY_GRASSHOPPER_GROW_UP_ENERGY){
+			this.updateEnergy(-this.getEnergy());
+			this.studentWorld.addActor(new AdultGrasshopper(this.studentWorld, this.getX(), this.getY()));
 			return false;
 		}
 		return true;
-		*/
 	}
 }
 
 class AdultGrasshopper extends Grasshopper {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
-		super(studentWorld, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass')
+		super(studentWorld, startX, startY, ADULT_GRASSHOPPER_START_ENERGY, 'adultgrass');
 
 	}
 
 	getBitten(amt = throwIfMissing()){
+		super.getBitten(amt);
+
+		// if attacked, bite something 50% of the time!
+		if (!this.isDead() && randInt(1, 2) == 1)
+			this.studentWorld.biteEnemyAt(this, INVALID_COLONY_NUMBER, ADULT_GRASSHOPPER_BITE_DAMAGE);
 	}
 
 	doPreActionThenProceed(){
+		if (randInt(1, 3) == 1 && this.studentWorld.biteEnemyAt(this, INVALID_COLONY_NUMBER, ADULT_GRASSHOPPER_BITE_DAMAGE))
+			return false;
+
+		if (randInt(1, 10) == 1 && this.jump())
+			return false;
+
+		return true;
 	}
 
 	jump(){
+		for (let i = 0; i < MAX_JUMP_TRIES; i++){
+			let tx = this.getX();
+			let ty = this.getY();
+			let radius = randInt(MIN_JUMP_RADIUS, MAX_JUMP_RADIUS);
+			let angle = 2 * Math.PI * randInt(0, 359) / 360;
+			let dx = parseInt(radius * Math.cos(angle));
+			let dy = parseInt(radius * Math.sin(angle));
+			tx += dx;
+			ty += dy;
+			if (this.studentWorld.canMoveTo(tx, ty)){
+				this.moveTo(tx, ty);
+				return true;
+			}
+		}
+		return false;
 	}
 }

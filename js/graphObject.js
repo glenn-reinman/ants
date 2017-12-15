@@ -33,8 +33,7 @@ class GraphObject {
 		this.dir = dir;
 	}
 
-	updateImg(){ // update img according to current direction
-		console.log(this.imgName + this.dir);
+	updateImg(){
 		this.img = imgs[this.imgName + this.dir];
 	}
 }

@@ -14,11 +14,11 @@ function start(){
 	sw.init();
 	sw.draw();
 
-	var tickInterval = setInterval(function(){
+	/*var tickInterval = setInterval(function(){
 		if(sw.ticks === 2000) {
             clearInterval(tickInterval)
         }
         sw.move();
 		sw.draw();
-	}, 300);
+	}, 300);*/
 }
