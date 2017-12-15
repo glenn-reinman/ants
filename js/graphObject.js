@@ -2,7 +2,8 @@
 
 class GraphObject {
 	constructor(img, startX, startY, startDir, depth) {
-		this.img = imgs[img];
+		this.imgName = img;
+		this.img = imgs[img + startDir];
 		this.x = startX;
 		this.y = startY;
 		this.destX = startX;
@@ -32,6 +33,8 @@ class GraphObject {
 		this.dir = dir;
 	}
 
-	//updateImg(){ // update img according to current direction
-	//}
+	updateImg(){ // update img according to current direction
+		console.log(this.imgName + this.dir);
+		this.img = imgs[this.imgName + this.dir];
+	}
 }

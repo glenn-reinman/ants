@@ -67,7 +67,7 @@ class Actor extends GraphObject{
 
 class Pebble extends Actor {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.right, 'rock1', PEBBLE_DEPTH);
+		super(studentWorld, startX, startY, Direction.none, 'rock1', PEBBLE_DEPTH);
 	}
 
 	doSomething(){
@@ -241,13 +241,14 @@ class Poison extends TriggerableActor {
 
 class Insect extends EnergyHolder {
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), energy = throwIfMissing(), img = throwIfMissing()){
-		super(studentWorld, startX, startY, Direction.right, energy, img + Direction.right, INSECT_DEPTH);
+		super(studentWorld, startX, startY, Direction.right, energy, img, INSECT_DEPTH);
 		this.sleepTicks = 0;
 		this.stunned = false;
 		this.setDirection(this.getRandomDirection());
 	}
 
 	doSomething(){
+		this.updateImg();
 		this.updateEnergy(-1);
 		if (this.getEnergy() <= 0)
 			return;
@@ -287,9 +288,9 @@ class Insect extends EnergyHolder {
 		switch (this.getDirection())
 		{
 			case Direction.none:   break;  // should never happen
-			case Direction.up:     y++; break;
+			case Direction.up:     y--; break;
 			case Direction.right:  x++; break;
-			case Direction.down:   y--; break;
+			case Direction.down:   y++; break;
 			case Direction.left:   x--; break;
 			default: break;
 		}
