@@ -20,8 +20,8 @@ class GraphObject {
 	}
 
 	moveTo(x, y){
-		this.destX = x;
-		this.destY = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	getDirection(){//likely to be unnecessary

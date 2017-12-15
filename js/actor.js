@@ -4,9 +4,19 @@ class Actor extends GraphObject{
 	constructor(studentWorld = throwIfMissing(), startX = throwIfMissing(), startY = throwIfMissing(), startDir = throwIfMissing(), img = throwIfMissing(), depth = throwIfMissing()){
 		super(img, startX, startY, startDir, depth);
 		this.studentWorld = studentWorld;
+        this.moved = false;
+	}
+
+	hasMoved(){
+		return this.moved;
+	}
+
+	setMoved(moved){
+		this.moved = moved;
 	}
 
 	doSomething(){
+
 	}
 
 	isDead(){
@@ -196,7 +206,7 @@ class Pheromone extends EnergyHolder {
 		let amountToIncrease = Math.min(MAX_PHEROMONE_STRENGTH - super.getEnergy(), INCREMENTAL_PHEROMONE_STRENGTH);
 		if (amountToIncrease > 0)
 			super.updateEnergy(amountToIncrease);
-	}	
+	}
 }
 
 class TriggerableActor extends Actor {
@@ -245,7 +255,7 @@ class Insect extends EnergyHolder {
 			this.sleepTicks--;
 			return;
 		}
-		doSomethingAux();
+		this.doSomethingAux();
 	}
 
 	getBitten(amt = throwIfMissing()){
@@ -360,6 +370,7 @@ class Ant extends Insect {
 	}
 
 	doSomethingAux(){
+        this.moveForwardIfPossible();
 	}
 
 	conditionTrue(c = throwIfMissing()){

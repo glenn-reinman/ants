@@ -3,7 +3,7 @@
 
 class StudentWorld extends GameWorld{
 	constructor(){
-		super()
+		super();
 		this.numAnts0 = 0;
 		this.numAnts1 = 0;
 		this.numAnts2 = 0;
@@ -190,6 +190,39 @@ class StudentWorld extends GameWorld{
 	}
 
 	move(){
+		// increment tick count
+        this.ticks++;
+
+        // clear the moved boolean for all actors
+        for(var i = 0; i < 64; i++){
+            for(var j = 0; j < 64; j++){
+                for(var k = 0; k < this.map[i][j].length; k++){
+                    this.map[i][j][k].setMoved(false);
+                }
+            }
+        }
+
+        // if the actor has not already moved, move it and set its moved boolean to true
+		// if actor is not in original location, delete it from original location and insert in new one
+		for(var i = 0; i < 64; i++){
+			for(var j = 0; j < 64; j++){
+				for(var k = 0; k < this.map[i][j].length; k++){
+					var currActor = this.map[i][j][k];
+					var origX = currActor.getX();
+					var origY = currActor.getY();
+					if(!currActor.hasMoved()) {
+                        currActor.doSomething();
+                        currActor.setMoved(true);
+
+                        if(origX !== currActor.getX() || origY !== currActor.getY()){
+                        	this.map[i][j].splice(k, 1);
+                        	k--;
+                        	this.map[currActor.getX()][currActor.getY()].push(currActor);
+						}
+                    }
+				}
+			}
+		}
 	}
 
 	cleanUp(){
