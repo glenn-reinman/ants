@@ -377,6 +377,11 @@ class Ant extends Insect {
 	}
 
 	emitPheromone(pheromoneType = throwIfMissing()){
+		let pheromone = this.studentWorld.getPheromoneAt(this.getX(), this.getY(), this.colony, pheromoneType);
+		if (pheromone != null)
+			pheromone.increaseStrength();
+		else
+			this.studentWorld.addActor(new Pheromone(this.studentWorld, this.getX(), this.getY(), this.colony, pheromoneType));
 	}
 }
 
@@ -388,6 +393,22 @@ class Grasshopper extends Insect {
 	}
 
 	doSomethingAux(){
+		/*
+		if (doPreActionThenProceed())
+		{
+			if (pickupAndEatFood(GRASSHOPPER_EAT_AMOUNT) == 0  ||  randInt(1, 2) == 1)
+			{
+				if (m_walkDist == 0)  // time to change direction?
+					chooseDirectionAndDistance();
+				if (moveForwardIfPossible())
+					m_walkDist--;
+				else
+					m_walkDist = 0;
+			}
+		}
+		increaseSleepTicks(TICKS_TO_SLEEP_BETWEEN_MOVES);
+		*/
+
 	}
 
 	doPreActionThenProceed(){
@@ -409,6 +430,16 @@ class BabyGrasshopper extends Grasshopper {
 	}
 
 	doPreActionThenProceed(){
+		/*
+		// see if we want to grow up
+		if (getEnergy() >= BABY_GRASSHOPPER_GROW_UP_ENERGY)
+		{
+			updateEnergy(-getEnergy());
+			getWorld()->addActor(new AdultGrasshopper(getWorld(), getX(), getY()));
+			return false;
+		}
+		return true;
+		*/
 	}
 }
 

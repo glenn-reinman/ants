@@ -99,6 +99,10 @@ class StudentWorld extends GameWorld{
 		console.log(py.isPheromoneType(PheromoneType.ptype3));
 		py.increaseStrength();
 		console.log(py.getEnergy());
+		console.log(this.getPheromoneAt(1, 3, Colony.blue, PheromoneType.ptype1));
+		console.log(this.getPheromoneAt(1, 4, Colony.red, PheromoneType.ptype1));
+		console.log(this.getPheromoneAt(1, 4, Colony.blue, PheromoneType.ptype2));
+		console.log(this.getPheromoneAt(1, 4, Colony.blue, PheromoneType.ptype1));
 
 		let wp = new WaterPool(this, 1, 5);
 		this.addActor(wp);
@@ -108,7 +112,6 @@ class StudentWorld extends GameWorld{
 		console.log(anwp.stunned + " " + anwp.sleepTicks);
 		wp.doSomething();
 		console.log(anwp.stunned + " " + anwp.sleepTicks);
-
 
 		let po = new Poison(this, 1, 6);
 		this.addActor(po);
@@ -148,6 +151,11 @@ class StudentWorld extends GameWorld{
 		console.log(this.canMoveTo(1,1));
 		console.log(this.canMoveTo(1,2));
 		console.log(this.canMoveTo(2,1));
+		any.emitPheromone(PheromoneType.ptype2);
+		any.emitPheromone(PheromoneType.ptype2);
+		any.emitPheromone(PheromoneType.ptype1);
+		console.log(this.getActorsAt(4,7));
+		any.doSomething();
 
 		let bg = new BabyGrasshopper(this, 1, 8);
 		this.addActor(bg);
@@ -155,6 +163,7 @@ class StudentWorld extends GameWorld{
 		console.log(bg.walkDist);
 		console.log(bg.getDirection());
 		console.log(bg.isEnemy(Colony.yellow));
+		bg.doSomething();
 
 		let ag = new AdultGrasshopper(this, 1, 9);
 		this.addActor(ag);
@@ -263,10 +272,17 @@ class StudentWorld extends GameWorld{
 		return null;
 	}
 
-	getPheromoneAt(x, y, colony, pheromoneType){
-	}
+	getPheromoneAt(x, y, colony, pheromoneType){//todo; will also be getPheromoneAt(x, y, colony), which has not been accounted for yet
+		let actors = this.getActorsAt(x, y);
+		if (actors.length == 0)
+			return;
 
-	getPheromoneAt(x, y, colony){
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isPheromone(colony) && actors[i].isPheromoneType(pheromoneType) && !actors[i].isDead()){
+				return actors[i];
+			}
+		}
+		return null;
 	}
 
 	isEnemyAt(x, y, colony){
