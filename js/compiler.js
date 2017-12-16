@@ -25,16 +25,19 @@ var opcode = {
 }
 
 var condition = {
-	i_smell_danger_in_front_of_me: 1,
-	i_smell_pheromone_in_front_of_me: 2,
-	i_was_bit: 3,
-	i_am_carrying_food: 4,
-	i_am_hungry: 5,
-	i_am_standing_on_my_anthill: 6,
-	i_am_standing_on_food: 7,
-	i_am_standing_with_an_enemy: 8,
-	i_was_blocked_from_moving: 9,
-	last_random_number_was_zero: 10,
+	invalid_if: -1,
+	i_smell_danger_in_front_of_me: 0,
+	i_smell_pheromone_in_front_of_me: 1,
+	i_was_bit: 2,
+	i_am_carrying_food: 3,
+	i_am_hungry: 4,
+	i_am_standing_on_my_anthill: 5,
+	i_am_standing_on_food: 6,
+	i_am_standing_with_an_enemy: 7,
+	i_was_blocked_from_moving: 8,
+	last_random_number_was_zero: 9,
+	last_pheromone_stronger: 10,
+	same_pheromone_type: 11
 }
 
 function compile(source){

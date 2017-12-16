@@ -362,7 +362,7 @@ class Ant extends Insect {
 		return this.colony != colony;
 	}
 
-	moveForwardIfPossible(){//not tested yet b/c super.mfip not implem
+	moveForwardIfPossible(){
 		let moved = super.moveForwardIfPossible();
 		if (moved)
 			this.iWasBit = false;
@@ -371,10 +371,224 @@ class Ant extends Insect {
 	}
 
 	doSomethingAux(){
-        this.moveForwardIfPossible();
+        //this.moveForwardIfPossible();
+        //mix of cpp and js rn; waiting on compiler's .getCommand
+        /*
+        for (let i = 0; i < MAX_COMMANDS_PER_TICK; i++)
+		{
+			let c;
+			if (!m_program->getCommand(m_ip, c))
+			{
+				updateEnergy(-getEnergy());		// die if bad ip
+				return;
+			}
+			bool effectorUsed = true;
+			int newip = m_ip+1;       
+			switch (c.opcode)
+			{
+				default:
+					updateEnergy(-getEnergy());  // die if bad opcode
+					return;
+				case Compiler::generateRandomNumber:
+					effectorUsed = false;
+					m_lastRandomNumber = randInt(0, stoi(c.operand1)-1);
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Random Gen: " << m_lastRandomNumber << "\n";
+			#endif
+					break;
+			case Compiler::rememberPheromone:
+					effectorUsed = false;
+			{
+			  int x,y;
+			  StudentWorld* sw = getWorld();
+			  PheromoneType newptype;
+
+			  int phero=stoi(c.operand1);
+
+			  switch (phero)
+				{
+				case 1: newptype=ptype1;
+				  break;
+				case 2: newptype=ptype2;
+				  break;
+				case 3: newptype=ptype3;
+				  break;
+				default: newptype=pnone;
+				  break;
+				}
+			  
+			  getXYInFrontOfMe(x, y);
+			  
+			  Pheromone* p = static_cast<Pheromone*>(sw->getPheromoneAt(x,y, m_colony,newptype));
+			  if (p!=nullptr)
+				{
+				  m_lastPheromoneStrength = p->getEnergy();
+				  m_lastPheromoneType = p->getPheromoneType();
+				}
+			}
+			#ifdef DEBUG
+			  cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Remember Pheromone: S=" << m_lastPheromoneStrength << " T=" << m_lastPheromoneType << "\n";
+			#endif
+					break;
+				case Compiler::goto_command:
+					effectorUsed = false;
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Goto: " << c.operand1 << "\n";
+			#endif
+					newip = stoi(c.operand1);
+					break;
+				case Compiler::if_command:
+					effectorUsed = false;
+					if (conditionTrue(stoi(c.operand1)))
+						newip = stoi(c.operand2);
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Conditional: " << c.operand2 << "=" << conditionTrue(stoi(c.operand2)) << "\n";
+			#endif
+					break;
+				case Compiler::eatFood:
+					{
+						int amt = std::min(m_foodHeld, 0+ANT_EAT_AMOUNT);
+						updateEnergy(amt);
+						m_foodHeld -= amt;
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Eat!\n";
+			#endif
+					}
+					break;
+				case Compiler::bite:
+					getWorld()->biteEnemyAt(this, m_colony, ANT_BITE_DAMAGE);
+					#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Bite!\n";
+			#endif
+			break;
+				case Compiler::moveForward:
+					moveForwardIfPossible();
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Move Forward!\n";
+			#endif
+					break;
+				case Compiler::pickupFood:
+					m_foodHeld += pickupFood(std::min(ANT_MAX_FOOD_THAT_CAN_BE_CARRIED - m_foodHeld, 0+ANT_FOOD_PICKUP_AMOUNT));
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Pickup Food: " << m_foodHeld << "\n";
+			#endif
+					break;
+				case Compiler::dropFood:
+					addFood(m_foodHeld);
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Drop Food: " << m_foodHeld << "\n";
+			#endif
+				  
+					m_foodHeld = 0;
+					break;
+				case Compiler::emitPheromone:
+			  {
+			PheromoneType newptype;
+
+					  int phero=stoi(c.operand1);
+			
+			switch (phero)
+			  {
+			  case 1: newptype=ptype1;
+				break;
+			  case 2: newptype=ptype2;
+				break;
+			  case 3: newptype=ptype3;
+				break;
+			  default: newptype=pnone;
+				break;
+			  }
+			emitPheromone(newptype);
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Pheromone "<< c.operand1 << "\n";
+			#endif
+			  }
+					break;
+				case Compiler::faceRandomDirection:
+					setDirection(getRandomDirection());
+			#ifdef DEBUG
+			cerr << "Rotating at: " << getX() << " "<< getY() << " for " << m_colony <<"\n";
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Rotate Random Now Facing:" << getDirection() << "\n";
+			#endif
+					break;
+				case Compiler::rotateClockwise:	 // 1 2 3 4 --> 2 3 4 1
+					setDirection(static_cast<Direction>(1 + getDirection() % 4));
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Rotate C Now Facing:" << getDirection() << "\n";
+			#endif
+					break;
+				case Compiler::rotateCounterClockwise:	// 1 2 3 4 --> 4 1 2 3
+					setDirection(static_cast<Direction>(4 - ((5 - getDirection()) % 4)));
+			#ifdef DEBUG
+			cerr << "ANT(" << m_lastRandomNumber << " - " << getEnergy() << ") Rotate CC Now Facing:" << getDirection() << "\n";
+			#endif
+					break;
+			}
+			m_ip = newip;
+			if (effectorUsed)
+				break;
+		}
+		*/
 	}
 
-	conditionTrue(c = throwIfMissing()){
+	conditionTrue(c = throwIfMissing()){//not tested yet
+		switch (c){
+		default:
+		case condition.invalid:
+			return false;
+		case condition.last_random_number_was_zero:
+			return this.lastRandomNumber == 0;
+		case condition.last_pheromone_stronger:
+	  	{
+			let xy = this.getXYInFrontOfMe();
+			let pheromone = this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony, this.lastPheromoneType);
+			if (p != nullptr)
+	  		{
+				return this.lastPheromoneStrength > pheromone.getEnergy();
+	  		}
+			else
+	  			return 1;
+  		}
+		case condition.same_pheromone_type:
+	  	{
+			let xy = this.getXYInFrontOfMe();
+			let pheromone = this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony, this.lastPheromoneType);
+			if (pheromone != null)
+	  		{
+				return 1;
+			}
+			else
+	  			return 0;
+  		}
+		case condition.i_am_carrying_food:
+			return this.foodHeld > 0;
+		case condition.i_am_hungry:
+			return this.getEnergy() <= HUNGRY_IF_LESS_THAN_THIS_ENERGY;
+		case condition.i_am_standing_with_an_enemy:
+			return this.studentWorld.isEnemyAt(this.getX(), this.getY(), this.colony);
+		case condition.i_am_standing_on_food:
+			return this.studentWorld.getEdibleAt(this.getX(), this.getY(), this.colony) != null;
+		case condition.i_am_standing_on_my_anthill:
+	  	{
+			console.error("Checking Anthill at: " + this.getX() + " " + this.getY() + " for " + this.colony);
+			return this.studentWorld.isAntHillAt(this.getX(), this.getY(), this.colony);
+	  	}
+		case condition.i_smell_pheromone_in_front_of_me:
+		{
+			let xy = this.getXYInFrontOfMe();
+			return this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony) != nullptr;
+		}
+		case condition.i_smell_danger_in_front_of_me:
+		{
+			let xy = this.getXYInFrontOfMe();
+			return this.studentWorld.isDangerAt(xy[0], xy[1], this.colony);
+		}
+		case condition.i_was_bit:
+			return this.i_was_bit;
+		case condition.i_was_blocked_from_moving:
+			return this.blockedFromMoving;
+		}
+
 	}
 
 	emitPheromone(pheromoneType = throwIfMissing()){
