@@ -381,7 +381,7 @@ class Ant extends Insect {
 	doSomethingAux(){
 		//for (let i = 0; i < MAX_COMMANDS_PER_TICK; i++){
 		for (let i = 0; i < 1; i++){
-			let cmd = this.getCommand(this.ip+12);
+			let cmd = this.getCommand(this.ip);
 			if (!cmd){
 				this.updateEnergy(-this.getEnergy()); // die if bad ip
 				return;
@@ -502,7 +502,6 @@ class Ant extends Insect {
 					console.log("rotateCounterClockwise");
 					break;
 			}
-			
 			this.ip = newip;
 			if (effectorUsed)
 				break;
