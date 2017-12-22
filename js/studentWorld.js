@@ -177,7 +177,7 @@ class StudentWorld extends GameWorld{
 		this.addActor(ag1);
 		this.addActor(ag2);
 		console.log("---AdultGrashopper---")
-		
+
 		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
 		ag1.getBitten(ADULT_GRASSHOPPER_BITE_DAMAGE);
 		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
@@ -193,7 +193,7 @@ class StudentWorld extends GameWorld{
 		console.log(this.getActorsAt(1, 1));
 		console.log(this.getEdibleAt(1, 2));
 		console.log(this.getEdibleAt(1, 9));
-		//end temporary test all 
+		//end temporary test all
 
 
 
@@ -203,8 +203,8 @@ class StudentWorld extends GameWorld{
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		for(var i = 0; i < 64; i++){
 			for(var j = 0; j < 64; j++){
-				ctx.fillStyle = ((i+j)%2 == 0)? "#ffffff": "#dddddd";
-				ctx.fillRect(i*offset, j*offset, offset, offset);
+				ctx.fillStyle = ((i+j)%2 == 0)? "#56534a": "#4f4c43";
+				ctx.fillRect(i*offset, j*offset, offset+1, offset+1);
 			}
 		}
 
@@ -256,7 +256,7 @@ class StudentWorld extends GameWorld{
 
 	cleanUp(){
 	}
-	
+
 	canMoveTo(toX, toY){
 		if (toX < 0 || toX >= VIEW_WIDTH || toY < 0 || toY >= VIEW_HEIGHT)
         	return false;
@@ -372,4 +372,3 @@ class StudentWorld extends GameWorld{
 	}
 
 }
-	

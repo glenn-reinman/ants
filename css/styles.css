@@ -1,55 +1,50 @@
 #sidepanel {
 
 }
+body {
+  padding-top: 54px;
+}
 
 #editor {
 	display: none;
 
 	margin: auto;
 	width: 99.5vh;
-	height: 99.5vh;
-	
+	height: 50vh;
+
 	border: 1px dotted;
 }
 
 #sim {
-	display: block;
-
-	margin: auto;
-	width: 99.5vh;
-	height: 99.5vh;
-
-	border: 1px dotted;
+	width: calc(100vh - 54px);
+	height: calc(100vh - 54px);
+	position: fixed;
+	top: 54px;
+	right: calc(100% - 50vh + 54px);
+	bottom: 0;
+	left: 0%;
+	background-color: #272822;
 }
 
 #graphics {
-	
+
 }
 
 #ide {
-	width: 50%;
-	height: 80%;
+	width: calc(100% - 50vh + 54px);
+	height: calc(80% - 54px);
 	position: fixed;
-	top: 5%;
-	right: 25%;
+	top: 54px;
+	right: 0%;
 	bottom: 0;
-	left: 25%;
-}
-#options {
-	width: 50%;
-	height: 5%;
-	position: fixed;
-	top: 0;
-	right: 25%;
-	bottom: 0;
-	left: 25%;
+	left: calc(100vh - 54px);
 }
 #terminal {
-	width: 50%;
+	width: calc(100% - 50vh + 54px);
 	height: 20%;
 	position: fixed;
-	top: 85%;
-	right: 25%;
+	top: 80%;
+	right: 0%;
 	bottom: 0;
-	left: 25%;
+	left: calc(100vh - 54px);
 }
