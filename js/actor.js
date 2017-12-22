@@ -381,7 +381,7 @@ class Ant extends Insect {
 	doSomethingAux(){
 		//for (let i = 0; i < MAX_COMMANDS_PER_TICK; i++){
 		for (let i = 0; i < 1; i++){
-			let cmd = this.getCommand(this.ip);
+			let cmd = this.getCommand(this.ip+12);
 			if (!cmd){
 				this.updateEnergy(-this.getEnergy()); // die if bad ip
 				return;
@@ -397,7 +397,9 @@ class Ant extends Insect {
 					return;
 				case Opcode.generateRandomNumber:
 					effectorUsed = false;
+					console.log(this.lastRandomNumber);
 					this.lastRandomNumber = randInt(0, cmd.operand1 - 1);
+					console.log(this.lastRandomNumber);
 					console.log("generateRandomNumber");
 					break;
 				case Opcode.rememberPheromone:
@@ -429,25 +431,23 @@ class Ant extends Insect {
 					}
 					console.log("rememberPheromone");
 					break;
-				/*case Opcode.goto:
+				case Opcode.goto:
 					effectorUsed = false;
-
 					newip = cmd.operand1;
 					console.log("goto");
 					break;
 				case Opcode.if:
 					effectorUsed = false;
-					if (conditionTrue(cmd.operand1))
+					if (this.conditionTrue(cmd.operand1))
 						newip = cmd.operand2;
+					console.log(cmd.operand2);
+					console.log(newip);
 					console.log("if");
 					break;
 				case Opcode.eatFood:
-					{
-						int amt = std::min(this.foodHeld, 0+ANT_EAT_AMOUNT);
-						updateEnergy(amt);
+					let amt = Math.min(this.foodHeld, ANT_EAT_AMOUNT);
+						this.updateEnergy(amt);
 						this.foodHeld -= amt;
-
-					}
 					console.log("eatFood");
 					break;
 				case Opcode.bite:
@@ -455,52 +455,52 @@ class Ant extends Insect {
 					console.log("bite");
 					break;
 				case Opcode.moveForward:
-					moveForwardIfPossible();
+					this.moveForwardIfPossible();
 					console.log("moveForward");
 					break;
-				case Opcode.pickupFood:
-					this.foodHeld += pickupFood(std::min(ANT_MAX_FOOD_THAT_CAN_BE_CARRIED - this.foodHeld, 0+ANT_FOOD_PICKUP_AMOUNT));
-					console.log("pickupFood");
+				case Opcode.pickUpFood:
+					this.foodHeld += this.pickupFood(Math.min(ANT_MAX_FOOD_THAT_CAN_BE_CARRIED - this.foodHeld, ANT_FOOD_PICKUP_AMOUNT));
+					console.log("pickUpFood");
 					break;
 				case Opcode.dropFood:
-					addFood(this.foodHeld);
+					this.addFood(this.foodHeld);
 					this.foodHeld = 0;
 					console.log("dropFood");
 					break;
 				case Opcode.emitPheromone:
 					{
-						PheromoneType newptype;
+						let newPheromone;
 
-						int phero= cmd.operand1;
+						let phero = cmd.operand1;
 
 						switch (phero)
 						{
-							case 1: newptype = ptype1;
+							case 1: newPheromone = PheromoneType.ptype1;
 							break;
-							case 2: newptype = ptype2;
+							case 2: newPheromone = PheromoneType.ptype2;
 							break;
-							case 3: newptype = ptype3;
+							case 3: newPheromone = PheromoneType.ptype3;
 							break;
-							default: newptype = pnone;
+							default: newPheromone = PheromoneType.pnone;
 							break;
 						}
-						emitPheromone(newptype);
+						this.emitPheromone(newPheromone);
 
 					}
 					console.log("emitPheromone");
 					break;
 				case Opcode.faceRandomDirection:
-					setDirection(getRandomDirection());
+					this.setDirection(this.getRandomDirection());
 					console.log("faceRandomDirection");
 					break;
 				case Opcode.rotateClockwise:  // 1 2 3 4 --> 2 3 4 1
-					setDirection(static_cast<Direction>(1 + getDirection() % 4));
+					this.setDirection(1 + this.getDirection() % 4);
 					console.log("rotateClockwise");
 					break;
 				case Opcode.rotateCounterClockwise:  // 1 2 3 4 --> 4 1 2 3
-					setDirection(static_cast<Direction>(4 - ((5 - getDirection()) % 4)));
+					this.setDirection(4 - ((5 - this.getDirection()) % 4));
 					console.log("rotateCounterClockwise");
-					break;*/
+					break;
 			}
 			
 			this.ip = newip;

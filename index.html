@@ -48,19 +48,21 @@
 			<div id="editor">
 				<div id="ide">colony: DumbAnt
 start:
-    if i_am_standing_on_food then goto on_food
+	generateRandomNumber 5
+    rememberPheromone
+    if i_am_standing_on_food then goto other
+    eatFood
+    bite
+    moveForward
+    pickUpFood
+    dropFood
     emitPheromone
     faceRandomDirection
     rotateClockwise
     rotateCounterClockwise
-    moveForward
-    bite
-    pickUpFood
-    dropFood
-    eatFood
-    generateRandomNumber
-    rememberPheromone
     goto start
+other:
+    
 
 // this program controls a single ant and causes it to move
 // around the field and do things.
