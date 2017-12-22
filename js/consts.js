@@ -1,10 +1,45 @@
 // consts.js
 
-Direction = {none: '', up: '_up', right: '_right', down: '_down', left: '_left'}
+const Opcode = {
+    empty: -2,
+    invalid: -1,
+    label: 0,
+    goto: 1,
+    if: 2,
+    emitPheromone: 3,
+    faceRandomDirection: 4,
+    rotateClockwise: 5,
+    rotateCounterClockwise: 6,
+    moveForward: 7,
+    bite: 8,
+    pickUpFood: 9,
+    dropFood: 10,
+    eatFood: 11,
+    generateRandomNumber: 12,
+    rememberPheromone: 13
+}
 
-PheromoneType = {pnone: 0, ptype1: 1, ptype2: 2, ptype3: 3}
+const Condition = {
+    invalid_if: -1,
+    i_smell_danger_in_front_of_me: 0,
+    i_smell_pheromone_in_front_of_me: 1,
+    i_was_bit: 2,
+    i_am_carrying_food: 3,
+    i_am_hungry: 4,
+    i_am_standing_on_my_anthill: 5,
+    i_am_standing_on_food: 6,
+    i_am_standing_with_an_enemy: 7,
+    i_was_blocked_from_moving: 8,
+    last_random_number_was_zero: 9,
+    last_pheromone_stronger: 10,
+    same_pheromone_type: 11
+}
 
-Colony = {green: 'green', red: 'red', blue: 'blue', yellow: 'yellow'}
+const Direction = {none: '', up: '_up', right: '_right', down: '_down', left: '_left'};
+
+const PheromoneType = {pnone: 0, ptype1: 1, ptype2: 2, ptype3: 3};
+
+const Colony = {green: 'green', red: 'red', blue: 'blue', yellow: 'yellow'};
 
 // GameConstants
 const MIN_ANTS_TO_QUALIFY = 6;

@@ -122,13 +122,13 @@ class StudentWorld extends GameWorld{
 		po.doSomething();
 		console.log(anpo.getEnergy());
 
-		let anb = new Ant(this, 1, 7, Colony.blue, 'p2', 'ant');
+		let anb = new Ant(this, 1, 7, Colony.blue, compile(""), 'ant');
 		this.addActor(anb);
-		let ang = new Ant(this, 2, 7, Colony.green, 'p2', 'ant');
+		let ang = new Ant(this, 2, 7, Colony.green, compile(""), 'ant');
 		this.addActor(ang);
-		let anr = new Ant(this, 3, 7, Colony.red, 'p2', 'ant');
+		let anr = new Ant(this, 3, 7, Colony.red, compile(""), 'ant');
 		this.addActor(anr);
-		let any = new Ant(this, 4, 7, Colony.yellow, 'p2', 'ant');
+		let any = new Ant(this, 4, 7, Colony.yellow, compile(editor.getValue()), 'ant');
 		this.addActor(any);
 		console.log("---Ant---");
 		console.log(any.getEnergy());
@@ -156,6 +156,7 @@ class StudentWorld extends GameWorld{
 		any.emitPheromone(PheromoneType.ptype1);
 		console.log(this.getActorsAt(4,7));
 		any.doSomething();
+		console.log(any.program);
 
 		let bg = new BabyGrasshopper(this, 1, 8);
 		this.addActor(bg);

@@ -1,44 +1,4 @@
-/*
-command = {
-	lineNum,
-	opcode,
-	operand1,
-	operand2
-}
-*/
-var opcode = {
-	empty: -2,
-	invalid: -1,
-	label: 0,
-	goto: 1,
-	if: 2,
-	emitPheromone: 3,
-	faceRandomDirection: 4,
-	rotateClockwise: 5,
-	rotateCounterClockwise: 6,
-	moveForward: 7,
-	bite: 8,
-	pickUpFood: 9,
-	dropFood: 10,
-	eatFood: 11,
-	generateRandomNumber: 12,
-}
-
-var condition = {
-	invalid_if: -1,
-	i_smell_danger_in_front_of_me: 0,
-	i_smell_pheromone_in_front_of_me: 1,
-	i_was_bit: 2,
-	i_am_carrying_food: 3,
-	i_am_hungry: 4,
-	i_am_standing_on_my_anthill: 5,
-	i_am_standing_on_food: 6,
-	i_am_standing_with_an_enemy: 7,
-	i_was_blocked_from_moving: 8,
-	last_random_number_was_zero: 9,
-	last_pheromone_stronger: 10,
-	same_pheromone_type: 11
-}
+// compiler.js
 
 function compile(source){
 	var lines = source.split('\n');
@@ -54,11 +14,11 @@ function compile(source){
 	for(var i = 1; i < lines.length; i++){
 		var command = parseLine(lines[i],i+1);
 		switch(command.opcode){
-			case opcode.empty:
+			case Opcode.empty:
 				break;
-			case opcode.invalid:
+			case Opcode.invalid:
 				return [false, i+1, command.operand1];
-			case opcode.label:
+			case Opcode.label:
 				if(labels.hasOwnProperty(command.operand1))
 					return [false, i+1, "Duplicate label '" + command.operand1 +"'"];
 				labels[command.operand1] = program.length;
@@ -68,13 +28,13 @@ function compile(source){
 		}
 	}
 	for(var i = 0; i < program.length; i++){
-		if(program[i].opcode == opcode.goto){
+		if(program[i].opcode == Opcode.goto){
 			if(labels.hasOwnProperty(program[i].operand1))
 				program[i].operand1 = labels[program[i].operand1]
 			else {
 				return [false, program[i].lineNum, "Unknown label '" + program[i].operand1+"'"];
 			}
-		}else if(program[i].opcode == opcode.if){
+		}else if(program[i].opcode == Opcode.if){
 			if(labels.hasOwnProperty(program[i].operand2))
 				program[i].operand2 = labels[program[i].operand2]
 			else {
@@ -94,70 +54,71 @@ function parseColonyName(line){
 function parseLine(line, lineNum){
 	var command = {};
 	command.lineNum = lineNum;
+
 	var tokens = tokenize(line);
 	if(tokens.length < 1){
-		command.opcode = opcode.empty;
+		command.opcode = Opcode.empty;
 		return command;
 	}
-	if(!opcode[tokens[0]]){
+	if(!Opcode[tokens[0]]){
 		if(tokens.length == 1 && tokens[0].match(/^[A-z]+\:$/g)){
-			command.opcode = opcode.label;
+			command.opcode = Opcode.label;
 			command.operand1 = tokens[0].substring(0,tokens[0].length-1);
 			return command;
 		}
-		command.opcode = opcode.invalid;
+		command.opcode = Opcode.invalid;
 		command.operand1 = "Invalid command '" + tokens[0]+"'";
 		return command;
 	}
-	switch(opcode[tokens[0]]){
-		case opcode.generateRandomNumber:
+	switch(Opcode[tokens[0]]){
+		case Opcode.generateRandomNumber:
 			if(tokens.length != 2){
-				command.opcode = opcode.invalid;
+				command.opcode = Opcode.invalid;
 				command.operand1 = "The 'generateRandomNumber' command requires 1 argument";
 				return command;
 			}
 			var max = parseInt(tokens[1],10)
 			if(isNaN(max)){
-				command.opcode = opcode.invalid;
+				command.opcode = Opcode.invalid;
 				command.operand1 = "The 'generateRandomNumber' command requires an integer argument";
 				return command;
 			}
-			command.opcode = opcode.generateRandomNumber;
+			command.opcode = Opcode.generateRandomNumber;
 			command.operand1 = max;
 			return command;
-		case opcode.goto:
+		case Opcode.goto:
 			if(tokens.length != 2){
-				command.opcode = opcode.invalid;
+				command.opcode = Opcode.invalid;
 				command.operand1 = "The 'goto' command requires 1 argument";
 				return command;
 			}
-			command.opcode = opcode.goto;
+			command.opcode = Opcode.goto;
 			command.operand1 = tokens[1];
 			return command;
-		case opcode.if:
+		case Opcode.if:
 			if(tokens.length != 5 ||
 				tokens[2] !== "then" ||
 				tokens[3] !== "goto"){
-					command.opcode = opcode.invalid;
+					command.opcode = Opcode.invalid;
 					command.operand1 = "Incorrect syntax for if statement";
 					return command;
 				}
-			if(!condition.hasOwnProperty(tokens[1])){
-				command.opcode = opcode.invalid;
+			if(!Condition.hasOwnProperty(tokens[1])){
+				command.opcode = Opcode.invalid;
 				command.operand1 = "Unknown Condition '" + tokens[1]+"'";
 				return command;
 			}
-			command.opcode = opcode.if;
-			command.operand1 = condition[tokens[1]];
+			command.opcode = Opcode.if;
+			command.operand1 = Condition[tokens[1]];
 			command.operand2 = tokens[4];
 			return command;
 		default:
 			if(tokens.length != 1){
-				command.opcode = opcode.invalid;
+				command.opcode = Opcode.invalid;
 				command.operand1 = "The '" + tokens[0] + "' command does not take any arguments";
 				return command;
 			}
-			command.opcode = opcode[tokens[0]];
+			command.opcode = Opcode[tokens[0]];
 			return command;
 	}
 }
