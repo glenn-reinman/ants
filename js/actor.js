@@ -589,7 +589,7 @@ class Grasshopper extends Insect {
 		if (this.doPreActionThenProceed()){
 			if (this.pickupAndEatFood(GRASSHOPPER_EAT_AMOUNT) == 0 || randInt(1, 2) == 1){
 				if (this.walkDist == 0)
-					chooseDirectionAndDistance();
+					this.chooseDirectionAndDistance();
 				if (this.moveForwardIfPossible())
 					this.walkDist--;
 				else
