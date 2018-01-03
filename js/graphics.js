@@ -9,16 +9,18 @@ canvas.height = canvas.width;
 
 var offset = canvas.width/64;
 
+var sw = new StudentWorld();
 function start(){
-	var sw = new StudentWorld();
 	sw.init();
 	sw.draw();
+}
 
-	/*var tickInterval = setInterval(function(){
+function run(){
+	var tickInterval = setInterval(function(){
 		if(sw.ticks === 2000) {
             clearInterval(tickInterval)
         }
         sw.move();
 		sw.draw();
-	}, 300);*/
+	}, 300);
 }
