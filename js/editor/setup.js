@@ -42,6 +42,7 @@ function compileCode(){
     var result = compile(editor.getValue());
     if(result[0]){
         terminal.insert("Colony '" + result[2] + "' successfully compiled (" + result[1]+")");
+        console.log(result);
     }else{
         terminal.insert("ERROR (Line "+result[1]+"): "+result[2]);
     }
