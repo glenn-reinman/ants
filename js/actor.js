@@ -371,7 +371,7 @@ class Ant extends Insect {
 	}
 
 	getCommand(lineNumber){
-		console.log(this.program[3])
+		console.log(this.program[3]);
 		if (lineNumber < 0 || lineNumber >= this.program[3].length)
 			return false;
 

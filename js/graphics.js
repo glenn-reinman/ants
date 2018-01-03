@@ -10,6 +10,9 @@ canvas.height = canvas.width;
 var offset = canvas.width/64;
 
 var sw = new StudentWorld();
+start();
+run();
+
 function start(){
 	sw.init();
 	sw.draw();
@@ -22,5 +25,5 @@ function run(){
         }
         sw.move();
 		sw.draw();
-	}, 300);
+	}, 50);
 }

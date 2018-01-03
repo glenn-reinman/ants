@@ -1,6 +1,6 @@
 // studentWorld.js
 
-var field = 
+let field =
 "****************************************************************" +
 "**        g  w *  pf w                    w fp  * w  g        **" + 
 "*                      w                w                      *" + 
@@ -78,16 +78,19 @@ class StudentWorld extends GameWorld{
 
 		this.ticks = 0;
 
-		this.map = new Array(); for (let x = 0; x < 64; x++){ this.map[x] = new Array(); for (let y = 0; y < 64; y++){this.map[x][y] = new Array();}} // Makes 3D array
+		this.map = [];
+		for (let x = 0; x < 64; x++){
+			this.map[x] = [];
+			for (let y = 0; y < 64; y++){
+				this.map[x][y] = [];
+			}
+		} // Makes 3D array
 
 		this.scores = {'green': 0, 'red': 0, 'blue': 0, 'yellow': 0};
 		this.winningScore = MIN_ANTS_TO_QUALIFY;
 
 		this.antProgram = {'green': null, 'red': null, 'blue': null, 'yellow': null};
 	}
-
-
-
 
 	init(){
 		for(let i = 0; i < 64; i++){
@@ -131,7 +134,7 @@ class StudentWorld extends GameWorld{
 	initTest(){
 		for(let x = 0; x < 64; x++){
 			for(let y = 0; y < 64; y++){
-				if(x == 0 || y == 0 || x == 63 || y == 63){
+				if(x === 0 || y === 0 || x === 63 || y === 63){
 					let tmp = new Pebble(this, x, y);
 					this.addActor(tmp);
 				}
@@ -175,14 +178,14 @@ class StudentWorld extends GameWorld{
 		console.log(ah.getEnergy());
 		console.log(ah.studentWorld.getActorsAt(1,3));
 		console.log(this.scores[Colony.green]);
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
-		ah.doSomething()
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
+		ah.doSomething();
 		console.log(ah.getEnergy());
 		console.log(ah.studentWorld.getActorsAt(1,3));
 		console.log(this.scores[Colony.green]);
@@ -283,7 +286,7 @@ class StudentWorld extends GameWorld{
 		let ag2 = new AdultGrasshopper(this, 1, 9);
 		this.addActor(ag1);
 		this.addActor(ag2);
-		console.log("---AdultGrashopper---")
+		console.log("---AdultGrashopper---");
 
 		console.log(ag1.getEnergy() + " " + ag2.getEnergy());
 		ag1.getBitten(ADULT_GRASSHOPPER_BITE_DAMAGE);
@@ -296,7 +299,7 @@ class StudentWorld extends GameWorld{
 		ag1.jump();
 		console.log(ag1.getX() + " " + ag1.getY());
 
-		console.log("---studentWorld---")
+		console.log("---studentWorld---");
 		console.log(this.getActorsAt(1, 1));
 		console.log(this.getEdibleAt(1, 2));
 		console.log(this.getEdibleAt(1, 9));
@@ -308,16 +311,16 @@ class StudentWorld extends GameWorld{
 
 	draw(){
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		for(var i = 0; i < 64; i++){
-			for(var j = 0; j < 64; j++){
-				ctx.fillStyle = ((i+j)%2 == 0)? "#56534a": "#4f4c43";
+		for(let i = 0; i < 64; i++){
+			for(let j = 0; j < 64; j++){
+				ctx.fillStyle = ((i+j)%2 === 0)? "#56534a": "#4f4c43";
 				ctx.fillRect(i*offset, j*offset, offset+1, offset+1);
 			}
 		}
 
-		for(var x = 0; x < 64; x++){
-			for(var y = 0; y < 64; y++){
-				if (this.map[x][y].length != 0){// probably will eventually have to make this display a specific image, rather than just the first
+		for(let x = 0; x < 64; x++){
+			for(let y = 0; y < 64; y++){
+				if (this.map[x][y].length !== 0){// probably will eventually have to make this display a specific image, rather than just the first
 					ctx.drawImage(this.map[x][y][0].img, this.map[x][y][0].x*offset, this.map[x][y][0].y*offset, offset, offset);
 				}
 			}
@@ -330,9 +333,9 @@ class StudentWorld extends GameWorld{
         this.ticks++;
 
         // clear the moved boolean for all actors
-        for(var i = 0; i < 64; i++){
-            for(var j = 0; j < 64; j++){
-                for(var k = 0; k < this.map[i][j].length; k++){
+        for(let i = 0; i < 64; i++){
+            for(let j = 0; j < 64; j++){
+                for(let k = 0; k < this.map[i][j].length; k++){
                     this.map[i][j][k].setMoved(false);
                 }
             }
@@ -340,25 +343,27 @@ class StudentWorld extends GameWorld{
 
         // if the actor has not already moved, move it and set its moved boolean to true
 		// if actor is not in original location, delete it from original location and insert in new one
-		for(var i = 0; i < 64; i++){
-			for(var j = 0; j < 64; j++){
-				for(var k = 0; k < this.map[i][j].length; k++){
-					var currActor = this.map[i][j][k];
-					var origX = currActor.getX();
-					var origY = currActor.getY();
-					if(!currActor.hasMoved()) {
+		for(let i = 0; i < 64; i++){
+			for(let j = 0; j < 64; j++){
+				for(let k = 0; k < this.map[i][j].length; k++){
+					let currActor = this.map[i][j][k];
+					let origX = currActor.getX();
+					let origY = currActor.getY();
+					if(!currActor.hasMoved() && !currActor.isDead()) {
                         currActor.doSomething();
                         currActor.setMoved(true);
 
                         if(origX !== currActor.getX() || origY !== currActor.getY()){
                         	this.map[i][j].splice(k, 1);
                         	k--;
-                        	this.map[currActor.getX()][currActor.getY()].push(currActor);
+                        	this.addActor(currActor);
 						}
                     }
 				}
 			}
 		}
+
+		this.removeDeadActors();
 	}
 
 	cleanUp(){
@@ -369,7 +374,7 @@ class StudentWorld extends GameWorld{
         	return false;
 
         let actors = this.getActorsAt(toX, toY);
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return true;
 
 		for (let i = 0; i < actors.length; i++){
@@ -387,7 +392,7 @@ class StudentWorld extends GameWorld{
 
 	getEdibleAt(x, y){
 		let actors = this.getActorsAt(x, y);
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return;
 
 		for (let i = 0; i < actors.length; i++){
@@ -401,7 +406,7 @@ class StudentWorld extends GameWorld{
 
 	getPheromoneAt(x, y, colony, pheromoneType){//todo; will also be getPheromoneAt(x, y, colony), which has not been accounted for yet
 		let actors = this.getActorsAt(x, y);
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return;
 
 		for (let i = 0; i < actors.length; i++){
@@ -423,16 +428,16 @@ class StudentWorld extends GameWorld{
 
 	biteEnemyAt(me, colony, biteDamage){
 		let actors = this.getActorsAt(me.getX(), me.getY());
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return false;
 
-		let enemies = new Array();
+		let enemies = [];
 		for (let i = 0; i < actors.length; i++){
-			if (actors[i].isEnemy(colony) && !actors[i].isDead() && actors[i] != me){
+			if (actors[i].isEnemy(colony) && !actors[i].isDead() && actors[i] !== me){
 				enemies.push(actors[i]);
 			}
 		}
-		if (enemies.length == 0)
+		if (enemies.length === 0)
 			return false;
 		enemies[randInt(0, enemies.length - 1)].getBitten(biteDamage);
 		return true;
@@ -440,7 +445,7 @@ class StudentWorld extends GameWorld{
 
 	poisonAllPoisonableAt(x, y){
 		let actors = this.getActorsAt(x, y);
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return;
 
 		for (let i = 0; i < actors.length; i++){
@@ -452,7 +457,7 @@ class StudentWorld extends GameWorld{
 
 	stunAllStunnableAt(x, y){
 	    let actors = this.getActorsAt(x, y);
-		if (actors.length == 0)
+		if (actors.length === 0)
 			return;
 
 		for (let i = 0; i < actors.length; i++){
@@ -473,6 +478,17 @@ class StudentWorld extends GameWorld{
 	}
 
 	removeDeadActors(){
+        for(let i = 0; i < 64; i++){
+            for(let j = 0; j < 64; j++){
+                for(let k = 0; k < this.map[i][j].length; k++){
+                    let currActor = this.map[i][j][k];
+                    if(currActor.isDead()){
+                        this.map[i][j].splice(k, 1);
+                        k--;
+                    }
+                }
+            }
+        }
 	}
 
 	updateStats(){
