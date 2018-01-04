@@ -44,5 +44,5 @@ function run(){
         }
         sw.move();
 		sw.draw();
-	}, 50);
+	}, 100);
 }

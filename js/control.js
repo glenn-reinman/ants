@@ -27,7 +27,7 @@ function runSimulation(){
             }
             sw.move();
             sw.draw();
-        }, 50);
+        }, 1000);
         button.innerHTML = "Pause";
     }else{
         terminal.setValue("Paused Colony '" + compiledProgram[2] + "'...\nPress 'Run' to resume the simulation\nPress 'Compile' to reset the simulation");

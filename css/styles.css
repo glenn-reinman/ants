@@ -52,3 +52,24 @@ body {
 .nav-link{
 	cursor: pointer;
 }
+
+#info{
+	color: white;
+	font-family: Inconsolata, Courier;
+}
+
+#green{
+	color: lawngreen;
+}
+
+#blue{
+	color: cornflowerblue;
+}
+
+#red{
+	color: red;
+}
+
+#yellow{
+	color: yellow;
+}

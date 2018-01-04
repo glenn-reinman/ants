@@ -332,6 +332,9 @@ class StudentWorld extends GameWorld{
 		// increment tick count
         this.ticks++;
 
+        // update status bar
+		this.updateStats();
+
         // clear the moved boolean for all actors
         for(let i = 0; i < 64; i++){
             for(let j = 0; j < 64; j++){
@@ -387,7 +390,7 @@ class StudentWorld extends GameWorld{
 	}
 
 	addActor(actor){
-		this.map[actor.getX()][actor.getY()].push(actor);
+		this.map[actor.getX()][actor.getY()].unshift(actor);
 	}
 
 	getEdibleAt(x, y){
@@ -492,6 +495,7 @@ class StudentWorld extends GameWorld{
 	}
 
 	updateStats(){
+        $('#ticks').text(this.ticks);
 	}
 
 }
