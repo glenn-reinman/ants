@@ -26,7 +26,11 @@ on_hill:
     // can produce more ants for the colony
     goto start // jump back to the "start:" line`;
 document.getElementById("ide").innerHTML = startText;
-document.getElementById("terminal").innerHTML = "Press 'Compile' to Load Your Program";
+document.getElementById("terminal").innerHTML = `The left panel shows the simulation
+The right panel is the code editor where you edit your program
+Press 'Compile' to load your program
+Press 'Run' to start the simulation
+Press 'Submit' to send your code to the instructor`;
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/bug");
