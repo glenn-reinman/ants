@@ -115,10 +115,10 @@ function parseLine(line, lineNum){
 		case Opcode.emitPheromone:
 			if(tokens.length != 2){
 				command.opcode = Opcode.invalid;
-				command.operand1 = "The 'emitPheromone' command requires 1 argument";
+				command.operand1 = "The 'emitPheromone' command requires exactly 1 argument";
 				return command;
 			}
-			if(isNaN(parseInt(tokens[1])) || parseInt(tokens[1] < 0 || parseInt(tokens[1] > 3))){
+			if(isNaN(parseInt(tokens[1])) || parseInt(tokens[1]) < 0 || parseInt(tokens[1]) > 3){
 				command.opcode = Opcode.invalid;
 				command.operand1 = "The 'emitPheromone' command requires an integer argument between 0 and 3";
 				return command;
@@ -129,10 +129,10 @@ function parseLine(line, lineNum){
 		case Opcode.rememberPheromone:
 			if(tokens.length != 2){
 				command.opcode = Opcode.invalid;
-				command.operand1 = "The 'rememberPheromone' command requires 1 argument";
+				command.operand1 = "The 'rememberPheromone' command requires exactly 1 argument";
 				return command;
 			}
-			if(isNaN(parseInt(tokens[1])) || parseInt(tokens[1] < 0 || parseInt(tokens[1] > 3))){
+			if(isNaN(parseInt(tokens[1])) || parseInt(tokens[1]) < 0 || parseInt(tokens[1]) > 3){
 				command.opcode = Opcode.invalid;
 				command.operand1 = "The 'rememberPheromone' command requires an integer argument between 0 and 3";
 				return command;

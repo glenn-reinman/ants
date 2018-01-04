@@ -5,6 +5,8 @@ document.getElementById("ide").innerHTML = dumbAntProg;
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/bug");
+var compiledProgram = compile(editor.getValue());
+var cpuProgram = compile(dumbAntProg);
 
 //Terminal Setup
 document.getElementById("terminal").innerHTML = terminalInstructions;
@@ -27,12 +29,13 @@ canvas.height = canvas.width;
 var offset = canvas.width/64;
 
 var sw = new StudentWorld();
+//Why does this only work if it's in a function?
 start();
-
 function start(){
-	sw.init();
+	sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
 	sw.draw();
 }
+var tickInterval;
 
 function run(){
 	var tickInterval = setInterval(function(){
@@ -42,18 +45,4 @@ function run(){
         sw.move();
 		sw.draw();
 	}, 50);
-}
-
-function compileCode(){
-    terminal.setValue("Compiling...\n");
-    terminal.gotoLine(2);
-    var result = compile(editor.getValue());
-    if(result[0]){
-        terminal.insert("Colony '" + result[2] + "' successfully compiled (" + result[1]+")");
-        console.log(result);
-    }else{
-        terminal.insert("ERROR (Line "+result[1]+"): "+result[2]);
-    }
-    terminal.clearSelection();
-
 }

@@ -2,68 +2,68 @@
 
 let field =
 "****************************************************************" +
-"**        g  w *  pf w                    w fp  * w  g        **" + 
-"*                      w                w                      *" + 
-"*              p         w   *    *   w         p              *" + 
-"*    f *  f w*    **                        **    *w f  * f    *" + 
-"*    *                         ww                         *    *" + 
-"*                 w  f       p    p       f  w                 *" + 
-"*                                                              *" + 
-"*  f                *    *  p      p  *    *                f  *" + 
-"*    *            f w         *  *         w f            *    *" + 
-"*    f             *           ff           *             f    *" + 
-"*      *                                                *      *" + 
-"*                         0          1                         *" + 
-"*                          * w ww w *                          *" + 
-"**            p                                  p            **" + 
-"*   *                                                      *   *" + 
-"*                    *   **          **   *                    *" + 
-"*             *                                  *             *" + 
-"*     f  f   w                                    w   f  f     *" + 
-"*f     *          *       w          w       *          *     f*" + 
-"*   fw f                   *        *                   f wf   *" + 
-"*        *   w        *                  *        w   *        *" + 
-"*gf               w  *                    *  w               fg*" + 
-"* *         f  w          g   *  *   g          w  f         * *" + 
-"**                      f              f                      **" + 
-"*                 * w  g    *      *    g  w *                 *" + 
-"*             *   *                          *   *             *" + 
-"*              *        *              *        *              *" + 
-"*     *     *    ff      f     ww     f      ff    *     *     *" + 
-"*    f                     w        w                     f    *" + 
-"*    *            g *   *              *   * g            *    *" + 
-"*                     w                  w                     *" + 
-"*                     w                  w                     *" + 
-"*    *            g *   *              *   * g            *    *" + 
-"*    f                     w        w                     f    *" + 
-"*     *     *    ff      f     ww     f      ff    *     *     *" + 
-"*              *        *              *        *              *" + 
-"*             *   *                          *   *             *" + 
-"*                 * w  g    *      *    g  w *                 *" + 
-"**                      f              f                      **" + 
-"* *         f  w          g   *  *   g          w  f         * *" + 
-"*gf               w  *                    *  w               fg*" + 
-"*        *   w        *                  *        w   *        *" + 
-"*   fw f                   *        *                   f wf   *" + 
-"*f     *          *       w          w       *          *     f*" + 
-"*     f  f   w                                    w   f  f     *" + 
-"*             *                                  *             *" + 
-"*                    *   **          **   *                    *" + 
-"*   *                                                      *   *" + 
-"**            p                                  p            **" + 
-"*                          * w ww w *                          *" + 
-"*                         3          2                         *" + 
-"*      *                                                *      *" + 
-"*    f             *           ff           *             f    *" + 
-"*    *            f w         *  *         w f            *    *" + 
-"*  f                *    *  p      p  *    *                f  *" + 
-"*                                                              *" + 
-"*                 w  f       p    p       f  w                 *" + 
-"*    *                         ww                         *    *" + 
-"*    f *  f w*    **                        **    *w f  * f    *" + 
-"*              p         w   *    *   w         p              *" + 
-"*                      w                w                      *" + 
-"*         g  w *  pf w                    w fp  * w  g         *" + 
+"**        g  w *  pf w                    w fp  * w  g        **" +
+"*                      w                w                      *" +
+"*              p         w   *    *   w         p              *" +
+"*    f *  f w*    **                        **    *w f  * f    *" +
+"*    *                         ww                         *    *" +
+"*                 w  f       p    p       f  w                 *" +
+"*                                                              *" +
+"*  f                *    *  p      p  *    *                f  *" +
+"*    *            f w         *  *         w f            *    *" +
+"*    f             *           ff           *             f    *" +
+"*      *                                                *      *" +
+"*                         0          1                         *" +
+"*                          * w ww w *                          *" +
+"**            p                                  p            **" +
+"*   *                                                      *   *" +
+"*                    *   **          **   *                    *" +
+"*             *                                  *             *" +
+"*     f  f   w                                    w   f  f     *" +
+"*f     *          *       w          w       *          *     f*" +
+"*   fw f                   *        *                   f wf   *" +
+"*        *   w        *                  *        w   *        *" +
+"*gf               w  *                    *  w               fg*" +
+"* *         f  w          g   *  *   g          w  f         * *" +
+"**                      f              f                      **" +
+"*                 * w  g    *      *    g  w *                 *" +
+"*             *   *                          *   *             *" +
+"*              *        *              *        *              *" +
+"*     *     *    ff      f     ww     f      ff    *     *     *" +
+"*    f                     w        w                     f    *" +
+"*    *            g *   *              *   * g            *    *" +
+"*                     w                  w                     *" +
+"*                     w                  w                     *" +
+"*    *            g *   *              *   * g            *    *" +
+"*    f                     w        w                     f    *" +
+"*     *     *    ff      f     ww     f      ff    *     *     *" +
+"*              *        *              *        *              *" +
+"*             *   *                          *   *             *" +
+"*                 * w  g    *      *    g  w *                 *" +
+"**                      f              f                      **" +
+"* *         f  w          g   *  *   g          w  f         * *" +
+"*gf               w  *                    *  w               fg*" +
+"*        *   w        *                  *        w   *        *" +
+"*   fw f                   *        *                   f wf   *" +
+"*f     *          *       w          w       *          *     f*" +
+"*     f  f   w                                    w   f  f     *" +
+"*             *                                  *             *" +
+"*                    *   **          **   *                    *" +
+"*   *                                                      *   *" +
+"**            p                                  p            **" +
+"*                          * w ww w *                          *" +
+"*                         3          2                         *" +
+"*      *                                                *      *" +
+"*    f             *           ff           *             f    *" +
+"*    *            f w         *  *         w f            *    *" +
+"*  f                *    *  p      p  *    *                f  *" +
+"*                                                              *" +
+"*                 w  f       p    p       f  w                 *" +
+"*    *                         ww                         *    *" +
+"*    f *  f w*    **                        **    *w f  * f    *" +
+"*              p         w   *    *   w         p              *" +
+"*                      w                w                      *" +
+"*         g  w *  pf w                    w fp  * w  g         *" +
 "****************************************************************";
 
 class StudentWorld extends GameWorld{
@@ -92,7 +92,7 @@ class StudentWorld extends GameWorld{
 		this.antProgram = {'green': null, 'red': null, 'blue': null, 'yellow': null};
 	}
 
-	init(){
+	init(program0, program1, program2, program3){
 		for(let i = 0; i < 64; i++){
 			for(let j = 0; j < 64; j++){
 				switch(field[j*64 + i]){
@@ -103,16 +103,16 @@ class StudentWorld extends GameWorld{
 						this.addActor(new BabyGrasshopper(this, i, j));
 						break;
 					case '0':
-						this.addActor(new AntHill(this, i, j, Colony.green, compile(editor.getValue())));
+						this.addActor(new AntHill(this, i, j, Colony.green, program0));
 						break;
 					case '1':
-						this.addActor(new AntHill(this, i, j, Colony.red, compile(editor.getValue())));
+						this.addActor(new AntHill(this, i, j, Colony.red, program1));
 						break;
 					case '2':
-						this.addActor(new AntHill(this, i, j, Colony.yellow, compile(editor.getValue())));
+						this.addActor(new AntHill(this, i, j, Colony.yellow, program2));
 						break;
 					case '3':
-						this.addActor(new AntHill(this, i, j, Colony.blue, compile(editor.getValue())));
+						this.addActor(new AntHill(this, i, j, Colony.blue, program3));
 						break;
 					case 'w':
 						this.addActor(new WaterPool(this, i, j));

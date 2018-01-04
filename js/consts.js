@@ -149,3 +149,5 @@ The right panel is the code editor where you edit your program
 Press 'Compile' to load your program
 Press 'Run' to start the simulation
 Press 'Submit' to send your code to the instructor`;
+
+var compileInstructions = `Press 'Run' to start the simulation`;
