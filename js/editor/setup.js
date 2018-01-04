@@ -1,44 +1,48 @@
-var startText = `colony: DumbAnt
-// this program controls a single ant and causes it to move
-// around the field and do things.
-// this ant moves around randomly, picks up food if it
-// happens to stumble upon it, eats when it gets hungry,
-// and will drop food on its anthill if it happens to be
-// stumble back on its anthill while holding food.
-// here are the ant’s programming instructions, written
-// in our "Bugs!" language
+//This file contains initial scripts to setup the ants environment
 
-start:
-    faceRandomDirection // face some random direction
-    moveForward // move forward
-    if i_am_standing_on_food then goto on_food
-    if i_am_hungry then goto eat_food
-    if i_am_standing_on_my_anthill then goto on_hill
-    goto start // jump back to the "start:" line
-on_food:
-    pickUpFood
-    goto start // jump back to the "start:" line
-eat_food:
-    eatFood // assumes we have food – I hope we do!
-    goto start // jump back to the "start:" line
-on_hill:
-    dropFood // feed the anthill’s queen ant so she
-    // can produce more ants for the colony
-    goto start // jump back to the "start:" line`;
-document.getElementById("ide").innerHTML = startText;
-document.getElementById("terminal").innerHTML = `The left panel shows the simulation
-The right panel is the code editor where you edit your program
-Press 'Compile' to load your program
-Press 'Run' to start the simulation
-Press 'Submit' to send your code to the instructor`;
+//IDE Setup
+document.getElementById("ide").innerHTML = dumbAntProg;
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/bug");
+
+//Terminal Setup
+document.getElementById("terminal").innerHTML = terminalInstructions;
 var terminal = ace.edit("terminal");
 terminal.setTheme("ace/theme/vibrant_ink");
 terminal.setReadOnly(true);
 terminal.setHighlightActiveLine(false);
 document.getElementById("terminal").removeAttribute("tabIndex");
+
+//Simulation Setup
+// graphics.js
+var canvas = document.getElementById('graphics');
+var sim = document.getElementById("sim");
+var ctx = canvas.getContext("2d");
+
+var w = window.getComputedStyle(sim).width;
+canvas.width = parseInt(w.substring(0, w.length - 2));
+canvas.height = canvas.width;
+
+var offset = canvas.width/64;
+
+var sw = new StudentWorld();
+start();
+
+function start(){
+	sw.init();
+	sw.draw();
+}
+
+function run(){
+	var tickInterval = setInterval(function(){
+		if(sw.ticks === 2000) {
+            clearInterval(tickInterval)
+        }
+        sw.move();
+		sw.draw();
+	}, 50);
+}
 
 function compileCode(){
     terminal.setValue("Compiling...\n");

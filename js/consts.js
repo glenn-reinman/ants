@@ -107,10 +107,45 @@ const MIN_JUMP_RADIUS = 3;
 function randInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
 // Temp dev. method
 function throwIfMissing() {
     throw new Error('Missing parameter');
 }
+
+//Default ant program
+var dumbAntProg = `colony: DumbAnt
+// this program controls a single ant and causes it to move
+// around the field and do things.
+// this ant moves around randomly, picks up food if it
+// happens to stumble upon it, eats when it gets hungry,
+// and will drop food on its anthill if it happens to be
+// stumble back on its anthill while holding food.
+// here are the ant’s programming instructions, written
+// in our "Bugs!" language
+
+start:
+    faceRandomDirection // face some random direction
+    moveForward // move forward
+    if i_am_standing_on_food then goto on_food
+    if i_am_hungry then goto eat_food
+    if i_am_standing_on_my_anthill then goto on_hill
+    goto start // jump back to the "start:" line
+on_food:
+    pickUpFood
+    goto start // jump back to the "start:" line
+eat_food:
+    eatFood // assumes we have food – I hope we do!
+    goto start // jump back to the "start:" line
+on_hill:
+    dropFood // feed the anthill’s queen ant so she
+    // can produce more ants for the colony
+    goto start // jump back to the "start:" line`;
+
+var terminalInstructions = `The left panel shows the simulation
+The right panel is the code editor where you edit your program
+Press 'Compile' to load your program
+Press 'Run' to start the simulation
+Press 'Submit' to send your code to the instructor`;
