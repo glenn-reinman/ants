@@ -41,16 +41,6 @@ function start(){
 }
 var tickInterval;
 
-function run(){
-	var tickInterval = setInterval(function(){
-		if(sw.ticks === 2000) {
-            clearInterval(tickInterval)
-        }
-        sw.move();
-		sw.draw();
-	}, 50);
-}
-
 
 //resize handler for canvas
 function onResize( element, callback ){
@@ -73,4 +63,3 @@ onResize( document.getElementById("sim"), function(h, w){ canvas.width = w; canv
 setInterval(function(){
     document.cookie = "code=" + editor.getValue();
 }, 300);
- 

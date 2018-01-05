@@ -24,6 +24,7 @@ function runSimulation(){
         tickInterval = setInterval(function(){
             if(sw.ticks === 2000) {
                 clearInterval(tickInterval)
+                return;
             }
             sw.move();
             sw.draw();
