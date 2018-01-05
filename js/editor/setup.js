@@ -33,24 +33,10 @@ canvas.height = canvas.width;
 var offset = canvas.width/64;
 
 var sw = new StudentWorld();
-//Why does this only work if it's in a function?
-start();
-function start(){
-	sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
-	sw.draw();
-}
+sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
+sw.draw();
+
 var tickInterval;
-
-function run(){
-	var tickInterval = setInterval(function(){
-		if(sw.ticks === 2000) {
-            clearInterval(tickInterval)
-        }
-        sw.move();
-		sw.draw();
-	}, 50);
-}
-
 
 //resize handler for canvas
 function onResize( element, callback ){

@@ -88,6 +88,7 @@ class StudentWorld extends GameWorld{
 
 		this.scores = {'green': 0, 'red': 0, 'blue': 0, 'yellow': 0};
 		this.winningScore = MIN_ANTS_TO_QUALIFY;
+		this.currentWinner = "";
 
 		this.antProgram = {'green': null, 'red': null, 'blue': null, 'yellow': null};
 	}
@@ -475,6 +476,7 @@ class StudentWorld extends GameWorld{
 		this.scores[colonyNum]++;
 		if (this.scores[colonyNum] > this.winningScore) {
             this.winningScore = this.scores[colonyNum];
+            this.currentWinner = colonyNum;
         }
 	}
 

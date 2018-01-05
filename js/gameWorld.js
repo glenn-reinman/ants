@@ -2,12 +2,14 @@
 
 class GameWorld{
 	constructor(){
-		this.winnerColony;
+		this.winnerName = "";
 	}
 
 	setWinner(winner){
+		this.winnerName = winner;
 	}
 
 	getWinnerName(){
+		return this.winnerName;
 	}
 }

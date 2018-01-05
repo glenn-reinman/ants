@@ -39,5 +39,10 @@ var img_names = Object.keys(imgs);
 for (var i = 0; i < img_names.length; i++){
 	imgs[img_names[i]] = new Image();
 	imgs[img_names[i]].src = "./assets/" + img_names[i] + ".png";
-	imgs[img_names[i]].onload = function(){loaded_imgs++; if(loaded_imgs == 33) {start();}};
+	imgs[img_names[i]].onload = function(){
+		loaded_imgs++;
+		// if(loaded_imgs === 33) {
+		// 	start();
+		// }
+	}
 }
