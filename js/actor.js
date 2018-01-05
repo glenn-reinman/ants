@@ -548,7 +548,6 @@ class Ant extends Insect {
 			return this.studentWorld.getEdibleAt(this.getX(), this.getY(), this.colony) != null;
 		case Condition.i_am_standing_on_my_anthill:
 		{
-			console.error("Checking Anthill at: " + this.getX() + " " + this.getY() + " for " + this.colony);
 			return this.studentWorld.isAntHillAt(this.getX(), this.getY(), this.colony);
 		}
 		case Condition.i_smell_pheromone_in_front_of_me:
