@@ -496,6 +496,10 @@ class StudentWorld extends GameWorld{
 
 	updateStats(){
         $('#ticks').text(this.ticks);
+        $('#green-count').text(this.scores.green);
+        $('#red-count').text(this.scores.red);
+        $('#blue-count').text(this.scores.blue);
+        $('#yellow-count').text(this.scores.yellow);
 	}
 
 }

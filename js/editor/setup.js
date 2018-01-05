@@ -1,10 +1,10 @@
 //This file contains initial scripts to setup the ants environment
 
 //IDE Setup
-if(document.cookie)
-    document.getElementById("ide").innerHTML = document.cookie.substring(5);
-else
-    document.getElementById("ide").innerHTML = dumbAntProg;
+// if(document.cookie)
+//     document.getElementById("ide").innerHTML = document.cookie.substring(5);
+// else
+document.getElementById("ide").innerHTML = dumbAntProg;
 
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
@@ -48,7 +48,7 @@ function run(){
         }
         sw.move();
 		sw.draw();
-	}, 100);
+	}, 50);
 }
 
 
