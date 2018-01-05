@@ -9,6 +9,9 @@ function compile(source){
 	if(colonyName.length < 1){
 		return [false, 1, "Invalid colony specification at top of bug program"]
 	}
+	if(colonyName.length > 8){
+		return [false, 1, "Colony name must not exceed 8 characters"]
+	}
 	var labels = {};
 	var program = [];
 	for(var i = 1; i < lines.length; i++){
