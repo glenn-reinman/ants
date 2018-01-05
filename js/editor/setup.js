@@ -33,11 +33,7 @@ canvas.height = canvas.width;
 var offset = canvas.width/64;
 
 var sw = new StudentWorld();
-sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
-sw.draw();
-
 var tickInterval;
-
 
 //resize handler for canvas
 function onResize( element, callback ){

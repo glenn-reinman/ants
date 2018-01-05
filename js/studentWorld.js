@@ -87,7 +87,7 @@ class StudentWorld extends GameWorld{
 		} // Makes 3D array
 
 		this.scores = {'green': 0, 'red': 0, 'blue': 0, 'yellow': 0};
-		this.winningScore = MIN_ANTS_TO_QUALIFY;
+		this.winningScore = MIN_ANTS_TO_QUALIFY - 1;
 		this.currentWinner = "";
 
 		this.antProgram = {'green': null, 'red': null, 'blue': null, 'yellow': null};
@@ -369,6 +369,28 @@ class StudentWorld extends GameWorld{
 		}
 
 		this.removeDeadActors();
+
+        if(this.ticks === 2000){
+            if(this.currentWinner !== ""){
+				swal({
+					title: "And the winner is...",
+					text: `Colony ${this.currentWinner} is the winner, with ${this.winningScore} ants produced!`,
+					type: "info",
+					confirmButtonText: "Reset Game"
+				}).then(function(){
+					compileCode();
+				});
+            } else{
+				swal({
+					title: "No Winner...",
+					text: "No colony produced more than 5 ants in 2000 ticks, so the game ends in a tie.",
+					type: "warning",
+                    confirmButtonText: "Reset Game"
+                }).then(function(){
+                    compileCode();
+				});
+            }
+        }
 	}
 
 	cleanUp(){
