@@ -93,6 +93,7 @@ class StudentWorld extends GameWorld{
 	}
 
 	init(program0, program1, program2, program3){
+		this.updateStats();
 		for(let i = 0; i < 64; i++){
 			for(let j = 0; j < 64; j++){
 				switch(field[j*64 + i]){
@@ -472,8 +473,9 @@ class StudentWorld extends GameWorld{
 
 	increaseScore(colonyNum){
 		this.scores[colonyNum]++;
-		if (this.scores[colonyNum] > this.winningScore)
-			this.winningScore = this.scores[colonyNum];
+		if (this.scores[colonyNum] > this.winningScore) {
+            this.winningScore = this.scores[colonyNum];
+        }
 	}
 
 	getActorsAt(x, y){
