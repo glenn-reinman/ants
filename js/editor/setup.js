@@ -38,6 +38,7 @@ sw.draw();
 
 var tickInterval;
 
+
 //resize handler for canvas
 function onResize( element, callback ){
   var elementHeight = element.clientHeight,
@@ -59,4 +60,3 @@ onResize( document.getElementById("sim"), function(h, w){ canvas.width = w; canv
 setInterval(function(){
     document.cookie = "code=" + editor.getValue();
 }, 300);
- 
