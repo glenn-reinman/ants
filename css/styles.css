@@ -54,10 +54,19 @@ body {
 }
 
 #info{
-	color: white;
+    color: rgba(255,255,255,.75);
 	font-family: Inconsolata, Courier;
 }
 
+#logo{
+    font-family: 'Caveat Brush', cursive;
+    cursor: pointer;
+    color: white;
+}
+#logo:hover{
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+}
 #green{
 	color: lawngreen;
 }
