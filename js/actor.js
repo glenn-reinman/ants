@@ -379,7 +379,6 @@ class Ant extends Insect {
 	}
 
 	doSomethingAux(){
-		//for (let i = 0; i < MAX_COMMANDS_PER_TICK; i++){
 		for (let i = 0; i < 1; i++){
 			let cmd = this.getCommand(this.ip);
 			if (!cmd){
@@ -494,11 +493,11 @@ class Ant extends Insect {
 					console.log("faceRandomDirection");
 					break;
 				case Opcode.rotateClockwise:  // 1 2 3 4 --> 2 3 4 1
-					this.setDirection(1 + this.getDirection() % 4);
+					this.setDirectionNum(1 + this.getDirectionNum() % 4);
 					console.log("rotateClockwise");
 					break;
 				case Opcode.rotateCounterClockwise:  // 1 2 3 4 --> 4 1 2 3
-					this.setDirection(4 - ((5 - this.getDirection()) % 4));
+					this.setDirectionNum(4 - ((5 - this.getDirectionNum()) % 4));
 					console.log("rotateCounterClockwise");
 					break;
 			}
