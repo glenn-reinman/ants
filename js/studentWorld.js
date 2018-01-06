@@ -341,8 +341,8 @@ class StudentWorld extends GameWorld{
 
 		for(let x = 0; x < 64; x++){
 			for(let y = 0; y < 64; y++){
-				if (this.map[x][y].length !== 0){// probably will eventually have to make this display a specific image, rather than just the first
-					ctx.drawImage(this.map[x][y][0].img, this.map[x][y][0].x*offset, this.map[x][y][0].y*offset, offset, offset);
+				for(let a = this.map[x][y].length - 1; a >= 0; a--){
+					ctx.drawImage(this.map[x][y][a].img, this.map[x][y][a].x*offset, this.map[x][y][a].y*offset, offset, offset);
 				}
 			}
 		}
