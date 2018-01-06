@@ -9,6 +9,7 @@ document.getElementById("ide").innerHTML = dumbAntProg;
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/bug");
+editor.getSession().setUseWrapMode(true);
 var compiledProgram = compile(editor.getValue());
 var cpuProgram = compile(dumbAntProg);
 
