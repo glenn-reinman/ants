@@ -163,7 +163,7 @@ class AntHill extends EnergyHolder {
 			return;
 
 		if (this.getEnergy() >= MIN_FOOD_TO_PRODUCE_NEW_ANT){
-			let tmp = new Ant(this.studentWorld, this.getX(), this.getY(), this.colony, this.program, 'ant');
+			let tmp = new Ant(this.studentWorld, this.getX(), this.getY(), this.colony, this.program);
 			this.studentWorld.addActor(tmp);
 			this.updateEnergy(-tmp.getEnergy());
 			this.studentWorld.increaseScore(this.colony);
@@ -346,7 +346,7 @@ class Ant extends Insect {
 
 		this.ip = 0;
 		this.lastRandomNumber = 0;
-		this.lastPheromoneType = Pheromone.pnone;
+		this.lastPheromoneType = PheromoneType.pnone;
 		this.lastPheromoneStrength = 0;
 		this.foodHeld = 0;
 		this.iWasBit = false;
@@ -371,7 +371,6 @@ class Ant extends Insect {
 	}
 
 	getCommand(lineNumber){
-		console.log(this.program[3]);
 		if (lineNumber < 0 || lineNumber >= this.program[3].length)
 			return false;
 
@@ -387,25 +386,28 @@ class Ant extends Insect {
 			}
 			let effectorUsed = true;
 			let newip = this.ip + 1;
-
 			switch (cmd.opcode)
 			{
 				default:
+				{
 					this.updateEnergy(-this.getEnergy());  // die if bad opcode
 					console.log("default");
 					return;
+				}
 				case Opcode.generateRandomNumber:
+				{
 					effectorUsed = false;
 					console.log(this.lastRandomNumber);
 					this.lastRandomNumber = randInt(0, cmd.operand1 - 1);
 					console.log(this.lastRandomNumber);
 					console.log("generateRandomNumber");
 					break;
+				}
 				case Opcode.rememberPheromone:
+				{
 					effectorUsed = false;
-					let newPheromone;
 					let phero = cmd.operand1;
-
+					let newPheromone;
 					switch (phero)
 					{
 						case 1: newPheromone = PheromoneType.ptype1;
@@ -422,7 +424,7 @@ class Ant extends Insect {
 					let x = xy[0];
 					let y = xy[1];
 
-					let pheromone = this.studentWorld.getPheromoneAt(x, y, this.colony, newPheromone);
+					let pheromone = this.studentWorld.getPheromoneAt_4(x, y, this.colony, newPheromone);
 					if (pheromone != null)
 					{
 						this.lastPheromoneStrength = pheromone.getEnergy();
@@ -430,76 +432,92 @@ class Ant extends Insect {
 					}
 					console.log("rememberPheromone");
 					break;
+				}
 				case Opcode.goto:
+				{
 					effectorUsed = false;
 					newip = cmd.operand1;
 					console.log("goto");
 					break;
+				}
 				case Opcode.if:
+				{
 					effectorUsed = false;
 					if (this.conditionTrue(cmd.operand1))
 						newip = cmd.operand2;
-					console.log(cmd.operand2);
-					console.log(newip);
 					console.log("if");
 					break;
+				}
 				case Opcode.eatFood:
+				{
 					let amt = Math.min(this.foodHeld, ANT_EAT_AMOUNT);
-						this.updateEnergy(amt);
-						this.foodHeld -= amt;
+					this.updateEnergy(amt);
+					this.foodHeld -= amt;
 					console.log("eatFood");
 					break;
+				}
 				case Opcode.bite:
+				{
 					this.studentWorld.biteEnemyAt(this, this.colony, ANT_BITE_DAMAGE);
 					console.log("bite");
 					break;
+				}
 				case Opcode.moveForward:
+				{
 					this.moveForwardIfPossible();
 					console.log("moveForward");
 					break;
+				}
 				case Opcode.pickUpFood:
+				{
 					this.foodHeld += this.pickupFood(Math.min(ANT_MAX_FOOD_THAT_CAN_BE_CARRIED - this.foodHeld, ANT_FOOD_PICKUP_AMOUNT));
 					console.log("pickUpFood");
 					break;
+				}
 				case Opcode.dropFood:
+				{
 					this.addFood(this.foodHeld);
 					this.foodHeld = 0;
 					console.log("dropFood");
 					break;
+				}
 				case Opcode.emitPheromone:
+				{
+					let phero = cmd.operand1;
+					let newPheromone;
+					switch (phero)
 					{
-						let newPheromone;
-
-						let phero = cmd.operand1;
-
-						switch (phero)
-						{
-							case 1: newPheromone = PheromoneType.ptype1;
-							break;
-							case 2: newPheromone = PheromoneType.ptype2;
-							break;
-							case 3: newPheromone = PheromoneType.ptype3;
-							break;
-							default: newPheromone = PheromoneType.pnone;
-							break;
-						}
-						this.emitPheromone(newPheromone);
-
+						case 1: newPheromone = PheromoneType.ptype1;
+						break;
+						case 2: newPheromone = PheromoneType.ptype2;
+						break;
+						case 3: newPheromone = PheromoneType.ptype3;
+						break;
+						default: newPheromone = PheromoneType.pnone;
+						break;
 					}
+					this.emitPheromone(newPheromone);
 					console.log("emitPheromone");
 					break;
+				}
 				case Opcode.faceRandomDirection:
+				{
 					this.setDirection(this.getRandomDirection());
 					console.log("faceRandomDirection");
 					break;
+				}
 				case Opcode.rotateClockwise:  // 1 2 3 4 --> 2 3 4 1
+				{
 					this.setDirectionNum(1 + this.getDirectionNum() % 4);
 					console.log("rotateClockwise");
 					break;
+				}
 				case Opcode.rotateCounterClockwise:  // 1 2 3 4 --> 4 1 2 3
+				{
 					this.setDirectionNum(4 - ((5 - this.getDirectionNum()) % 4));
 					console.log("rotateCounterClockwise");
 					break;
+				}
 			}
 			this.ip = newip;
 			if (effectorUsed)
@@ -510,65 +528,78 @@ class Ant extends Insect {
 
 	conditionTrue(c = throwIfMissing()){//not tested yet
 		switch (c){
-		default:
-		case Condition.invalid:
-			return false;
-		case Condition.last_random_number_was_zero:
-			return this.lastRandomNumber == 0;
-		case Condition.last_pheromone_stronger:
-		{
-			let xy = this.getXYInFrontOfMe();
-			let pheromone = this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony, this.lastPheromoneType);
-			if (p != nullptr)
+			default:
+			case Condition.invalid:
 			{
-				return this.lastPheromoneStrength > pheromone.getEnergy();
+				return false;
 			}
-			else
-				return 1;
-		}
-		case Condition.same_pheromone_type:
-		{
-			let xy = this.getXYInFrontOfMe();
-			let pheromone = this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony, this.lastPheromoneType);
-			if (pheromone != null)
+			case Condition.last_random_number_was_zero:
 			{
-				return 1;
+				return this.lastRandomNumber == 0;
 			}
-			else
-				return 0;
-		}
-		case Condition.i_am_carrying_food:
-			return this.foodHeld > 0;
-		case Condition.i_am_hungry:
-			return this.getEnergy() <= HUNGRY_IF_LESS_THAN_THIS_ENERGY;
-		case Condition.i_am_standing_with_an_enemy:
-			return this.studentWorld.isEnemyAt(this.getX(), this.getY(), this.colony);
-		case Condition.i_am_standing_on_food:
-			return this.studentWorld.getEdibleAt(this.getX(), this.getY(), this.colony) != null;
-		case Condition.i_am_standing_on_my_anthill:
-		{
-			return this.studentWorld.isAntHillAt(this.getX(), this.getY(), this.colony);
-		}
-		case Condition.i_smell_pheromone_in_front_of_me:
-		{
-			let xy = this.getXYInFrontOfMe();
-			return this.studentWorld.getPheromoneAt(xy[0], xy[1], this.colony) != nullptr;
-		}
-		case Condition.i_smell_danger_in_front_of_me:
-		{
-			let xy = this.getXYInFrontOfMe();
-			return this.studentWorld.isDangerAt(xy[0], xy[1], this.colony);
-		}
-		case Condition.i_was_bit:
-			return this.i_was_bit;
-		case Condition.i_was_blocked_from_moving:
-			return this.blockedFromMoving;
+			case Condition.last_pheromone_stronger:
+			{
+				let xy = this.getXYInFrontOfMe();
+				let pheromone = this.studentWorld.getPheromoneAt_4(xy[0], xy[1], this.colony, this.lastPheromoneType);
+				if (pheromone != null)
+					return this.lastPheromoneStrength > pheromone.getEnergy();
+				else
+					return 1;
+			}
+			case Condition.same_pheromone_type:
+			{
+				let xy = this.getXYInFrontOfMe();
+				let pheromone = this.studentWorld.getPheromoneAt_4(xy[0], xy[1], this.colony, this.lastPheromoneType);
+				if (pheromone != null)
+					return 1;
+				else
+					return 0;
+			}
+			case Condition.i_am_carrying_food:
+			{
+				return this.foodHeld > 0;
+			}
+			case Condition.i_am_hungry:
+			{
+				return this.getEnergy() <= HUNGRY_IF_LESS_THAN_THIS_ENERGY;
+			}
+			case Condition.i_am_standing_with_an_enemy:
+			{
+				return this.studentWorld.isEnemyAt(this.getX(), this.getY(), this.colony);
+			}
+			case Condition.i_am_standing_on_food:
+			{
+				return this.studentWorld.getEdibleAt(this.getX(), this.getY(), this.colony) != null;
+			}
+			case Condition.i_am_standing_on_my_anthill:
+			{
+				console.log(this.studentWorld.isAntHillAt(this.getX(), this.getY(), this.colony));
+				return this.studentWorld.isAntHillAt(this.getX(), this.getY(), this.colony);
+			}
+			case Condition.i_smell_pheromone_in_front_of_me:
+			{
+				let xy = this.getXYInFrontOfMe();
+				return this.studentWorld.getPheromoneAt_3(xy[0], xy[1], this.colony) != null;
+			}
+			case Condition.i_smell_danger_in_front_of_me:
+			{
+				let xy = this.getXYInFrontOfMe();
+				return this.studentWorld.isDangerAt(xy[0], xy[1], this.colony);
+			}
+			case Condition.i_was_bit:
+			{
+				return this.i_was_bit;
+			}
+			case Condition.i_was_blocked_from_moving:
+			{
+				return this.blockedFromMoving;
+			}
 		}
 
 	}
 
 	emitPheromone(pheromoneType = throwIfMissing()){
-		let pheromone = this.studentWorld.getPheromoneAt(this.getX(), this.getY(), this.colony, pheromoneType);
+		let pheromone = this.studentWorld.getPheromoneAt_4(this.getX(), this.getY(), this.colony, pheromoneType);
 		if (pheromone != null)
 			pheromone.increaseStrength();
 		else

@@ -1,0 +1,10 @@
+colony: i_am_hungry_test
+
+start:
+    moveForward
+    if i_am_hungry then goto spin // ants will start spinning at 1500-25 ticks
+    goto start
+    
+spin:
+    rotateClockwise
+    goto spin

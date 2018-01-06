@@ -1,0 +1,29 @@
+colony: last_pheromone_stronger_test
+
+start:
+    emitPheromone 1 // this test requires a single ant alone
+    //rotateClockwise // commenting out these 4 lines will result in spinning
+    //rotateClockwise // will spin (even though it is remembering the pheromone
+    //rotateClockwise // first because of the time differences between remember
+    //rotateClockwise // and the if statement
+    moveForward
+    emitPheromone 1
+    rotateClockwise
+    moveForward
+    rotateClockwise
+    moveForward 
+    rotateClockwise
+    rememberPheromone 1
+    rotateClockwise
+    moveForward
+    rotateCounterClockwise
+    if last_pheromone_stronger then goto spin 
+    goto run
+
+run:    
+    moveForward
+    goto run
+    
+spin:
+    rotateClockwise
+    goto spin

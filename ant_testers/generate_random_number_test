@@ -1,0 +1,14 @@
+colony: generate_random_number_test
+
+start:
+    generateRandomNumber 1 // changing this to '2' will result in some running
+    if last_random_number_was_zero then goto spin
+    goto run
+
+run:
+    moveForward
+    goto run
+
+spin:
+    rotateClockwise
+    goto spin

@@ -1,0 +1,14 @@
+colony: pick_up_drop_food_test
+
+start:
+    moveForward // this test requires food around the anthill/ant
+    moveForward // if anthill with 4 foods, should see total 21 ants spawned
+    pickUpFood // because total = (8999 + 4 * 6000 ) / 1500 = 21.9
+    rotateClockwise // anthill starts 8999
+    rotateClockwise // 4 food, each 6000 energy
+    moveForward // anthill needs 2000 energy to be capable of producing ant
+    moveForward // each ant costs 1500 energy 
+    dropFood
+    rotateClockwise
+    rotateClockwise
+    goto start

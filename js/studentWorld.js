@@ -133,7 +133,7 @@ class StudentWorld extends GameWorld{
 	}
 
 
-	initTest(){
+	initT(program0, program1, program2, program3){
 		for(let x = 0; x < 64; x++){
 			for(let y = 0; y < 64; y++){
 				if(x === 0 || y === 0 || x === 63 || y === 63){
@@ -142,6 +142,25 @@ class StudentWorld extends GameWorld{
 				}
 			}
 		}
+		this.addActor(new Ant(this, 31, 31, Colony.blue, program0));
+
+		/*this.addActor(new AntHill(this, 31, 31, Colony.blue, program0));
+		this.addActor(new Food(this, 31, 29, START_FOOD_ENERGY));
+		this.addActor(new Food(this, 33, 31, START_FOOD_ENERGY));
+		this.addActor(new Food(this, 29, 31, START_FOOD_ENERGY));
+		this.addActor(new Food(this, 31, 33, START_FOOD_ENERGY));*/
+		/*
+
+		for(let x = 0; x < 64; x++){
+			for(let y = 0; y < 64; y++){
+				if(x === 0 || y === 0 || x === 63 || y === 63){
+					let tmp = new Pebble(this, x, y);
+					this.addActor(tmp);
+				}
+			}
+		}
+
+		
 
 		//temporary display all
         this.addActor(new Pebble(this, 21, 1));
@@ -153,10 +172,10 @@ class StudentWorld extends GameWorld{
         this.addActor(new Pheromone(this, 24, 4, Colony.yellow, PheromoneType.ptype3));
         this.addActor(new WaterPool(this, 21, 5));
         this.addActor(new Poison(this, 21, 6));
-        this.addActor(new Ant(this, 21, 7, Colony.blue, 'p2', 'ant'));
-        this.addActor(new Ant(this, 22, 7, Colony.green, 'p2', 'ant'));
-        this.addActor(new Ant(this, 23, 7, Colony.red, 'p2', 'ant'));
-        this.addActor(new Ant(this, 24, 7, Colony.yellow, 'p2', 'ant'));
+        this.addActor(new Ant(this, 21, 7, Colony.blue, program0, 'ant'));
+        this.addActor(new Ant(this, 22, 7, Colony.green, program1, 'ant'));
+        this.addActor(new Ant(this, 23, 7, Colony.red, program2, 'ant'));
+        this.addActor(new Ant(this, 24, 7, Colony.yellow, program3, 'ant'));
         this.addActor(new BabyGrasshopper(this, 21, 8));
         this.addActor(new AdultGrasshopper(this, 21, 9));
 
@@ -173,7 +192,7 @@ class StudentWorld extends GameWorld{
 		console.log("---Food---");
 		console.log(f.isEdible());
 
-		let ah = new AntHill(this, 1, 3, Colony.green, 'p1');
+		let ah = new AntHill(this, 1, 3, Colony.green, program0);
 		this.addActor(ah);
 		console.log("---Anthill---");
 		console.log(ah.isAntHill(Colony.green));
@@ -211,15 +230,15 @@ class StudentWorld extends GameWorld{
 		console.log(py.isPheromoneType(PheromoneType.ptype3));
 		py.increaseStrength();
 		console.log(py.getEnergy());
-		console.log(this.getPheromoneAt(1, 3, Colony.blue, PheromoneType.ptype1));
-		console.log(this.getPheromoneAt(1, 4, Colony.red, PheromoneType.ptype1));
-		console.log(this.getPheromoneAt(1, 4, Colony.blue, PheromoneType.ptype2));
-		console.log(this.getPheromoneAt(1, 4, Colony.blue, PheromoneType.ptype1));
+		console.log(this.getPheromoneAt_4(1, 3, Colony.blue, PheromoneType.ptype1));
+		console.log(this.getPheromoneAt_4(1, 4, Colony.red, PheromoneType.ptype1));
+		console.log(this.getPheromoneAt_4(1, 4, Colony.blue, PheromoneType.ptype2));
+		console.log(this.getPheromoneAt_4(1, 4, Colony.blue, PheromoneType.ptype1));
 
 		let wp = new WaterPool(this, 1, 5);
 		this.addActor(wp);
 		console.log("---WaterPool---");
-		let anwp = new Ant(this, 1, 5, Colony.blue, 'p2', 'ant');
+		let anwp = new Ant(this, 1, 5, Colony.blue, program0, 'ant');
 		this.addActor(anwp);
 		console.log(anwp.stunned + " " + anwp.sleepTicks);
 		wp.doSomething();
@@ -228,19 +247,19 @@ class StudentWorld extends GameWorld{
 		let po = new Poison(this, 1, 6);
 		this.addActor(po);
 		console.log("---Poison---");
-		let anpo = new Ant(this, 1, 6, Colony.blue, 'p2', 'ant');
+		let anpo = new Ant(this, 1, 6, Colony.blue, program0, 'ant');
 		this.addActor(anpo);
 		console.log(anpo.getEnergy());
 		po.doSomething();
 		console.log(anpo.getEnergy());
 
-		let anb = new Ant(this, 1, 7, Colony.blue, compile(""), 'ant');
+		let anb = new Ant(this, 1, 7, Colony.blue, program0, 'ant');
 		this.addActor(anb);
-		let ang = new Ant(this, 2, 7, Colony.green, compile(""), 'ant');
+		let ang = new Ant(this, 2, 7, Colony.green, program0, 'ant');
 		this.addActor(ang);
-		let anr = new Ant(this, 3, 7, Colony.red, compile(""), 'ant');
+		let anr = new Ant(this, 3, 7, Colony.red, program0, 'ant');
 		this.addActor(anr);
-		let any = new Ant(this, 4, 7, Colony.yellow, compile(editor.getValue()), 'ant');
+		let any = new Ant(this, 4, 7, Colony.yellow, program0, 'ant');
 		this.addActor(any);
 		console.log("---Ant---");
 		console.log(any.getEnergy());
@@ -306,7 +325,7 @@ class StudentWorld extends GameWorld{
 		console.log(this.getEdibleAt(1, 2));
 		console.log(this.getEdibleAt(1, 9));
 		//end temporary test all
-
+		*/
 
 
 	}
@@ -431,7 +450,7 @@ class StudentWorld extends GameWorld{
 		return null;
 	}
 
-	getPheromoneAt(x, y, colony, pheromoneType){//todo; will also be getPheromoneAt(x, y, colony), which has not been accounted for yet
+	getPheromoneAt_4(x, y, colony, pheromoneType){
 		let actors = this.getActorsAt(x, y);
 		if (actors.length === 0)
 			return;
@@ -444,13 +463,56 @@ class StudentWorld extends GameWorld{
 		return null;
 	}
 
+	getPheromoneAt_3(x, y, colony){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length === 0)
+			return;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isPheromone(colony) && !actors[i].isDead()){
+				return actors[i];
+			}
+		}
+		return null;
+	}
+
 	isEnemyAt(x, y, colony){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length === 0)
+			return false;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isEnemy(colony) && !actors[i].isDead()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	isDangerAt(x, y, colony){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length === 0)
+			return false;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isDangerous(colony) && !actors[i].isDead()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	isAntHillAt(x, y, colony){
+		let actors = this.getActorsAt(x, y);
+		if (actors.length === 0)
+			return false;
+
+		for (let i = 0; i < actors.length; i++){
+			if (actors[i].isAntHill(colony) && !actors[i].isDead()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	biteEnemyAt(me, colony, biteDamage){

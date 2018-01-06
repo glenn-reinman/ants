@@ -1,0 +1,14 @@
+colony: i_am_standing_on_my_anthill_test
+
+start:
+    //moveForward // if this line is commented out, ants will spin
+    if i_am_standing_on_my_anthill then goto spin
+    goto run
+
+run:
+    moveForward
+    goto run
+
+spin:
+    rotateClockwise
+    goto spin

@@ -1,0 +1,17 @@
+colony: i_am_carrying_food_test
+
+start:
+    moveForward
+    moveForward
+    pickUpFood
+    moveForward
+    if i_am_carrying_food then goto spin // if food is 2 steps away, ants will spin
+    goto run
+
+run:
+    moveForward
+    goto run
+
+spin:
+    rotateClockwise
+    goto spin
