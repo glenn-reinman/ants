@@ -10,6 +10,7 @@ var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/bug");
 editor.getSession().setUseWrapMode(true);
+editor.setShowPrintMargin(false);
 var compiledProgram = compile(editor.getValue());
 var cpuProgram = compile(dumbAntProg);
 
@@ -17,8 +18,10 @@ var cpuProgram = compile(dumbAntProg);
 document.getElementById("terminal").innerHTML = terminalInstructions;
 var terminal = ace.edit("terminal");
 terminal.setTheme("ace/theme/vibrant_ink");
-terminal.setReadOnly(true);
-terminal.setHighlightActiveLine(false);
+terminal.setShowPrintMargin(false);
+terminal.setOptions({readOnly: true, highlightActiveLine: false, highlightGutterLine: false});
+//terminal.renderer.setShowGutter(false);
+terminal.renderer.$cursorLayer.element.style.display = "none"
 document.getElementById("terminal").removeAttribute("tabIndex");
 
 //Simulation Setup
