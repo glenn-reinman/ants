@@ -1,4 +1,4 @@
-colony: i_am_hungry_test
+colony: t
 
 start:
     moveForward

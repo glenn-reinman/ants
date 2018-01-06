@@ -1,4 +1,4 @@
-colony: i_smell_pheromone_in_front_of_me_test
+colony: t
 
 start:
     moveForward

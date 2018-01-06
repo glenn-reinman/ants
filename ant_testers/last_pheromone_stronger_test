@@ -1,4 +1,4 @@
-colony: last_pheromone_stronger_test
+colony: t
 
 start:
     emitPheromone 1 // this test requires a single ant alone

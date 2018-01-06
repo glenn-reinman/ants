@@ -142,7 +142,11 @@ class StudentWorld extends GameWorld{
 				}
 			}
 		}
-		this.addActor(new Ant(this, 31, 31, Colony.blue, program0));
+		
+		let x = new Ant(this, 31, 31, Colony.blue, program0);
+		this.addActor(x);
+		let g = new AdultGrasshopper(this, 32, 31);
+		this.addActor(g);
 
 		/*this.addActor(new AntHill(this, 31, 31, Colony.blue, program0));
 		this.addActor(new Food(this, 31, 29, START_FOOD_ENERGY));

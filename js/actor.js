@@ -588,7 +588,7 @@ class Ant extends Insect {
 			}
 			case Condition.i_was_bit:
 			{
-				return this.i_was_bit;
+				return this.iWasBit;
 			}
 			case Condition.i_was_blocked_from_moving:
 			{

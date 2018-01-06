@@ -1,4 +1,4 @@
-colony: generate_random_number_test
+colony: t
 
 start:
     generateRandomNumber 1 // changing this to '2' will result in some running

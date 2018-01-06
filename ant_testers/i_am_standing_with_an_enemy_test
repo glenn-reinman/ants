@@ -1,8 +1,8 @@
 colony: t
 
-start:
+start: // needs two ants placed on top of each other
     //moveForward // if this line is commented out, ants will spin
-    if i_am_standing_on_my_anthill then goto spin
+    if i_am_standing_with_an_enemy then goto spin 
     goto run
 
 run:

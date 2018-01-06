@@ -1,4 +1,4 @@
-colony: pick_up_drop_food_test
+colony: t
 
 start:
     moveForward // this test requires food around the anthill/ant

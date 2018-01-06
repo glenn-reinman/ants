@@ -3,9 +3,8 @@ colony: t
 start:
     moveForward
     moveForward
-    pickUpFood
     moveForward
-    if i_am_carrying_food then goto spin // if food is 2 steps away, ants will spin
+    if i_am_standing_on_food then goto spin // if food is 2 steps away, ants will spin
     goto run
 
 run:

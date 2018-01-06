@@ -1,4 +1,4 @@
-colony: same_pheromone_type_test
+colony: t
 
 start:
     emitPheromone 1

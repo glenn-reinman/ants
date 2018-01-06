@@ -1,0 +1,14 @@
+colony: t
+
+start: // needs ant next to rock
+    moveForward 
+    if i_was_blocked_from_moving then goto spin 
+    goto run
+
+run:
+    moveForward
+    goto run
+
+spin:
+    rotateClockwise
+    goto spin
