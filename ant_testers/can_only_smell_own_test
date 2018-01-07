@@ -1,8 +1,10 @@
 colony: t
 
 start:
-    bite // place two ants on top of each other to test
-    if i_was_bit then goto spin 
+    emitPheromone 1
+    moveForward
+    rotateClockwise
+    if i_smell_pheromone_in_front_of_me then goto spin
     goto run
     
 run:

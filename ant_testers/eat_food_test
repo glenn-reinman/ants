@@ -1,0 +1,6 @@
+colony: t
+
+start:
+    pickUpFood
+    eatFood
+    goto start
