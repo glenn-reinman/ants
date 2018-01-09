@@ -57,3 +57,17 @@ function exportFile(){
 function submitProgram(){
     alert("Submit");
 }
+
+function leftField(){
+    field_index = (field_index == 0)?fields.length-1: field_index-1;
+    sw = new StudentWorld();
+    sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
+    sw.draw();
+}
+
+function rightField(){
+    field_index++;
+    sw = new StudentWorld();
+    sw.init(compiledProgram,cpuProgram,cpuProgram,cpuProgram);
+    sw.draw();
+}
