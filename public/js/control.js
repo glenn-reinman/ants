@@ -38,6 +38,22 @@ function runSimulation(){
     terminal.clearSelection();
 }
 
+function exportFile(){
+    var tempFile = document.createElement('a');
+    var source = editor.getValue();
+    var title = parseColonyName(source.split('\n')[0]);
+    if(title.length < 1){
+        title = "untitled"
+    }
+    title += ".bug";
+    tempFile.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(source));
+    tempFile.setAttribute('download', title);
+    tempFile.style.display = 'none';
+    document.body.appendChild(tempFile);
+    tempFile.click();
+    document.body.removeChild(tempFile);
+}
+
 function submitProgram(){
     alert("Submit");
 }

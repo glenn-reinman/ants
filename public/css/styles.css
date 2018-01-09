@@ -2,7 +2,7 @@
 
 }
 body {
-  padding-top: 54px;
+  padding-top: 56px;
 }
 
 #editor {
@@ -16,11 +16,11 @@ body {
 }
 
 #sim {
-	width: calc(100vh - 54px);
-	height: calc(100vh - 54px);
+	width: calc(100vh - 56px);
+	height: calc(100vh - 56px);
 	position: fixed;
-	top: 54px;
-	right: calc(100% - 50vh + 54px);
+	top: 56px;
+	right: calc(100% - 50vh + 56px);
 	bottom: 0;
 	left: 0%;
 	background-color: #272822;
@@ -31,22 +31,22 @@ body {
 }
 
 #ide {
-	width: calc(100vw - 100vh + 54px);
-	height: calc(80% - 54px);
+	width: calc(100vw - 100vh + 56px);
+	height: calc(80% - 56px);
 	position: fixed;
-	top: 54px;
+	top: 56px;
 	right: 0%;
 	bottom: 0;
-	left: calc(100vh - 54px);
+	left: calc(100vh - 56px);
 }
 #terminal {
-	width: calc(100vw - 100vh + 54px);
+	width: calc(100vw - 100vh + 56px);
 	height: 20%;
 	position: fixed;
 	top: 80%;
 	right: 0%;
 	bottom: 0;
-	left: calc(100vh - 54px);
+	left: calc(100vh - 56px);
 }
 
 .nav-link{
