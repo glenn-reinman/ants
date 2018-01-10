@@ -155,9 +155,10 @@ class AntHill extends EnergyHolder {
 	}
 
 	doSomething(){
-		this.updateEnergy(-1);
-		if (this.getEnergy() == 0)
+		if (this.getEnergy() <= 0)
 			return;
+
+		this.updateEnergy(-1);
 
 		if (this.pickupAndEatFood(QUEEN_EAT_PER_TICK) > 0)
 			return;
@@ -172,6 +173,10 @@ class AntHill extends EnergyHolder {
 
 	isAntHill(colony = throwIfMissing()){
 		return this.colony == colony;
+	}
+
+	isDead(){
+		return false;
 	}
 }
 
