@@ -65,6 +65,332 @@ setInterval(function(){
 //Fields setup
 var fields = [];
 var field_index = 0;
+fields.push( 
+"****************************************************************" +
+"* f      fff     f                            f     fff      f *" +
+"*f f                   f   f        f   f                   f f*" +
+"*                   f  f      f  f      f  f                   *" +
+"*  f                   f                f                   f  *" +
+"*                        f   f    f   f                        *" +
+"*            f                                    f            *" +
+"*f f             f                            f             f f*" +
+"*     f  ff     f       f f    ff    f f       f     ff  f     *" +
+"*  f              f    f                f    f              f  *" +
+"*      f f                     ff                     f f      *" +
+"*f          ff         f                f         ff          f*" +
+"*    f   f         f                        f         f   f    *" +
+"*        f   f   f       f            f       f   f   f        *" +
+"*       f     f  ff       f          f       ff  f     f       *" +
+"*        f  f                                      f  f        *" +
+"*  f                ff                    ff                f  *" +
+"*            f        f        ff        f        f            *" +
+"*    f                        f  f                        f    *" +
+"*        f       ff    f f            f f    ff       f        *" +
+"*                    f   f ff      ff f   f                    *" +
+"*             f         f              f         f             *" +
+"*      fff  f   f      f                f      f   f  fff      *" +
+"*        f             f                f             f        *" +
+"*   f           ff fff f                f fff ff           f   *" +
+"****************************************************************" +
+"*f     f f  f        f   *f          f*   f        f  f f     f*" +
+"*          f             * f        f *             f          *" +
+"*        f         f f f *  0f    f2  * f f f         f        *" +
+"* f     f               f*     ff     *f               f     f *" +
+"*      f      f          *            *          f      f      *" +
+"* ff              f      *   f    f   *      f              ff *" +
+"* ff              f      *   f    f   *      f              ff *" +
+"*      f      f          *            *          f      f      *" +
+"* f     f               f*     ff     *f               f     f *" +
+"*        f         f f f *  1f    f3  * f f f         f        *" +
+"*          f             * f        f *             f          *" +
+"*f     f f  f        f   *f          f*   f        f  f f     f*" +
+"****************************************************************" +
+"*   f           ff fff f                f fff ff           f   *" +
+"*        f             f                f             f        *" +
+"*      fff  f   f      f                f      f   f  fff      *" +
+"*             f         f              f         f             *" +
+"*                    f   f ff      ff f   f                    *" +
+"*        f       ff    f f            f f    ff       f        *" +
+"*    f                        f  f                        f    *" +
+"*            f        f        ff        f        f            *" +
+"*  f                ff                    ff                f  *" +
+"*        f  f                                      f  f        *" +
+"*       f     f  ff       f          f       ff  f     f       *" +
+"*        f   f   f       f            f       f   f   f        *" +
+"*    f   f         f                        f         f   f    *" +
+"*f          ff         f                f         ff          f*" +
+"*      f f                     ff                     f f      *" +
+"*  f              f    f                f    f              f  *" +
+"*     f  ff     f       f f    ff    f f       f     ff  f     *" +
+"*f f             f                            f             f f*" +
+"*            f                                    f            *" +
+"*                        f   f    f   f                        *" +
+"*  f                   f                f                   f  *" +
+"*                   f  f      f  f      f  f                   *" +
+"*f f                   f   f        f   f                   f f*" +
+"* f      fff     f                            f     fff      f *" +
+"****************************************************************" );
+fields.push( 
+"****************************************************************" +
+"*0                                                            1*" +
+"*                                                              *" +
+"*                                                              *" +
+"*   fff                                                 fff    *" +
+"*   fff                                                 fff    *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                             fffff                            *" +
+"*                            fffffff                           *" +
+"*                           fffffffff                          *" +
+"*                            fffffff                           *" +
+"*                             fffff                            *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*                                                              *" +
+"*    fff                                                fff    *" +
+"*    fff                                                fff    *" +
+"*                                                              *" +
+"*                                                              *" +
+"*2                                                            3*" +
+"****************************************************************" );
+fields.push( 
+"****************************************************************" +
+"*         f*     f       * *        * *       f     *f         *" +
+"*       f  *       f  f  **  f    f  **  f  f       *  f       *" +
+"*                *       *    f  f    *       *                *" +
+"*              *    f  f                f  f    *              *" +
+"*         *        * * f                f * *        *         *" +
+"*   f     f         *                      *         f     f   *" +
+"* f        *                                        *        f *" +
+"**f      f     *        *  *        *  *        *     f      f**" +
+"*   fff  f             f *     **     * f             f  fff   *" +
+"*      *     *       f                    f       *     *      *" +
+"* *            f      f        ff        f      f            * *" +
+"*    ff   *   *  *                            *  *   *   ff    *" +
+"*  * f           f        f          f        f           f *  *" +
+"*       *   f             *          *             f   *       *" +
+"**      f  f      *     * *          * *     *      f  f      **" +
+"*    *          0                              2          *    *" +
+"*    *  f *   f     f       *      *       f     f   * f  *    *" +
+"*   *       f    *   *                    *   *    f       *   *" +
+"**                 *                        *                 **" +
+"*f        f*               *f      f*               *f        f*" +
+"*    f f      f           f          f           f      f f    *" +
+"*   *            *     f     *    *     f     *            *   *" +
+"* *   *    *   *       *                *       *   *    *   * *" +
+"*   f        f   *  * f                  f *  *   f        f   *" +
+"*        f  f   *         **        **         *   f  f        *" +
+"*ff           *     * *                  * *     *           ff*" +
+"*   f            f             ff             f            f   *" +
+"*    f  *          **f f   f *    * f   f f**          *  f    *" +
+"* f*  *                     *      *                     *  *f *" +
+"*   *          f*         f f      f f         *f          *   *" +
+"*   f        **      f                    f      **        f   *" +
+"*   f        **      f                    f      **        f   *" +
+"*   *          f*         f f      f f         *f          *   *" +
+"* f*  *                     *      *                     *  *f *" +
+"*    f  *          **f f   f *    * f   f f**          *  f    *" +
+"*   f            f             ff             f            f   *" +
+"*ff           *     * *                  * *     *           ff*" +
+"*        f  f   *         **        **         *   f  f        *" +
+"*   f        f   *  * f                  f *  *   f        f   *" +
+"* *   *    *   *       *                *       *   *    *   * *" +
+"*   *            *     f     *    *     f     *            *   *" +
+"*    f f      f           f          f           f      f f    *" +
+"*f        f*               *f      f*               *f        f*" +
+"**                 *                        *                 **" +
+"*   *       f    *   *                    *   *    f       *   *" +
+"*    *  f *   f     f       *      *       f     f   * f  *    *" +
+"*    *          1                              3          *    *" +
+"**      f  f      *     * *          * *     *      f  f      **" +
+"*       *   f             *          *             f   *       *" +
+"*  * f           f        f          f        f           f *  *" +
+"*    ff   *   *  *                            *  *   *   ff    *" +
+"* *            f      f        ff        f      f            * *" +
+"*      *     *       f                    f       *     *      *" +
+"*   fff  f             f *     **     * f             f  fff   *" +
+"**f      f     *        *  *        *  *        *     f      f**" +
+"* f        *                                        *        f *" +
+"*   f     f         *                      *         f     f   *" +
+"*         *        * * f                f * *        *         *" +
+"*              *    f  f                f  f    *              *" +
+"*                *       *    f  f    *       *                *" +
+"*       f  *       f  f  **  f    f  **  f  f       *  f       *" +
+"*         f*     f       * *        * *       f     *f         *" +
+"****************************************************************" );
+fields.push( 
+"****************************************************************" +
+"*    fff       f    f    f  f      f  f    f    f       fff    *" +
+"* f f    f     f    f f     f      f     f f    f     f    f f *" +
+"*f f   f   f f                 ff                 f f   f   f f*" +
+"*         fff     f            ff            f     fff         *" +
+"*     f               f    f        f    f               f     *" +
+"*f      f                    f ff f                    f      f*" +
+"* f                 ff                    ff                 f *" +
+"*  ff  ff        fff ff   f f f  f f f   ff fff        ff  ff  *" +
+"*                           f      f                           *" +
+"*  f   f       f   f      f          f      f   f       f   f  *" +
+"* f   f     f  f  f   f                  f   f  f  f     f   f *" +
+"*f f  f        fff           f    f           fff        f  f f*" +
+"*       f  f   f     f      f      f      f     f   f  f       *" +
+"*        ff f       f f f   ff    ff   f f f       f ff        *" +
+"*    f              f        ffffff        f              f    *" +
+"*  f                        f      f                        f  *" +
+"*  f     f                    f  f                    f     f  *" +
+"*  ff    f f                                        f f    ff  *" +
+"* f     f  f      f    f f     ff     f f    f      f  f     f *" +
+"*    f     f     f f0 f       f  f       f 2f f     f     f    *" +
+"*    ff    f           f                f           f    ff    *" +
+"*     f  fff   f  f      f    ffff    f      f  f   fff  f     *" +
+"*    f         f     f   f    f  f    f   f     f         f    *" +
+"*f                    f  ff  ff  ff  ff  f                    f*" +
+"*f                ff  ff      f  f      ff  ff                f*" +
+"*        f        f    f  f          f  f    f        f        *" +
+"* f   ff       f              ffff              f       ff   f *" +
+"*ff     f f        f                        f        f f     ff*" +
+"*     f     f       ff  f              f  ff       f     f     *" +
+"*      f f    f f                              f f    f f      *" +
+"*ff      f     f f      f f  ff  ff  f f      f f     f      ff*" +
+"*ff      f     f f      f f  ff  ff  f f      f f     f      ff*" +
+"*      f f    f f                              f f    f f      *" +
+"*     f     f       ff  f              f  ff       f     f     *" +
+"*ff     f f        f                        f        f f     ff*" +
+"* f   ff       f              ffff              f       ff   f *" +
+"*        f        f    f  f          f  f    f        f        *" +
+"*f                ff  ff      f  f      ff  ff                f*" +
+"*f                    f  ff  ff  ff  ff  f                    f*" +
+"*    f         f     f   f    f  f    f   f     f         f    *" +
+"*     f  fff   f  f      f    ffff    f      f  f   fff  f     *" +
+"*    ff    f           f                f           f    ff    *" +
+"*    f     f     f f1 f       f  f       f 3f f     f     f    *" +
+"* f     f  f      f    f f     ff     f f    f      f  f     f *" +
+"*  ff    f f                                        f f    ff  *" +
+"*  f     f                    f  f                    f     f  *" +
+"*  f                        f      f                        f  *" +
+"*    f              f        ffffff        f              f    *" +
+"*        ff f       f f f   ff    ff   f f f       f ff        *" +
+"*       f  f   f     f      f      f      f     f   f  f       *" +
+"*f f  f        fff           f    f           fff        f  f f*" +
+"* f   f     f  f  f   f                  f   f  f  f     f   f *" +
+"*  f   f       f   f      f          f      f   f       f   f  *" +
+"*                           f      f                           *" +
+"*  ff  ff        fff ff   f f f  f f f   ff fff        ff  ff  *" +
+"* f                 ff                    ff                 f *" +
+"*f      f                    f ff f                    f      f*" +
+"*     f               f    f        f    f               f     *" +
+"*         fff     f            ff            f     fff         *" +
+"*f f   f   f f                 ff                 f f   f   f f*" +
+"* f f    f     f    f f     f      f     f f    f     f    f f *" +
+"*    fff       f    f    f  f      f  f    f    f       fff    *" +
+"****************************************************************" );
+fields.push( 
+"****************************************************************" +
+"**             *   f                        f   *             **" +
+"*                                                              *" +
+"*                            *    *                            *" +
+"*    f *  f  *    **                        **    *  f  * f    *" +
+"*    *                                                    *    *" +
+"*                    f                    f                    *" +
+"*                                                              *" +
+"*  f                *    *            *    *                f  *" +
+"*    *            f           *  *           f            *    *" +
+"*    f             *           ff           *             f    *" +
+"*      *                                                *      *" +
+"*                         0          1                         *" +
+"*                          *        *                          *" +
+"**                                                            **" +
+"*   *                                                      *   *" +
+"*                    *   **          **   *                    *" +
+"*             *                                  *             *" +
+"*     f  f                                            f  f     *" +
+"*f     *          *                          *          *     f*" +
+"*   f  f                   *        *                   f  f   *" +
+"*        *            *                  *            *        *" +
+"* f                  *                    *                  f *" +
+"* *         f                 *  *                 f         * *" +
+"**                      f              f                      **" +
+"*                 *         *      *         *                 *" +
+"*             *   *                          *   *             *" +
+"*              *        *              *        *              *" +
+"*     *     *    ff      f            f      ff    *     *     *" +
+"*    f                                                    f    *" +
+"*    *              *   *              *   *              *    *" +
+"*                                                              *" +
+"*                                                              *" +
+"*    *              *   *              *   *              *    *" +
+"*    f                                                    f    *" +
+"*     *     *    ff      f            f      ff    *     *     *" +
+"*              *        *              *        *              *" +
+"*             *   *                          *   *             *" +
+"*                 *         *      *         *                 *" +
+"**                      f              f                      **" +
+"* *         f                 *  *                 f         * *" +
+"* f                  *                    *                  f *" +
+"*        *            *                  *            *        *" +
+"*   f  f                   *        *                   f  f   *" +
+"*f     *          *                          *          *     f*" +
+"*     f  f                                            f  f     *" +
+"*             *                                  *             *" +
+"*                    *   **          **   *                    *" +
+"*   *                                                      *   *" +
+"**                                                            **" +
+"*                          *        *                          *" +
+"*                         3          2                         *" +
+"*      *                                                *      *" +
+"*    f             *           ff           *             f    *" +
+"*    *            f           *  *           f            *    *" +
+"*  f                *    *            *    *                f  *" +
+"*                                                              *" +
+"*                    f                    f                    *" +
+"*    *                                                    *    *" +
+"*    f *  f  *    **                        **    *  f  * f    *" +
+"*                            *    *                            *" +
+"*                                                              *" +
+"*              *   f                        f   *              *" +
+"****************************************************************" );
+/*
 fields.push(
 "****************************************************************" +
 "**             *   f                        f   *             **" +
@@ -195,4 +521,4 @@ fields.push(
 "*              p         w   *    *   w         p              *" +
 "*                      w                w                      *" +
 "*         g  w *  pf w                    w fp  * w  g         *" +
-"****************************************************************");
+"****************************************************************");*/
