@@ -67,6 +67,16 @@ body {
     color: rgba(255,255,255,.75);
     text-decoration: none;
 }
+
+.clickable{
+    cursor: pointer;
+    color: rgba(255,255,255,.75);
+}
+
+.clickable:hover{
+    color: rgba(255,255,255,.95);
+}
+
 #green{
 	color: lawngreen;
 }
