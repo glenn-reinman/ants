@@ -115,7 +115,7 @@ function throwIfMissing() {
     throw new Error('Missing parameter');
 }
 var placeHolderText = `colony: NAME
-//Write you code here!
+//Write your code here!
 
 start:`;
 
