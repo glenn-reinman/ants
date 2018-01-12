@@ -4,7 +4,7 @@
 // if(document.cookie)
 //     document.getElementById("ide").innerHTML = document.cookie.substring(5);
 // else
-document.getElementById("ide").innerHTML = dumbAntProg;
+document.getElementById("ide").innerHTML = placeHolderText;
 
 var editor = ace.edit("ide");
 editor.setTheme("ace/theme/monokai");
@@ -65,7 +65,7 @@ setInterval(function(){
 //Fields setup
 var fields = [];
 var field_index = 0;
-fields.push( 
+fields.push(
 "****************************************************************" +
 "* f      fff     f                            f     fff      f *" +
 "*f f                   f   f        f   f                   f f*" +
@@ -130,7 +130,7 @@ fields.push(
 "*f f                   f   f        f   f                   f f*" +
 "* f      fff     f                            f     fff      f *" +
 "****************************************************************" );
-fields.push( 
+fields.push(
 "****************************************************************" +
 "*0                                                            1*" +
 "*                                                              *" +
@@ -195,7 +195,7 @@ fields.push(
 "*                                                              *" +
 "*2                                                            3*" +
 "****************************************************************" );
-fields.push( 
+fields.push(
 "****************************************************************" +
 "*         f*     f       * *        * *       f     *f         *" +
 "*       f  *       f  f  **  f    f  **  f  f       *  f       *" +
@@ -260,7 +260,7 @@ fields.push(
 "*       f  *       f  f  **  f    f  **  f  f       *  f       *" +
 "*         f*     f       * *        * *       f     *f         *" +
 "****************************************************************" );
-fields.push( 
+fields.push(
 "****************************************************************" +
 "*    fff       f    f    f  f      f  f    f    f       fff    *" +
 "* f f    f     f    f f     f      f     f f    f     f    f f *" +
@@ -325,7 +325,7 @@ fields.push(
 "* f f    f     f    f f     f      f     f f    f     f    f f *" +
 "*    fff       f    f    f  f      f  f    f    f       fff    *" +
 "****************************************************************" );
-fields.push( 
+fields.push(
 "****************************************************************" +
 "**             *   f                        f   *             **" +
 "*                                                              *" +

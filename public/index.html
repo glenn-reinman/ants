@@ -50,7 +50,14 @@
                         <div id="runButton" class="nav-link" onclick="runSimulation()">Run</div>
                     </li>
                     <li class="nav-item">
-                        <div id="submitButton" class="nav-link" onclick="exportFile()">Export</div>
+                        <div class="dropdown">
+                          <div class="nav-link dropbtn">More</div>
+                          <div class="dropdown-content">
+                              <div id="submitButton" class="nav-link" onclick="exportFile()">Export Code</div>
+                              <div id="submitButton" class="nav-link" >Import Code</div>
+                              <div id="submitButton" class="nav-link" >Import Map</div>
+                          </div>
+                        </div>
                     </li>
                 </ul>
             </div>

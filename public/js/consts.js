@@ -114,6 +114,10 @@ function randInt(min, max) {
 function throwIfMissing() {
     throw new Error('Missing parameter');
 }
+var placeHolderText = `colony: NAME
+//Write you code here!
+
+start:`;
 
 //Default ant program
 var dumbAntProg = `colony: DumbAnt
